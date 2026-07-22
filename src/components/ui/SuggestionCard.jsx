@@ -1,7 +1,7 @@
 
 export function SuggestionCard({info, size}) {
   return(
-    <article className="flex items-center  cursor-pointer bg-gray-900 border-b border-b-gray-500">
+    <article className="flex items-center  cursor-pointer  bg-gray-900 border-b border-b-gray-500 z-90 ">
         <img src={info.images[0]} alt={`this is the image of the ${info.title}`} className="w-2/12 min-w-16 aspect-square"/>
       <div className="flex flex-col mr-10">
         <h2 className="sm:text-xl lg:text-2xl">{info.title}</h2>

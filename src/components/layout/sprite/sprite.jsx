@@ -39,14 +39,23 @@ export default function Sprite() {
       </symbol>
 
       <symbol id="icon-logo" viewBox="0 0 32 32" fill="none">
-        <circle cx="12" cy="16" r="7" stroke="#10b981" stroke-width="2"></circle>
-        <circle cx="20" cy="16" r="7" stroke="#10b981" stroke-width="2"></circle>
+        <circle cx="12" cy="16" r="7" stroke="#10b981" strokeWidth="2"></circle>
+        <circle cx="20" cy="16" r="7" stroke="#10b981" strokeWidth="2"></circle>
       </symbol>
 
-      <symbol id="icon-arrow-back" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+      <symbol id="icon-arrow-back"  viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
         <path  d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
       </symbol>
     
+      <symbol id="chevron-right"  viewBox="0 -960 960 960"  fill="#e3e3e3">
+        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+      </symbol>
+      
+      <symbol id="chevron-left"  viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/>
+      </symbol>
+
     </svg>
+
+    
   );
 }
