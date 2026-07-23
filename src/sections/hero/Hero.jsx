@@ -56,19 +56,27 @@ export function Hero({ size }) {
   handleTransitionRestore();
 
   return (
-    <div
-      className="overflow-hidden z-0 relative bg-black group"
+    <section
+      className="overflow-hidden z-0 relative bg-black group "
       style={{ width: '100dvw' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <svg className="h-15 w-15 z-100 left-0 absolute top-5/12 hidden group-hover:block" onClick={prev}>
+    
+    <button onClick={prev} aria-label="Go to prev slide">
+      <svg 
+        className="h-15 w-15 z-100 left-0 absolute top-5/12 hidden group-hover:block" 
+        >
         <use xlinkHref="#chevron-left"></use>
       </svg>
+    </button>
+      
 
-      <svg className="absolute z-100 h-15 w-15 right-0 top-5/12 hidden group-hover:block" onClick={next}>
-        <use xlinkHref="#chevron-right"></use>
-      </svg>
+      <button onClick={next} aria-label="Go to next slide">
+        <svg className="absolute z-100 h-15 w-15 right-0 top-5/12 hidden group-hover:block">
+          <use xlinkHref="#chevron-right"></use>
+        </svg>
+      </button>
 
       <div
         className="flex w-max overflow-hidden z-0"
@@ -79,9 +87,20 @@ export function Hero({ size }) {
         {products.slice(0, 5).map((e) => <Slide key={e.id} product={e} />)}
         {products[0] && <Slide key="clone2" product={products[0]} />}
       </div>
-      <div className="absolute  bottom-1  left-2/5 md:left-2/4 flex gap-2">
-        {products.slice(0,5).map((e, index) =>  <div key={`dot${e.id}`} className={`w-2 h-2 rounded-full  ${index == slide -1 ? 'bg-emerald-400' : 'bg-gray-600'}`}></div> )}
+      <div 
+        aria-label="Navegacion del carrusel"
+        className="absolute  bottom-1  left-2/5 md:left-2/4 flex gap-2">
+        
+        {products.slice(0,5).map((e, index) => 
+          <button 
+            key={`dot${e.id}`}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`w-2.5 h-2.5 rounded-full cursor-pointer  ${index == slide -1 ? 'bg-emerald-400' : 'bg-gray-600'}`}
+            onClick={()=> setSlide(index + 1)}>
+          </button> 
+          )}
+    
       </div>
-    </div>
+    </section>
   );
 }

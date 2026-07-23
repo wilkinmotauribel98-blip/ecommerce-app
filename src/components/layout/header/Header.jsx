@@ -41,13 +41,9 @@ export function Header() {
   }, [searchText]) 
   
   return(
-    <header 
-    className={`w-full bg-gray-950 h-20 flex items-center justify-between  fixed lg:relative  z-50`}
-    >
+    <header className={`w-full bg-black h-20 flex items-center justify-between  fixed lg:relative  z-50`}>
 
-      <div 
-      className="flex items-center gap-2 px-2"
-      >
+      <div className="flex items-center gap-2 px-2">
         {mobileMenu}
         <span className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</span>
       </div>
@@ -66,43 +62,52 @@ export function Header() {
 
       </div>
 
-      {menu ?
-      <div className="inset-0 z-20 fixed " 
-      onClick={()=> setMenu(!menu)}></div> : ''
+      {
+        menu ?
+          <div 
+            className="inset-0 z-20 fixed " 
+            onClick={()=> setMenu(!menu)}></div> : ''
       }
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
-
-        <div 
-        className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5  justify-center rounded-2xl w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}
+        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5  justify-center rounded-2xl w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}
         >
-        
+
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
             <use xlinkHref="#icon-search"/>
           </svg>
 
-          <input  type="text" 
-                  value={searchText} 
-                  onChange={(e)=> setSearchText(e.target.value)} 
-                  placeholder="Search for articles" 
-                  className={` caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
+          <input  
+            type="text" 
+            value={searchText} 
+            onChange={(e)=> setSearchText(e.target.value)} 
+            placeholder="Search for articles" 
+            className={` caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
           />
 
-          {(suggestions !== null && searcher) && (searchText && !menu) ? <div className="absolute top-17 w-[80dvw] sm:w-[70dvw] max-w-4xl flex flex-col rounded-xl overflow-hidden bg-gray-600 z-20">{suggestions.slice(0,3).map(e => <SuggestionCard size={size} info={e} key={e.id}/> )} <h2 className="text-emerald-600 ml-4 p-1.5 sm:text-2xl">{suggestions.length > 0 ? `See all results for  "${searchText}"`: 'No results'}</h2></div>: ''}
-          </div>
+          {(suggestions !== null && searcher) && (searchText && !menu) ? 
+            <div className="absolute top-17 w-[80dvw] sm:w-[70dvw] max-w-4xl flex flex-col rounded-xl overflow-hidden bg-gray-600 z-20">
+                {suggestions.slice(0,3).map(e => <SuggestionCard size={size} info={e} key={e.id}/>)}
+                <h2 className="text-emerald-600 ml-4 p-1.5 sm:text-2xl">
+                  {suggestions.length > 0 ? `See all results for  "${searchText}"`: 'No results'}
+                </h2>
+              </div> : ''
+              }
+        </div>
 
-        <svg className={`w-6.5 h-6.5 ${searcher && size < 768 ? 'hidden' : ''}` }
-              onClick={()=> setSearcher(!searcher)}>
-              <use xlinkHref={`${searcher  ? setSearchIcon : '#icon-search'}`}/>
-        </svg>
-
-        <svg className='w-6.5 h-6.5 hidden lg:block'>
-          <use xlinkHref="#icon-user"/>
-        </svg>
-
-        <svg className='w-6.5 h-6.5'>
-          <use xlinkHref="#icon-cart"/>
-        </svg>
+          <svg 
+            className={`w-6.5 h-6.5 ${searcher && size < 768 ? 'hidden' : ''}` }
+            onClick={()=> setSearcher(!searcher)}>
+            <use xlinkHref={`${searcher  ? setSearchIcon : '#icon-search'}`}/>
+          </svg>
+          
+          <svg className='w-6.5 h-6.5 hidden lg:block'>
+            <use xlinkHref="#icon-user"/>
+          </svg>
+          
+          <svg className='w-6.5 h-6.5'>
+            <use xlinkHref="#icon-cart"/>
+          </svg>
 
       </div>
     </header>
