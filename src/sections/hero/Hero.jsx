@@ -5,11 +5,13 @@ import { useState, useRef, use } from "react";
 export function Hero({ size }) {
   const products = useProducts((state) => state.products);
   const [slide, setSlide] = useState(1);
-  const [transition, setTransition] = useState('transform .3s ease');
+  const [transition, setTransition] = useState('transform .2s ease');
   const isTransitioning = useRef(false)
   const slideRef = useRef(slide);
   slideRef.current = slide;
 
+  const ids = [98, 78, 81, 95, 100]
+  
   
   const prev = () => {
     if(isTransitioning.current) return
@@ -50,7 +52,7 @@ export function Hero({ size }) {
   // en el próximo frame reactivamos la transición normal
   const handleTransitionRestore = () => {
     if (transition === 'transform 0s') {
-      requestAnimationFrame(() => setTransition('transform .3s ease'));
+      requestAnimationFrame(() => setTransition('transform .2s ease'));
     }
   };
   handleTransitionRestore();
@@ -83,24 +85,24 @@ export function Hero({ size }) {
         style={{ transform: `translate(-${slide * 100}dvw)`, transition }}
         onTransitionEnd={handleTransitionEnd}
       >
-        {products[4] && <Slide key="clone1" product={products[4]} />}
-        {products.slice(0, 5).map((e) => <Slide key={e.id} product={e} />)}
-        {products[0] && <Slide key="clone2" product={products[0]} />}
+        <Slide key="start clone" product={products.find(e=>e.id === ids[4])} />
+        {ids.map((e) => <Slide key={e} product={products.find(i => i.id === e)} />)}
+        <Slide key="end clone" product={products.find(e=>e.id === ids[0])} />
       </div>
       <div 
         aria-label="Navegacion del carrusel"
-        className="absolute  bottom-1  left-2/5 md:left-2/4 flex gap-2">
+        className=" flex gap-2 m-auto w-min">
         
-        {products.slice(0,5).map((e, index) => 
+        {ids.map((e, index) => 
           <button 
-            key={`dot${e.id}`}
+            key={`dot${e}`}
             aria-label={`Go to slide ${index + 1}`}
             className={`w-2.5 h-2.5 rounded-full cursor-pointer  ${index == slide -1 ? 'bg-emerald-400' : 'bg-gray-600'}`}
             onClick={()=> setSlide(index + 1)}>
           </button> 
           )}
-    
       </div>
+      
     </section>
   );
 }

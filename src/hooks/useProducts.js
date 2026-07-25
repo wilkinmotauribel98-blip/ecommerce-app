@@ -18,8 +18,6 @@ export const useProducts = create((set, get)=> ({
     } catch (err) {
       set({error : err.mesagge, isLoading: false})
     }
-    
 
-    
   }
 }))

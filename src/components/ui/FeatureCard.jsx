@@ -8,8 +8,8 @@ export function FeatureCard({className, icon, title, description}) {
       </svg>
 
       <div className="flex flex-col "> 
-        <h2 className="text-zinc-400 text-sm sm:text-lg p-0 m-0 ">{title}</h2>
-        <p className="text-zinc-500 hidden lg:block">{description}</p>
+        <h2 className="text-zinc-400 text-sm sm:text-lg p-0 m-0 md:text-center ">{title}</h2>
+        <p className="text-zinc-500 hidden md:block text-sm">{description}</p>
       </div>
     </article>
   )
