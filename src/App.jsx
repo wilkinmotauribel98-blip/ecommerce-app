@@ -14,7 +14,7 @@ export default function App() {
   const fetchProducts = useProducts((state)=> state.fetchProducts);
   useEffect(()=> {fetchProducts()}, []);
   return (
-    <div>
+    <div className='bg-black 2'>
       <Sprite />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -3,7 +3,7 @@ import { FeatureCard } from "../../components/ui/FeatureCard";
 
 export function Category() {
   return(
-    <section className="bg-black flex mt-5 overflow-hidden w-dvw justify-center gap-2.5 px-3 items-center m-auto" >
+    <section className="bg-black flex mt-5 overflow-hidden w-[97%] justify-center gap-2.5 items-center m-auto " >
       <FeatureCard className={`h-9 w-9 lg:h-12 lg:w-12`} icon={`#audio-icon`} title={`Audio`} description={`Speakers, Earbuds`}/>
       <FeatureCard className={`h-9 w-9 lg:h-12 lg:w-12`} icon={`#computers-icon`} title={`Computers`} description={`Laptops, Desktops`}/>
       <FeatureCard className={`h-9 w-9 lg:h-12 lg:w-12`} icon={`#smartphones-icon`} title={`Smartphones`} description={`Phones, Accesories`}/>

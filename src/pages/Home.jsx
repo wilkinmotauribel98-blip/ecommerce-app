@@ -1,7 +1,7 @@
 import { Header } from "../components/layout/header/header"
 import { Hero } from "../sections/hero/hero"
 import { Category } from "../sections/category/Category"
-import { Slider } from "../sections/slider/slider"
+import { Arrivals } from "../sections/arrivals/Arrivals"
 import { useProducts } from "../hooks/useProducts"
 import { use, useEffect } from "react"
 import { useState } from "react"
@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <>
     <Header />
-    <main className="top-20 absolute z-0 bg-black">
+    <main className="top-20 absolute z-0 bg-black overflow-hidden m-auto w-dvw">
       <Hero size={size}/>
       <Category/>
-      <Slider />
+      <Arrivals />
     </main>
     </>
     

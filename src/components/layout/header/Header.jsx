@@ -17,8 +17,9 @@ export function Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const products = useProducts((state)=>state.products);
   const [suggestions, setSuggestions] = useState(null);
+
+  const products = useProducts((state)=>state.products);
   const setSearchIcon = size < 768 ? '' : '#icon-close'
   const mobileMenu = searcher && size < 768 ?
     <svg className={` w-6.5 h-6.5 text-zinc-200 cursor-pointer  `} onClick={()=> setSearcher(!searcher)} >
@@ -26,12 +27,16 @@ export function Header() {
       </svg> : <svg className={` w-6.5 h-6.5 text-zinc-200 cursor-pointer  `} onClick={()=> setMenu(!menu)} >
           <use xlinkHref={size < 1024 ? '#icon-menu' : '#icon-logo'} />;
         </svg>
+
+
+        
   useEffect(()=>{ 
-    addEventListener('resize', ()=>{
+    const sizer =()=> addEventListener('resize', ()=>{
       setSize(window.innerWidth)
       size >= 1024 ? setMenu(false) : '';
       size >= 1024 ? setSearcher(false) : '';
     })
+    return ()=> removeEventListener('resize', sizer())
   },[])
   
   useEffect(()=>{
