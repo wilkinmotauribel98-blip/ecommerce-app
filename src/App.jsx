@@ -13,7 +13,11 @@ export default function App() {
   const isLoading = useProducts((state)=> state.isLoading);
   const fetchProducts = useProducts((state)=> state.fetchProducts);
   const productsById = useProducts((state)=> state.productsById);
+  const orderedByRating = useProducts((state)=> state.orderedByRating);
   console.log(productsById)
+  console.log(orderedByRating)
+  console.log(products)
+  console.log(isLoading)
   useEffect(()=> {fetchProducts()}, []);
   return (
     <>

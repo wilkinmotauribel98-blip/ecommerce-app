@@ -211,6 +211,69 @@ const svgProps = {
         <path d="M21 26h6" />
       </symbol>
 
+      <symbol
+           viewBox="0 0 24 24"
+           id="icon-premium-quality"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.5"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           >
+        <path d="M12 2L4.5 5v6c0 5.5 3.5 9.7 7.5 11 4-1.3 7.5-5.5 7.5-11V5L12 2z"/>
+        <path d="M8.5 12.5l2.5 2.5L16 10"/>
+      </symbol>
+
+      <symbol 
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.5"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           id="icon-free-shipping"
+           >
+            <path d="M3 13h4"/>
+            <path d="M1 17h6"/>
+            <path d="M5 9h2"/>
+            <path d="M7 6h8v9H7z"/>
+            <path d="M15 9h4l2 3v3h-6"/>
+            <circle cx="9" cy="18" r="2"/>
+            <circle cx="18" cy="18" r="2"/>
+      </symbol>
+
+
+      <symbol xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.5"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           id="icon-easy-returns"
+          >
+          <path d="M20 12a8 8 0 0 1-14 5.5"/>
+          <polyline points="4 20 4 14 10 14"/>
+          <path d="M4 12A8 8 0 0 1 20 6.5"/>
+          <polyline points="20 4 20 10 14 10"/>
+      </symbol>
+
+      <symbol 
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.5"
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           id='icon-customer-support'
+          >
+        <path d="M4 12a8 8 0 0 1 16 0"/>
+        <rect x="2" y="11" width="3" height="7" rx="1.5"/>
+        <rect x="19" y="11" width="3" height="7" rx="1.5"/>
+        <path d="M21 18c0 2.5-2 4-4.5 4H14"/>
+        <circle cx="12" cy="22" r="1"/>
+
+      </symbol>
     </svg>
 
     

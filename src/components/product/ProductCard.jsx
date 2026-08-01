@@ -19,6 +19,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
       >
 
       {newProduct ? <span className="rounded-4xl bg-emerald-800/50 0 w-min  px-2 mt-2  text-emerald-500 ml-3">New</span> : '' }
+      
 
       <div className={`
         ${newArrivals ? 'absolute top-7 w-35 ml-3' : ''}
@@ -32,23 +33,34 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
 
         <div className="absolute bottom-3 w-full">
           <h2 
-            className={`text-white  p-0 ${shopStyle ? 'text-center capitalize w-full' : 'ml-3'}` }>
+            className={`text-white  p-0 ${shopStyle ? 'text-center capitalize w-full' : 'ml-3'}` }
+            aria-label={
+              `${shopStyle ? `category: ${product?.title.replace(/-/g, ' ')}` : product?.title.replace(/-/g, ' ')}`
+            }
+            >
             {product?.title.replace(/-/g, ' ')}
           </h2>
 
           <h3 
             className={`
-
             ${newArrivals ? 'text-zinc-500' : ''}
             ${shopStyle ? 'text-center w-full text-zinc-500' : 'ml-3'}
             ${bestSeller ? 'text-emerald-500 flex gap-2' : ''}
             `
            }
+           aria-label={
+            `${shopStyle ? `${product?.products}+ products` : 
+            `$${product?.price.toString().replace(/\..*/, "")}`}`
+           }
             >
             {shopStyle ? `${product?.products}+ products`:  ``}
             {newArrivals ? `$${product?.price.toString().replace(/\..*/, "")}` : ''}
             {bestSeller ? `$${product?.price}` : ''}
-            {bestSeller ? <span className="text-zinc-500  flex gap-1.5 items-center">Rating {<svg className="w-6 h-6"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
+            {bestSeller ? 
+            <span 
+              className="text-zinc-500  flex gap-1.5 items-center"
+              aria-label={`Rating ${product?.rating}`}
+              >Rating {<svg className="w-6 h-6"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
           </h3>
          
         </div>

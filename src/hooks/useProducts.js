@@ -5,6 +5,7 @@ export const useProducts = create(
     (set, get) => ({
       products: [],
       productsById: {},
+      orderedById: [],
       isLoading: false,
       hasFetched: false,
       error: null,
