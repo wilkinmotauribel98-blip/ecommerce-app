@@ -19,6 +19,34 @@ const svgProps = {
         <line x1="21" y1="21" x2="16.65" y2="16.65" />
       </symbol>
 
+      <symbol xmlns="http://www.w3.org/2000/svg" 
+        id="icon-home"
+         
+        viewBox="0 -960 960 960" 
+        
+        fill="#9f9fa9 ">
+      <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
+      </symbol>
+
+      <symbol 
+        id="icon-shop" 
+        viewBox="0 -960 960 960"
+        
+        fill="#9f9fa9 "
+      >
+      <path d="m380-240 280-180-280-180v360ZM160-120q-33 0-56.5-23.5T80-200v-520h240v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h240v520q0 33-23.5 56.5T800-120H160Zm0-80h640v-440H160v440Zm24<PASSWORD>h16<PASSWORD>"/>
+      </symbol>
+
+      <symbol 
+        id="icon-grid" 
+        viewBox="0 0 24 24"
+        {...svgProps}
+      >
+        <circle cx="7" cy="7" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17" cy="7" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="7" cy="17" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+        <circle cx="17" cy="17" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+      </symbol>
 
       <symbol 
         id="icon-user" 
@@ -88,6 +116,14 @@ const svgProps = {
         <circle cx="12" cy="16" r="7" stroke="#10b981" strokeWidth="2"></circle>
         <circle cx="20" cy="16" r="7" stroke="#10b981" strokeWidth="2"></circle>
       </symbol>
+
+      <symbol 
+        id="icon-star"
+        viewBox="0 -960 960 960" 
+        fill="oklch(69.6% 0.17 162.4">
+      <path d="m275.93-189.58 54.8-228.57L149.7-571.61l237.07-20.62L480-807.69l93.42 216.46 236.88 19.62-181.04 153.46 54.98 228.57-204.16-121.35-204.15 121.35Z"/>
+      </symbol>
+
 
 
       <symbol 

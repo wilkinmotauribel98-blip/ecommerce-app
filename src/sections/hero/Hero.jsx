@@ -1,16 +1,17 @@
 import { Slide } from "../../components/ui/Slide"
 import { useProducts } from "../../hooks/useProducts"
-import { useState, useRef, use } from "react";
+import { useState, useRef, useEffect } from "react";
 
-export function Hero({ size }) {
+export function Hero() {
   const products = useProducts((state) => state.products);
   const [slide, setSlide] = useState(1);
   const [transition, setTransition] = useState('transform .2s ease');
+  const [size, setSize ]= useState(window.innerWidth <= 1440 ? window.innerWidth : 1440);
   const isTransitioning = useRef(false)
   const slideRef = useRef(slide);
   slideRef.current = slide;
 
-  const ids = [98, 78, 81, 95, 100]
+  const ids = [98, 78, 81, 95, 100];
   
   
   const prev = () => {
@@ -33,41 +34,51 @@ export function Hero({ size }) {
   };
 
   const handleTransitionEnd = () => {
-    // solo nos interesa el snap-back cuando llegamos al clon del final
     if (slideRef.current === 6) {
       setTransition('transform 0s');
       setSlide(1);
+      return;
     }
     
-    isTransitioning.current = false
+    
     if (slideRef.current === 0) {
       setTransition('transform 0s');
       setSlide(5);
+      return;
     }
-  
+    isTransitioning.current = false;
   };
   
-
-  // después de que React vuelve a montar con transition 0s,
-  // en el próximo frame reactivamos la transición normal
-  const handleTransitionRestore = () => {
+  useEffect(() => {
     if (transition === 'transform 0s') {
-      requestAnimationFrame(() => setTransition('transform .2s ease'));
+      requestAnimationFrame(() => {
+        setTransition('transform .2s ease')
+        isTransitioning.current = false;
+      });
     }
-  };
-  handleTransitionRestore();
+  }, [transition]);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setSize(window.innerWidth <= 1440 ? window.innerWidth : 1440);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  },[])
 
   return (
     <section
-      className="overflow-hidden z-0 relative bg-black group "
-      style={{ width: '100dvw' }}
+      className=" z-0 relative bg-black group "
+      style={{ width: `${size}px` }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-    
+
     <button onClick={prev} aria-label="Go to prev slide">
       <svg 
-        className="h-15 w-15 z-100 left-0 absolute top-5/12 hidden group-hover:block" 
+        className="h-15 w-15 z-100 -left-1 absolute top-5/12 hidden group-hover:block" 
         >
         <use xlinkHref="#chevron-left"></use>
       </svg>
@@ -75,19 +86,19 @@ export function Hero({ size }) {
       
 
       <button onClick={next} aria-label="Go to next slide">
-        <svg className="absolute z-100 h-15 w-15 right-0 top-5/12 hidden group-hover:block">
+        <svg className="absolute z-100 h-15 w-15 -right-1 top-5/12 hidden group-hover:block">
           <use xlinkHref="#chevron-right"></use>
         </svg>
       </button>
 
       <div
         className="flex w-max overflow-hidden z-0"
-        style={{ transform: `translate(-${slide * 100}dvw)`, transition }}
+        style={{ transform: `translate(-${slide * size }px)`, transition }}
         onTransitionEnd={handleTransitionEnd}
       >
-        <Slide key="start clone" product={products.find(e=>e.id === ids[4])} />
-        {ids.map((e) => <Slide key={e} product={products.find(i => i.id === e)} />)}
-        <Slide key="end clone" product={products.find(e=>e.id === ids[0])} />
+        <Slide key="start clone" product={products.find(e=>e.id === ids[4])} size={size} />
+        {ids.map((e) => <Slide key={e} product={products.find(i => i.id === e)} size={size} />)}
+        <Slide key="end clone" product={products.find(e=>e.id === ids[0])} size={size} />
       </div>
       <div 
         aria-label="Navegacion del carrusel"
@@ -97,7 +108,7 @@ export function Hero({ size }) {
           <button 
             key={`dot${e}`}
             aria-label={`Go to slide ${index + 1}`}
-            className={`w-2.5 h-2.5 rounded-full cursor-pointer  ${index == slide -1 ? 'bg-emerald-400' : 'bg-gray-600'}`}
+            className={`w-2.5 h-2.5 rounded-full cursor-pointer  ${index == slide - 1 || slide === 0 ? 'bg-emerald-400' : 'bg-gray-600'}`}
             onClick={()=> setSlide(index + 1)}>
           </button> 
           )}
