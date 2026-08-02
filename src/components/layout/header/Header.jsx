@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"; 
 import { SuggestionCard } from "@/components/ui/SuggestionCard";
-import { Navbar } from "@/sections/navbar/Navbar";
 import { useProducts } from "@/hooks/useProducts";
 
-export function Header() {
+export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -29,7 +28,7 @@ export function Header() {
   }, [searchText]) 
   
   return(
-    <header className={`w-full max-w-360 m-auto bg-black h-20 flex items-center justify-between  fixed lg:relative  z-50`}>
+    <header className={`w-full max-w-360 m-auto bg-black h-15 flex items-center justify-between   lg:relative  z-50`}>
       <div className="flex items-center gap-2 px-2">
         {searcher && size < 768 
           ?

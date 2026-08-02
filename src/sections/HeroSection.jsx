@@ -1,8 +1,8 @@
-import { Slide } from "../../components/ui/Slide"
-import { useProducts } from "../../hooks/useProducts"
+import { Slide } from "../components/ui/Slide"
+import { useProducts } from "../hooks/useProducts"
 import { useState, useRef, useEffect } from "react";
 
-export function Hero() {
+export default function HeroSection() {
   const products = useProducts((state) => state.products);
   const [slide, setSlide] = useState(1);
   const [transition, setTransition] = useState('transform .2s ease');

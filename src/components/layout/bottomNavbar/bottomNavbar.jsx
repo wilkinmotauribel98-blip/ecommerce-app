@@ -1,4 +1,4 @@
-export function Navbar() {
+export default function BottomNavbar() {
   return (
     <nav 
       className=" w-full h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
@@ -92,3 +92,4 @@ export function Navbar() {
     </nav>
   );
 } 
+

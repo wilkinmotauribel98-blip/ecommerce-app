@@ -1,6 +1,6 @@
-export function WhyChooseUs() {
+export default function WhyChooseUsSection() {
   return (
-    <section className="w-[97%] h-auto bg-black m-auto mb-60">
+    <section className="w-[97%] h-auto bg-black m-auto mb-6">
       <h2 className="text-xl   text-white mb-5">Why Choose Us</h2>
       <div className="flex flex-wrap gap-4 justify-center border border-zinc-800 p-4 rounded-lg">
         <ul className="flex flex-wrap gap-4">

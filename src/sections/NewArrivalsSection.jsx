@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useProducts } from "../../hooks/useProducts";
-import { ProductCard } from "../../components/product/ProductCard";
+import { useProducts } from "../hooks/useProducts";
+import { ProductCard } from "../components/product/ProductCard";
 const newIds = [99, 87, 34, 35, 50];
 
 function getIdsForWidth(width) {
@@ -10,7 +10,7 @@ function getIdsForWidth(width) {
   if (width < 1200) return newIds.slice(0, 4);
   return newIds;
 }
-export function NewArrivals(params) {
+export default function NewArrivalsSection(params) {
   const [ids, setIds] = useState(()=> getIdsForWidth(window.innerWidth))
   const products = useProducts((state)=> state.products);
   

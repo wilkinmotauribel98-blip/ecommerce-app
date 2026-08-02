@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import { useProducts } from '../../hooks/useProducts';
-import { ProductCard } from '../../components/product/ProductCard';
+import { useProducts } from '../hooks/useProducts';
+import { ProductCard } from '../components/product/ProductCard';
 
 
 
-export function ShopByCategory() {
+export default function ShopByCategorySection() {
   const products = useProducts((state) => state.products);
   const isLoading = useProducts((state) => state.isLoading);
   
@@ -30,7 +30,7 @@ export function ShopByCategory() {
         <h2 className="text-white  text-xl sm:text-2xl">Shop by Category</h2>
         <span className="text-emerald-500 text-sm sm:text-lg lg:text-xl">View All</span>
       </div>
-      <div className='grid gap-4 h-62 overflow-y-hidden p-2 grid-cols-[repeat(auto-fill,minmax(150px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(172px,1fr))]  ' >
+      <div className='grid gap-4 h-62 overflow-y-hidden p-2 grid-cols-[repeat(auto-fill,minmax(160px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(172px,1fr))]  ' >
         {index.map((i) => (
         <ProductCard key={categories[i].title} product={categories[i]} shopStyle={true} />
       )) }
