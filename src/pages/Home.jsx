@@ -13,12 +13,12 @@ export default function Home() {
   const isLoading = useProducts((state) => state.isLoading)
     if (isLoading) return <p>Cargando...</p>
   return (
-    <main className="max-w-360 m-auto z-0 bg-black overflow-hidden  w-dvw">
+    <main className="max-w-360 m-auto z-0 bg-black overflow-hidden  w-dvw" aria-label="Home Page Main Content">
       <HeroSection />
       <CategorySection />
       <NewArrivalsSection />
       <ShopByCategorySection />
-      <BestSellersSection />
+      <BestSellersSection />      
       <WhyChooseUsSection />
       <NewsletterSection />
     </main>

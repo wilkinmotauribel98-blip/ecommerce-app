@@ -1,11 +1,13 @@
 export default function WhyChooseUsSection() {
   return (
-    <section className="w-[97%] h-auto bg-black m-auto mb-6">
-      <h2 className="text-xl   text-white mb-5">Why Choose Us</h2>
+    <section className="w-[97%] h-auto bg-black m-auto mb-6" aria-label="Why Choose Us Section">
+      <h2 className="text-xl  text-white mb-5" aria-label="Section Title">Why Choose Us</h2>
       <div className="flex flex-wrap gap-4 justify-center border border-zinc-800 p-4 rounded-lg">
         <ul className="flex flex-wrap gap-4">
-
-          <li className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1   flex flex-col gap-1 text-white text-lg mb-2">
+          <li 
+            className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1   flex flex-col gap-1 text-white text-lg mb-2"
+            aria-label="Premium Quality: Curated top quality products."
+          >
             <svg className="w-10 text-emerald-400 h-10">
               <use xlinkHref="#icon-premium-quality"></use>
             </svg>
@@ -13,7 +15,10 @@ export default function WhyChooseUsSection() {
             <p className="text-zinc-600 text-pretty text-center">Curated top quality products.</p>
           </li>
             
-          <li className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1  flex flex-col gap-1 text-white text-lg mb-2">
+          <li 
+          className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1  flex flex-col gap-1 text-white text-lg mb-2"
+          aria-label="Fast & Free Shipping: Free shipping on orders over $99."
+          >
             <svg className="w-10 text-emerald-400 h-10">
               <use xlinkHref="#icon-free-shipping"></use>
             </svg>
@@ -21,7 +26,9 @@ export default function WhyChooseUsSection() {
             <p className="text-zinc-600 text-pretty text-center">Free shipping on orders over $99.</p>
           </li>
 
-          <li className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1 flex flex-col gap-1 text-white text-lg mb-2">
+          <li 
+            className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1 flex flex-col gap-1 text-white text-lg mb-2" 
+            aria-label="Easy Returns: 30-day return policy for your peace of mind.">
             <svg className="w-10 text-emerald-400 h-10">
               <use xlinkHref="#icon-easy-returns"></use>
             </svg>
@@ -29,7 +36,9 @@ export default function WhyChooseUsSection() {
             <p className="text-zinc-600 text-pretty text-center">30-day return policy for your peace of mind.</p>
           </li>
 
-          <li className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1 flex flex-col gap-1 text-white text-lg mb-2">
+          <li 
+            className="min-w-35 sm:min-w-57 md:min-w-40 items-center flex-1 flex flex-col gap-1 text-white text-lg mb-2" 
+            aria-label="24/7 Customer Support: Our dedicated team is always here to help you.">
             <svg className="w-10 text-emerald-400 h-10">
               <use xlinkHref="#icon-customer-support  "></use>
             </svg>
