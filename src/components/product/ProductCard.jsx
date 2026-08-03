@@ -32,16 +32,16 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
         {shopStyle && <div className={`w-full h-20 inset-y-2/8 inset-x-0 absolute bg-radial-[at_50%_50%] from-emerald-700  to-transparent to-60%` } ></div>}
 
         <div className="absolute bottom-3 w-full">
-          <h2 
+          <h3 
             className={`text-white  p-0 ${shopStyle ? 'text-center capitalize w-full' : 'ml-3'}` }
             aria-label={
               `${shopStyle ? `category: ${product?.title.replace(/-/g, ' ')}` : product?.title.replace(/-/g, ' ')}`
             }
             >
             {product?.title.replace(/-/g, ' ')}
-          </h2>
+          </h3>
 
-          <h3 
+          <span 
             className={`
             ${newArrivals ? 'text-zinc-500' : ''}
             ${shopStyle ? 'text-center w-full text-zinc-500' : 'ml-3'}
@@ -61,7 +61,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
               className="text-zinc-500  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
               >Rating {<svg className="w-6 h-6"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
-          </h3>
+          </span>
          
         </div>
 

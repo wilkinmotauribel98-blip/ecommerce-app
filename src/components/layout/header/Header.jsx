@@ -46,16 +46,24 @@ export default function  Header() {
             >
             <use xlinkHref={'#icon-logo'} />
           </svg>}
-        <span className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</span>
+        <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</h1>
       </div>
 
       {size >=1024 ?
         <ul className={`flex  relative gap-8 w-max overflow-visible ${searcher && size >= 1024 ? 'hidden' : 'flex'} h-dvh z-50 lg:h-auto text-zinc-500 text-2xl bg-black items-center transition-[width] duration-200 ease `}>
           <li  className="text-emerald-400 hover:text-gray-400  cursor-pointer" aria-label="Home">Home</li>
-          <li  className="text-white hover:text-gray-400 cursor-pointer" aria-label="Shop">Shop</li>
-          <li  className="text-white hover:text-gray-400 cursor-pointer" aria-label="Categories">Categories</li>
-          <li  className="text-white hover:text-gray-400 cursor-pointer" aria-label="Discover">Discover</li>
-          <li  className="text-white hover:text-gray-400 cursor-pointer" aria-label="Support">Support</li>
+          <li  className="text-white hover:text-gray-400" aria-label="Shop">
+            <a href="/shop">Shop</a>
+          </li>
+          <li  className="text-white hover:text-gray-400" aria-label="Categories">
+            <a href="/categories">Categories</a>
+          </li>
+          <li  className="text-white hover:text-gray-400" aria-label="Discover">
+            <a href="/discover">Discover</a>
+          </li>
+          <li  className="text-white hover:text-gray-400" aria-label="Support">
+            <a href="/support">Support</a>
+          </li>
           </ul>
       : ''}
 
@@ -65,13 +73,17 @@ export default function  Header() {
             <use xlinkHref="#icon-search"/>
           </svg>
 
-          <input  
-            type="text" 
+          <form action="search" className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}>
+            <input  
+            type="text"
+            label="Search for articles"
+            aria-label="Search for articles" 
             value={searchText} 
             onChange={(e)=> setSearchText(e.target.value)} 
             placeholder="Search for articles" 
             className={` caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
           />
+          </form>
 
           {
             (suggestions !== null && searcher) && (searchText.length > 0) 

@@ -11,7 +11,7 @@ import  NewsletterSection  from "@/sections/NewsletterSection"
 
 export default function Home() {
   const isLoading = useProducts((state) => state.isLoading)
-    if (isLoading) return <p>Cargando...</p>
+    if (isLoading) return <p>charging...</p>
   return (
     <main className="max-w-360 m-auto z-0 bg-black overflow-hidden  w-dvw" aria-label="Home Page Main Content">
       <HeroSection />

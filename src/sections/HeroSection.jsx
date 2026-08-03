@@ -76,7 +76,8 @@ export default function HeroSection() {
       onTouchEnd={handleTouchEnd}
     >
 
-    <button onClick={prev} aria-label="Go to prev slide">
+    <button onClick={prev} aria-label="Go to prev slide" focus-visible="true"> 
+
       <svg 
         className="h-15 w-15 z-100 -left-1 absolute top-5/12 hidden group-hover:block" 
         >
@@ -85,7 +86,7 @@ export default function HeroSection() {
     </button>
       
 
-      <button onClick={next} aria-label="Go to next slide">
+      <button onClick={next} aria-label="Go to next slide" focus-visible="true">
         <svg className="absolute z-100 h-15 w-15 -right-1 top-5/12 hidden group-hover:block">
           <use xlinkHref="#chevron-right"></use>
         </svg>

@@ -9,7 +9,13 @@ const svgProps = {
   strokeLinejoin: "round",
 }
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+    <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    style={{ display: 'none' }}
+    aria-hidden="true"
+    focusable="false" 
+    
+    >
       <symbol   
         id="icon-search"  
         viewBox="0 0 24 24"  

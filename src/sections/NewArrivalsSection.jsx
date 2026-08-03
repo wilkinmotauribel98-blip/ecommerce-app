@@ -25,7 +25,7 @@ export default function NewArrivalsSection(params) {
       className="border mt-10 w-[95%] sm:w-[calc(100%-2rem)] gap-5 flex m-auto rounded-2xl border-zinc-700 px-4  py-6 bg-linear-0 to-t from-black to-zinc-800" 
      >
       <div className="w-50 sm:w-60 flex flex-col gap-1 py-2">
-        <span className="text-emerald-500 text-sm sm:text-lg lg:text-xl">NEW ARRIVALS</span>
+        <h3 className="text-emerald-500 text-sm sm:text-lg lg:text-xl">NEW ARRIVALS</h3>
         <h2 className="text-white text-xl sm:text-2xl lg:text-4xl w-min">Just Launched.</h2>
         <p className="text-zinc-500 text-sm sm:text-lg  text-prety" aria-label="New arrivals description">Discover the latest products handpicked for you.</p>
         <span className="text-emerald-500 text-sm sm:text-lg lg-text-xl" aria-label="Discover now">Discover Now</span>
@@ -33,6 +33,6 @@ export default function NewArrivalsSection(params) {
       <div className="flex gap-4 ml-auto">
         {ids.map(e => <ProductCard key={`arrival ${e + 1}`} newProduct={true} newArrivals={true} product={products.find(p=> p.id == e)} />)}
       </div>
-    </section>
+    </section>  
   )
 }

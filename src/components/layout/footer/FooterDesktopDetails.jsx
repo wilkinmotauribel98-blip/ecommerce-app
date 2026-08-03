@@ -3,8 +3,8 @@
 export default function FooterDesktopDetails() {
   return (
     <>
-        <nav className="flex-1">
-          <h3 className='text-zinc-200' aria-label="Shop">Shop</h3>
+        <nav className="flex-1" name="footer-navigation" aria-label="Footer Navigation Links">
+          <span className='text-zinc-200' aria-label="Shop">Shop</span>
           <ul>
             <li className='text-zinc-400' aria-label="All Products">All Products</li>
             <li className='text-zinc-400' aria-label="New Arrivals">New Arrivals</li>
@@ -12,8 +12,8 @@ export default function FooterDesktopDetails() {
             <li className='text-zinc-400' aria-label="Categories">Categories</li>
           </ul>
         </nav>
-        <nav className="flex-1">
-          <h3 className='text-zinc-200' aria-label="Customer Care">Customer Care</h3>
+        <nav className="flex-1" name="footer-customer-care" aria-label="Customer Care Links">
+          <span className='text-zinc-200' aria-label="Customer Care">Customer Care</span>
           <ul>
             <li className='text-zinc-400' aria-label="Contact Us">Contact Us</li>
             <li className='text-zinc-400' aria-label="Shipping & Delivery">Shipping & Delivery</li>
@@ -21,8 +21,8 @@ export default function FooterDesktopDetails() {
             <li className='text-zinc-400' aria-label="FAQs">FAQs</li>
           </ul>
         </nav>
-        <nav className="flex-1">
-          <h3 className='text-zinc-200' aria-label="Company">Company</h3>
+        <nav className="flex-1" name="footer-company" aria-label="Company Links">
+          <span className='text-zinc-200' aria-label="Company">Company</span>
           <ul>
             <li className='text-zinc-400' aria-label="About us">About us</li>
             <li className='text-zinc-400' aria-label="Careers">Careers</li>
@@ -31,7 +31,7 @@ export default function FooterDesktopDetails() {
           </ul>
         </nav>
 
-        <nav className="flex-1 ">
+        <nav className="flex-1 " name="footer-social" aria-label="Social Media Links">
           <h3 className='text-zinc-200' aria-label="Follow us">Follow us</h3>
           <ul className='flex gap-4' aria-label="Social Media Links">
             <li className='text-zinc-400' aria-label="Instagram">
