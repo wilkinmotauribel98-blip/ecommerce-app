@@ -2,7 +2,14 @@ import { svg } from "framer-motion/client";
 
 export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newArrivals }) {
   return (
-    <article 
+    <article
+      onClick={() => {
+        if (shopStyle) {
+          window.location.href = `/category/${product?.title.toLowerCase()}`;
+        } else {
+          window.location.href = `/product/${product?.title.toLowerCase()}`;
+        }
+      }}
       className={
         `
         border border-zinc-800 rounded-2xl flex flex-col gap-1 cursor-pointer relative hover:scale-105
@@ -44,7 +51,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
           <span 
             className={`
             ${newArrivals ? 'text-zinc-500' : ''}
-            ${shopStyle ? 'text-center w-full text-zinc-500' : 'ml-3'}
+            ${shopStyle ? 'text-center ml-3  w-full text-zinc-500' : 'ml-3'}
             ${bestSeller ? 'text-emerald-500 flex gap-2' : ''}
             `
            }
@@ -64,7 +71,6 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
           </span>
          
         </div>
-
     </article>
   )
 }

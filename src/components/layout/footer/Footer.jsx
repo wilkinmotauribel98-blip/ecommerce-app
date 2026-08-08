@@ -20,10 +20,10 @@ export default function Footer() {
             <svg className="w-10 h-10 flex" aria-label="Footer Logo">
               <use xlinkHref="#icon-logo"></use>
             </svg>
-            <span class="text-white text-xl sm:text-xl lg:text-2xl" aria-label="Footer Navigation Title">NIFLIX</span>
+            <span className="text-white text-xl sm:text-xl lg:text-2xl" aria-label="Footer Navigation Title">NIFLIX</span>
           </div>
-          <p class="text-zinc-400 text-sm sm:text-lg" aria-label="Footer Description">Beyond technology.</p>
-          <p class="text-zinc-400 text-sm sm:text-lg" aria-label="Footer Tagline">Elevate your everyday</p>
+          <p className="text-zinc-400 text-sm sm:text-lg" aria-label="Footer Description">Beyond technology.</p>
+          <p className="text-zinc-400 text-sm sm:text-lg" aria-label="Footer Tagline">Elevate your everyday</p>
         </article>
         {size >= 768 ? <FooterDesktopDetails /> : <FooterMobileDetails />}
       </section>

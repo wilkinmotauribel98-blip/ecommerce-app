@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom"
 
 export default function FooterDesktopDetails() {
   return (
@@ -6,9 +6,21 @@ export default function FooterDesktopDetails() {
         <nav className="flex-1" name="footer-navigation" aria-label="Footer Navigation Links">
           <span className='text-zinc-200' aria-label="Shop">Shop</span>
           <ul>
-            <li className='text-zinc-400' aria-label="All Products">All Products</li>
-            <li className='text-zinc-400' aria-label="New Arrivals">New Arrivals</li>
-            <li className='text-zinc-400' aria-label="Best Sellers">Best Sellers</li>
+            <li className='text-zinc-400' aria-label="All Products">
+              <Link >
+                All Products
+              </Link>
+            </li>
+            <li className='text-zinc-400' aria-label="New Arrivals">
+              <Link>
+                New Arrivals
+              </Link>
+            </li>
+            <li className='text-zinc-400' aria-label="Best Sellers">
+              <Link>
+               Best Sellers
+              </Link>
+            </li>
             <li className='text-zinc-400' aria-label="Categories">Categories</li>
           </ul>
         </nav>

@@ -12,7 +12,7 @@ export function Slide({product, size}) {
         style={{background : 'radial-gradient(circle at center, #10b981 0%, transparent 59%)',}}
         >
         </div>
-        <img src={product?.images[0]} alt={`img from ${product?.title}`} fetchPriority='high' className=" object-cover z-10 pb-8 aspect-16/15 xl:max-w-120 m-auto relative" aria-label={`Image for ${product?.title}`} />
+        <img src={product?.images[0]} alt={`img from ${product?.title}`} fetchpriority='high' className=" object-cover z-10 pb-8 aspect-16/15 xl:max-w-120 m-auto relative" aria-label={`Image for ${product?.title}`} />
       </div>
       <div className="z-10 w-6/10  top-6 sm:top-10 lg:top-15 absolute ml-4 sm:ml-10 flex flex-col gap-2 sm:gap-6 h-full " >
         <h2 
@@ -30,7 +30,7 @@ export function Slide({product, size}) {
         >
           {product?.description}
         </p>
-        <Button title={'Shop Collection'} />
+        <Button title={'Shop Collection'} href={`/product/${product?.title.toLowerCase()}`} />
       </div>
     </article>
   )

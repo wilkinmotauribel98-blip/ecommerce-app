@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect, useMemo } from "react"; 
 import { SuggestionCard } from "@/components/ui/SuggestionCard";
 import { useProducts } from "@/hooks/useProducts";
 
@@ -6,26 +6,23 @@ export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [suggestions, setSuggestions] = useState(null);
-
   const products = useProducts((state)=>state.products);
   const setSearchIcon = size < 768 ? '' : '#icon-close'
-
 
   useEffect(()=>{ 
     const sizer =()=>{
       setSize(window.innerWidth)
-      size >= 1024 ? setSearcher(false) : '';
+      if(size >= 1024) setSearcher(false);
 }
     addEventListener('resize', sizer)
     return ()=> removeEventListener('resize', sizer)
-  },[])
-  
-  useEffect(()=>{
-    if(!products) return
-    if(!searchText) return
-    setSuggestions(products.filter(e => (e.title.toLowerCase().startsWith(searchText.toLowerCase()) || e.category.toLowerCase().startsWith(searchText.toLowerCase()))));
-  }, [searchText]) 
+  },[]);
+
+  const suggestions = useMemo(()=>{
+    if (!products || !searchText) return null
+    const q = searchText.toLocaleLowerCase();
+    return products.filter(e => (e.title.toLowerCase().startsWith(searchText.toLowerCase()) || e.category.toLowerCase().startsWith(q)))
+  },[products, searchText]);
   
   return(
     <header className={`w-full max-w-360 m-auto bg-black h-15 flex items-center justify-between   lg:relative  z-50`}>
