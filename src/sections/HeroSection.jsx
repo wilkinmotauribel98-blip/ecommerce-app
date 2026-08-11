@@ -3,7 +3,7 @@ import { useProducts } from "../hooks/useProducts"
 import { useState, useRef, useEffect } from "react";
 
 export default function HeroSection() {
-  const products = useProducts((state) => state.products);
+  const products = useProducts((state) => state.heroProducts);
   const [slide, setSlide] = useState(1);
   const [transition, setTransition] = useState('transform .2s ease');
   const [size, setSize ]= useState(window.innerWidth <= 1440 ? window.innerWidth : 1440);
@@ -11,7 +11,6 @@ export default function HeroSection() {
   const slideRef = useRef(slide);
   slideRef.current = slide;
 
-  const ids = [98, 78, 81, 95, 100];
   
   
   const prev = () => {
@@ -97,17 +96,17 @@ export default function HeroSection() {
         style={{ transform: `translate(-${slide * size }px)`, transition }}
         onTransitionEnd={handleTransitionEnd}
       >
-        <Slide key="start clone" product={products.find(e=>e.id === ids[4])} size={size} />
-        {ids.map((e) => <Slide key={e} product={products.find(i => i.id === e)} size={size} />)}
-        <Slide key="end clone" product={products.find(e=>e.id === ids[0])} size={size} />
+        <Slide key="start clone" product={products[4]} size={size} />
+        {products.map((e) => <Slide key={e.id} product={e} size={size} />)}
+        <Slide key="end clone" product={products[0]} size={size} />
       </div>
       <div 
         aria-label="Navegacion del carrusel"
         className=" flex gap-2 m-auto w-min">
         
-        {ids.map((e, index) => 
+        {products.map((e, index) => 
           <button 
-            key={`dot${e}`}
+            key={`dot${e.id}`}
             aria-label={`Go to slide ${index + 1}`}
             className={`w-2.5 h-2.5 rounded-full cursor-pointer  ${index == slide - 1 || slide === 0 ? 'bg-emerald-400' : 'bg-gray-600'}`}
             onClick={()=> setSlide(index + 1)}>

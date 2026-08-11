@@ -1,14 +1,13 @@
-import { useState, useEffect, useMemo } from "react"; 
-import { SuggestionCard } from "@/components/ui/SuggestionCard";
-import { useProducts } from "@/hooks/useProducts";
+import { useState, useEffect, useMemo, lazy, Suspense } from "react"; 
+
+
 
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const products = useProducts((state)=>state.products);
   const setSearchIcon = size < 768 ? '' : '#icon-close'
-
+  const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
   useEffect(()=>{ 
     const sizer =()=>{
       setSize(window.innerWidth)
@@ -18,11 +17,6 @@ export default function  Header() {
     return ()=> removeEventListener('resize', sizer)
   },[]);
 
-  const suggestions = useMemo(()=>{
-    if (!products || !searchText) return null
-    const q = searchText.toLocaleLowerCase();
-    return products.filter(e => (e.title.toLowerCase().startsWith(searchText.toLowerCase()) || e.category.toLowerCase().startsWith(q)))
-  },[products, searchText]);
   
   return(
     <header className={`w-full max-w-360 m-auto bg-black h-15 flex items-center justify-between   lg:relative  z-50`}>
@@ -83,14 +77,11 @@ export default function  Header() {
           </form>
 
           {
-            (suggestions !== null && searcher) && (searchText.length > 0) 
+            (searchText.length > 0 && searcher)  
             ? 
-              <div className="absolute top-17 w-[80dvw] sm:w-[70dvw] max-w-4xl flex flex-col rounded-xl overflow-hidden bg-gray-600 z-20">
-                  {suggestions.slice(0,3).map(e => <SuggestionCard size={size} info={e} key={e.id}/>)}
-                  <h2 className="text-emerald-600 ml-4 p-1.5 sm:text-2xl">
-                    {suggestions.length > 0 ? `See all results for  "${searchText}"`: 'No results'}
-                  </h2>
-              </div> 
+              <Suspense fallback={null}>
+                <Suggestions search={searchText} />
+              </Suspense>
               : ''
           }
         </div>

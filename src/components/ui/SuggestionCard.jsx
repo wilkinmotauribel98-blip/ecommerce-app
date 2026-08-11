@@ -7,7 +7,7 @@ export function SuggestionCard({info, size}) {
         <span className="sm:text-xl lg:text-2xl">{info.title}</span>
         <div className="flex items-center gap-1 text-zinc-500">
           <p>{info.category}</p>
-          {size < 500 ? '' :<>
+          {size < 500 || !info.brand  ? '' :<>
           <span className="w-1 h-1 rounded-full bg-zinc-600"></span>
           <p>{info.brand}</p> </> } 
         </div>

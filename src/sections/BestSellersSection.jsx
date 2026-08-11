@@ -2,10 +2,10 @@ import { ProductCard } from "@/components/product/ProductCard"
 import { useProducts } from "@/hooks/useProducts"
 
 export default function BestSellersSection() {
-  const products = useProducts((state) => state.products);
-  const orderedByRating = useProducts((state) => state.orderedByRating);
-  const bestSellers = orderedByRating.slice(0,5)
-
+  const bestSellers = useProducts((state) => state.bestSellersProducts);
+  
+  
+if(!bestSellers) return
   return (
     <section className="w-[97%] h-auto bg-black m-auto mb-3">
       <div className="flex justify-between items-center px-1 py-4">
