@@ -1,12 +1,13 @@
 import {useEffect, useState} from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { ProductCard } from '../components/product/ProductCard';
+import Skeleton from '../components/ui/Skeleton';
 
 
 
 export default function ShopByCategorySection() {
   const products = useProducts((state) => state.categoryProducts);
-  const isLoading = useProducts((state) => state.isLoading);
+  const loading = useProducts((state) => state.categoriesLoading);
   
 
   
@@ -17,7 +18,6 @@ export default function ShopByCategorySection() {
         images: category.images,
       };
     });
-   if (categories.length === 0) return
   
   return (
     <section className="w-[95%] sm:w-[calc(100%-2rem)] h-auto bg-black m-auto   ">
@@ -26,9 +26,11 @@ export default function ShopByCategorySection() {
         <span className="text-emerald-500 text-sm sm:text-lg lg:text-xl">View All</span>
       </div>
       <div className='grid gap-4 h-62 overflow-y-hidden p-2 grid-cols-[repeat(auto-fill,minmax(160px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(172px,1fr))]  ' >
-        {categories.map((i) => (
-        <ProductCard key={i.title} product={i} shopStyle={true} />
-      )) }
+        {loading || !categories.length
+          ? [0,1,2,3,4].map(i => <Skeleton key={i} className="h-62 w-full" />)
+          : categories.map((i) => (
+          <ProductCard key={i.title} product={i} shopStyle={true} />
+        )) }
       </div>
     </section>
   )

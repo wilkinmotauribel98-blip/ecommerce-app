@@ -29,15 +29,15 @@ export default function Footer() {
       </section>
 
     <section className="flex flex-col md:flex-row gap-3 items-center w-full " aria-label="Footer Section">
-      <small className="text-zinc-600 text-sm sm:text-lg lg:text-xl" aria-label="Copyright Notice">© 2025 NIFLIX. All rights reserved.</small>
+      <small className="text-zinc-300 text-sm sm:text-lg lg:text-xl" aria-label="Copyright Notice">© 2025 NIFLIX. All rights reserved.</small>
       <ul className="flex items-center md:ml-auto md:pr-4 gap-4  lg:gap-6 text-sm sm:text-lg lg:text-xl text-zinc-600 ">
-        <li className="text-zinc-600 hover:text-gray-400 cursor-pointer" aria-label="Privacy Policy">
+        <li className="text-zinc-300 hover:text-gray-400 cursor-pointer" aria-label="Privacy Policy">
           <Link to="/privacy-policy" aria-label="Navigate to Privacy Policy page">Privacy Policy</Link>
         </li>
-        <li className="text-zinc-600 hover:text-gray-400 cursor-pointer border-x border-zinc-600 px-5" aria-label="Terms of Service">
+        <li className="text-zinc-300 hover:text-gray-400 cursor-pointer border-x border-zinc-600 px-5" aria-label="Terms of Service">
           <Link to="/terms-of-service" aria-label="Navigate to Terms of Service page">Terms of Service</Link>
         </li>
-        <li className="text-zinc-600 hover:text-gray-400 cursor-pointer" aria-label="Contact Us">
+        <li className="text-zinc-300 hover:text-gray-400 cursor-pointer" aria-label="Contact Us">
           <Link to="/contact-us" aria-label="Navigate to Contact Us page">Contact Us</Link>
         </li>
       </ul>

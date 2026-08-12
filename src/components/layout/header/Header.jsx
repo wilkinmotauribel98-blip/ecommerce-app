@@ -59,12 +59,16 @@ export default function  Header() {
       : ''}
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
-        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5  justify-center rounded-2xl w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}>
+        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}>
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
             <use xlinkHref="#icon-search"/>
           </svg>
 
-          <form action="search" className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}>
+          <form 
+            action="search" 
+            className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}
+            aria-label=""
+            >
             <input  
             type="text"
             label="Search for articles"
@@ -72,7 +76,7 @@ export default function  Header() {
             value={searchText} 
             onChange={(e)=> setSearchText(e.target.value)} 
             placeholder="Search for articles" 
-            className={` caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
+            className={`caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
           />
           </form>
 
@@ -80,7 +84,7 @@ export default function  Header() {
             (searchText.length > 0 && searcher)  
             ? 
               <Suspense fallback={null}>
-                <Suggestions search={searchText} />
+                <Suggestions search={searchText} onClose={()=> setSearcher(false)}/>
               </Suspense>
               : ''
           }

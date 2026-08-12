@@ -1,5 +1,11 @@
 import { svg } from "framer-motion/client";
 
+// utils/img.js
+export function optimizedImg(src, w, h) {
+  if (!src) return '';
+  return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${w}&h=${h}&fit=cover&q=80`;
+}
+
 export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newArrivals }) {
   return (
     <article
@@ -34,7 +40,10 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
         ${bestSeller ? 'w-full max-w-45 mx-auto -mt-10 ' : ''} 
         
         `}>
-          <img src={product?.images[0]} alt={`${product?.title}`} className="object-cover  relative z-10"/>
+          <img 
+          src={optimizedImg(product?.images[0], 280, 280)} 
+          alt={`${product?.title}`} 
+          className="object-cover  relative z-10"/>
         </div>
         {shopStyle && <div className={`w-full h-20 inset-y-2/8 inset-x-0 absolute bg-radial-[at_50%_50%] from-emerald-700  to-transparent to-60%` } ></div>}
 
@@ -50,8 +59,8 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
 
           <span 
             className={`
-            ${newArrivals ? 'text-zinc-500' : ''}
-            ${shopStyle ? 'text-center ml-3  w-full text-zinc-500' : 'ml-3'}
+            ${newArrivals ? 'text-zinc-400' : ''}
+            ${shopStyle ? 'text-center ml-3  w-full text-zinc-400' : 'ml-3'}
             ${bestSeller ? 'text-emerald-500 flex gap-2' : ''}
             `
            }
@@ -65,7 +74,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
             {bestSeller ? `$${product?.price}` : ''}
             {bestSeller ? 
             <span 
-              className="text-zinc-500  flex gap-1.5 items-center"
+              className="text-zinc-400  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
               >Rating {<svg className="w-6 h-6"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
           </span>

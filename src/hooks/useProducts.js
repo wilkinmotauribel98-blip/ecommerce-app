@@ -14,6 +14,9 @@ const categories = [
   {category: "womens-watches", id: 190,images: null, total: 5}
 ]
 
+const fetchIds = (ids) =>
+  Promise.all(ids.map((id) => fetch(`https://dummyjson.com/products/${id}`).then((res) => res.json())));
+
 export const useProducts = create(
   persist(
     (set, get) => ({
@@ -22,27 +25,54 @@ export const useProducts = create(
       newArrivalsProducts: [],
       bestSellersProducts: [],
       categoryProducts : [],
-      isLoading: false,
+      heroLoading: false,
+      newArrivalsLoading: false,
+      bestSellersLoading: false,
+      categoriesLoading: false,
       hasHomeFetched: false,
-      error: null,      
-      fetchHomeProducts:async () => {
+      error: null,
+      fetchHomeProducts: async () => {
         if (get().hasHomeFetched) return;
-        set({ isLoading: true, error: null });
+        set({
+          error: null,
+          heroLoading: true,
+          newArrivalsLoading: true,
+          bestSellersLoading: true,
+          categoriesLoading: true,
+        });
         try {
-          const hero = await Promise.all(heroIds.map((i)=> fetch( `https://dummyjson.com/products/${i}`).then(p=>p.json())));
+          const [hero, newArrivals, bestSellers, categorias] = await Promise.all([
+            fetchIds(heroIds),
+            fetchIds(newArrivalsIds),
+            fetchIds(bestSellersIds),
+            Promise.all(
+              categories.map((category) =>
+                fetch(`https://dummyjson.com/products/${category.id}`)
+                  .then((res) => res.json())
+                  .then((product) => ({ ...category, images: product.images }))
+              )
+            ),
+          ]);
 
-          const newArrivals = await Promise.all(newArrivalsIds.map((i)=> fetch( `https://dummyjson.com/products/${i}`).then(p=>p.json())));
-
-          const bestSellers = await Promise.all(bestSellersIds.map((i)=> fetch( `https://dummyjson.com/products/${i}`).then(p=>p.json())));
-
-          const categorias = await Promise.all(categories.map((i, index)=> fetch( `https://dummyjson.com/products/${i.id}`).then(p=> p.json()).then(pr => categories[index].images = pr.images)));
-          
-          console.log(categories);
-          
-          
-          set({ heroProducts: hero, newArrivalsProducts: newArrivals, bestSellersProducts: bestSellers, categoryProducts: categories, hasHomeFetched: true, isLoading: false });
+          set({
+            heroProducts: hero,
+            heroLoading: false,
+            newArrivalsProducts: newArrivals,
+            newArrivalsLoading: false,
+            bestSellersProducts: bestSellers,
+            bestSellersLoading: false,
+            categoryProducts: categorias,
+            categoriesLoading: false,
+            hasHomeFetched: true,
+          });
         } catch (err) {
-          set({ error: err.message, isLoading: false });
+          set({
+            error: err.message,
+            heroLoading: false,
+            newArrivalsLoading: false,
+            bestSellersLoading: false,
+            categoriesLoading: false,
+          });
         }
       }
     }),
