@@ -126,7 +126,7 @@ const svgProps = {
       <symbol 
         id="icon-star"
         viewBox="0 -960 960 960" 
-        fill="oklch(69.6% 0.17 162.4">
+        fill="currentColor">
       <path d="m275.93-189.58 54.8-228.57L149.7-571.61l237.07-20.62L480-807.69l93.42 216.46 236.88 19.62-181.04 153.46 54.98 228.57-204.16-121.35-204.15 121.35Z"/>
       </symbol>
 
@@ -145,7 +145,7 @@ const svgProps = {
       <symbol 
         id="chevron-right"  
         viewBox="0 -960 960 960"  
-        fill="#e3e3e3"
+        fill="currentColor"
       >
         <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
       </symbol>
@@ -154,11 +154,19 @@ const svgProps = {
       <symbol 
         id="chevron-left"  
         viewBox="0 -960 960 960" 
-        fill="#e3e3e3"
+        fill="currentColor"
       >
         <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/>
       </symbol>
 
+
+        <symbol 
+        id="icon-void-star"
+        xmlns="http://www.w3.org/2000/svg" 
+        height="24px" 
+        viewBox="0 -960 960 960"
+        width="24px" fill="#e3e3e3"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/>
+        </symbol>
 
       <symbol
         id="audio-icon"

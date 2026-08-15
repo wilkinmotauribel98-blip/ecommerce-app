@@ -13,7 +13,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
         if (shopStyle) {
           window.location.href = `/category/${product?.title.toLowerCase()}`;
         } else {
-          window.location.href = `/product/${product?.title.toLowerCase()}`;
+          window.location.href = `/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`;
         }
       }}
       className={
@@ -76,7 +76,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
             <span 
               className="text-zinc-400  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
-              >Rating {<svg className="w-6 h-6"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
+              >Rating {<svg className="w-6 h-6 text-emerald-500"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
           </span>
          
         </div>
