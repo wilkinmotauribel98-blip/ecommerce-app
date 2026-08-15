@@ -28,7 +28,7 @@ export function Detail({title, content}) {
               onClick={() => setIsOpen(!isOpen)}
               >{title}
                 {
-                  <svg width="30" height="30" aria-hidden="true" style={{transition : 'transform .3s ease', transform: isOpen ? 'rotate(90deg)' : 'none'}}><use href="#chevron-right"></use></svg>
+                  <svg width="30" height="30" aria-hidden="true" style={{transition : 'transform .3s ease', transform: isOpen ? 'rotate(90deg)' : 'none'}}><use href="/sprite-core.svg#chevron-right"></use></svg>
                 }
               </summary>
             {content}

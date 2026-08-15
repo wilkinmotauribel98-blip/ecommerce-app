@@ -2,17 +2,28 @@ import { Button } from "../components/ui/Button";
 import { useState, useEffect } from "react";
 import { optimizedImg } from "../components/product/ProductCard";
 
+const cartProduct = (product, counter) => {
+    return{
+    product: product.title,
+    cant: counter,
+    id: product.id
+    }
+  };
+
+
 export default function ProductHeroSection({ product }){
   const [counter, setCounter] = useState(0);
   const review = (product.reviews.reduce((acc, r) =>  acc + r.rating, 0) / product.reviews.length)
   const stars = Math.round(review)
   const index = [0,1,2,3,4];
+  
+
   useEffect(()=> setCounter(1), [product])
   return(
-    <section className="flex flex-col md:flex-row mt-5 max-w-5xl gap-4  m-auto">
-      <div className="bg-zinc-900 flex-1 mt-0 max-w-110 m-auto h-max border border-zinc-600 rounded-xl">
+    <section className="flex flex-col md:flex-row mt-5 max-w-7xl gap-4  m-auto">
+      <div className="bg-zinc-900 flex-1 mt-0 max-w-150  m-auto max-h-140 border border-zinc-600 rounded-xl">
         <img 
-          className="cover w-full"
+          className="cover w-full -mt-12 sm:-mt-15 -ml-5"
           src={optimizedImg(product?.images[0], 720, 800)} 
           alt={`image of ${product.title}`} />
       </div>
@@ -23,7 +34,7 @@ export default function ProductHeroSection({ product }){
         {product.brand ? <h3 className="p-0 m-0 text-lg text-zinc-400">{product?.brand}</h3> : ''}
         
         <div className="flex gap-1.5">
-          {index.map(e => e < stars  ?   <svg className="w-6 h-6 text-amber-400" key={e} ><use xlinkHref="#icon-star"></use> </svg> : <svg className="w-6 h-6 text-amber-300" key={e} ><use xlinkHref="#icon-void-star"></use> </svg> )}
+          {index.map(e => e < stars  ?   <svg className="w-6 h-6 text-amber-400" key={e} ><use href="/sprite-extra.svg#icon-star"></use> </svg> : <svg className="w-6 h-6 text-amber-300" key={e} ><use href="/sprite-extra.svg#icon-void-star"></use> </svg> )}
           <div>
             <span>{review.toFixed(2)} ({product.reviews.length} reviews)</span>
           </div>
@@ -51,7 +62,11 @@ export default function ProductHeroSection({ product }){
           <button className="bg-zinc-800 text-zinc-100 w-14 h-12 border-x border-zinc-700  text-center">{counter}</button>
           <button className="bg-zinc-800 text-zinc-100 w-14 h-12  text-center" onClick={()=> {if(counter < product.stock) setCounter(s => s + 1)}}>+</button>
           </div>
-          <Button title={'Add to Cart'}/>
+          <button 
+            className={`bg-emerald-500 py-3 w-fit px-2 flex-1  text-gray-300 sm:px-10 hover:opacity-50 cursor-pointer sm:mt-0`}
+            aria-label={`Add to cart`}
+            onClick={()=> localStorage.setItem('cart', JSON.stringify(cartProduct(product, counter)))}
+            >Add to cart</button>
         </div>
         <button className="border border-zinc-600 py-2 cursor-pointer rounded">Buy Now</button>
       </article>

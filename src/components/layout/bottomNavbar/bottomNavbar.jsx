@@ -20,7 +20,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Home page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Home">
-                <use xlinkHref="#icon-home" />
+                <use href="/sprite-core.svg#icon-home"/>
               </svg>
               <p className='text-md sm:text-lg'>
                 Home
@@ -37,7 +37,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Shop page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer `} aria-label="Products">
-                <use xlinkHref="#icon-shop" />
+                <use href="/sprite-core.svg#icon-shop"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Shop
@@ -53,7 +53,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Categories page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 text-zinc-400 cursor-pointer`} aria-label="About">
-                <use xlinkHref="#icon-grid" />
+                <use href="/sprite-core.svg#icon-grid"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Categories
@@ -69,7 +69,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Cart page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Contact">
-                <use xlinkHref="#icon-cart" />
+                <use href="/sprite-core.svg#icon-cart"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Cart
@@ -82,7 +82,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Account page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer`} aria-label="User Account">
-                <use xlinkHref="#icon-user" />
+                <use href="/sprite-core.svg#icon-user"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Account

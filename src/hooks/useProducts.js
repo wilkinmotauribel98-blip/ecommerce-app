@@ -20,7 +20,6 @@ const fetchIds = (ids) =>
 export const useProducts = create(
   persist(
     (set, get) => ({
-      products: [],
       heroProducts: [],
       newArrivalsProducts: [],
       bestSellersProducts: [],

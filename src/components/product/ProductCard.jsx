@@ -76,7 +76,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
             <span 
               className="text-zinc-400  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
-              >Rating {<svg className="w-6 h-6 text-emerald-500"><use xlinkHref="#icon-star"></use> </svg>} {product?.rating}</span> : ''}
+              >Rating {<svg className="w-6 h-6 text-emerald-500"><use href="/sprite-extra.svg#icon-star"></use> </svg>} {product?.rating}</span> : ''}
           </span>
          
         </div>

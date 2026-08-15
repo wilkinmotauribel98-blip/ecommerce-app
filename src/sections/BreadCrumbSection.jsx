@@ -11,7 +11,7 @@ export default function BreadCrumbSection({ category, brand, title}) {
         aria-label="Link to Home"
       >Home</Link>
       <svg className="w-7 h-7">
-        <use xlinkHref="#chevron-right"></use>
+        <use href="/sprite-core.svg#chevron-right"></use>
       </svg>
       <Link 
         className="capitalize" 
@@ -22,7 +22,7 @@ export default function BreadCrumbSection({ category, brand, title}) {
       </Link>
       
       <svg className="w-7 h-7 ">
-        <use xlinkHref="#chevron-right"></use>
+        <use href="/sprite-core.svg#chevron-right"></use>
       </svg>
       <h2 
         className="text-emerald-400"

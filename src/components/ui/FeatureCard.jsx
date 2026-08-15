@@ -8,7 +8,7 @@ export function FeatureCard({className, icon, title, description}) {
       aria-label={`Feature: ${title} - ${description}`}
     >
       <svg className={`${className}`}>
-        <use xlinkHref={icon}></use>
+        <use href={`/sprite-extra.svg#${icon}`}></use>
       </svg>
 
       <div className="flex flex-col "> 

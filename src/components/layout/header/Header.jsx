@@ -6,7 +6,7 @@ export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const setSearchIcon = size < 768 ? '' : '#icon-close'
+  const setSearchIcon = size < 768 ? '' : '/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
   useEffect(()=>{ 
     const sizer =()=>{
@@ -28,14 +28,14 @@ export default function  Header() {
               onClick={()=> setSearcher(!searcher)}
               aria-label="search opened, click to close"
             >
-              <use xlinkHref={`#icon-arrow-back`} />
+              <use href="/sprite-core.svg#icon-arrow-back"/>
             </svg> 
           : 
             <svg 
               className={` w-6.5 h-6.5 text-zinc-200 cursor-pointer`}
               aria-label="Niflix logo"
             >
-            <use xlinkHref={'#icon-logo'} />
+            <use href="/sprite-core.svg#icon-logo"/>
           </svg>}
         <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</h1>
       </div>
@@ -61,7 +61,7 @@ export default function  Header() {
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
         <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}>
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
-            <use xlinkHref="#icon-search"/>
+            <use href="/sprite-core.svg#icon-search"/>
           </svg>
 
           <form 
@@ -94,19 +94,19 @@ export default function  Header() {
             className={`w-6.5 h-6.5 ${searcher && size < 768 ? 'hidden' : ''}` }
             onClick={()=> setSearcher(!searcher)}
             aria-label="Search">
-            <use xlinkHref={`${searcher  ? setSearchIcon : '#icon-search'}`}/>
+            <use href={searcher ? setSearchIcon : '/sprite-core.svg#icon-search'}/>
           </svg>
           
           <svg 
             className='w-6.5 h-6.5 hidden lg:block'
             aria-label="User profile">
-            <use xlinkHref="#icon-user"/>
+            <use href="/sprite-core.svg#icon-user"/>
           </svg>
           
           <svg 
             className='w-6.5 h-6.5' 
            aria-label="Shopping cart">
-            <use xlinkHref="#icon-cart"/>
+            <use href="/sprite-core.svg#icon-cart"/>
           </svg>
 
       </div>

@@ -106,14 +106,14 @@ export default function HeroSection() {
       <svg 
         className="h-15 w-15 z-100 -left-1 text-zinc-300 absolute top-5/12 hidden group-hover:block" 
         >
-        <use xlinkHref="#chevron-left"></use>
+        <use href="/sprite-core.svg#chevron-left"></use>
       </svg>
     </button>
       
 
       <button onClick={next} aria-label="Go to next slide" focus-visible="true">
         <svg className="absolute z-100 text-zinc-300 h-15 w-15 -right-1 top-5/12 hidden group-hover:block">
-          <use xlinkHref="#chevron-right"></use>
+          <use href="/sprite-core.svg#chevron-right"></use>
         </svg>
       </button>
 

@@ -12,7 +12,7 @@ export default function ProductPage() {
 
   if(!product) return
   return (
-    <main className="max-w-360 m-auto z-0 bg-black overflow-hidden   w-[95%]" aria-label="Product Page Main Content">
+    <main className="max-w-7xl m-auto z-0 bg-black overflow-hidden   w-[95%]" aria-label="Product Page Main Content">
       <BreadCrumbSection category={product.category} brand={product?.brand} title={product.title} />
       <ProductHeroSection product={product}/>
       <TrustBarSection product={product} />

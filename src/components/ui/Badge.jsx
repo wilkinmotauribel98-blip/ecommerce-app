@@ -6,7 +6,7 @@ export default function Badge({icon, title, desc, style}) {
         aria-label={`${title}: ${desc}`}
         >
             <svg className="w-10 text-emerald-400 h-10">
-              <use xlinkHref={`#${icon}`}></use>
+              <use href={`/sprite-extra.svg#${icon}`}></use>
             </svg>
             <div>
               <h3 className={`font-bold text-sm ${style ? '': "text-center"}`}>{title}</h3>
