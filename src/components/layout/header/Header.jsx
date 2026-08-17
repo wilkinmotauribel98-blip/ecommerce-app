@@ -1,13 +1,18 @@
 import { useState, useEffect, useMemo, lazy, Suspense } from "react"; 
-
+import { useCart } from "../../../hooks/useCart.js";
 
 
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
+  
   const setSearchIcon = size < 768 ? '' : '/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
+
+  const total = useCart((state)=> state.total)
+
+  
   useEffect(()=>{ 
     const sizer =()=>{
       setSize(window.innerWidth)
@@ -19,7 +24,7 @@ export default function  Header() {
 
   
   return(
-    <header className={`w-full max-w-360 m-auto bg-black h-15 flex items-center justify-between   lg:relative  z-50`}>
+    <header className={`w-full max-w-360 m-auto bg-black h-17  flex items-center justify-between   lg:relative  z-50`}>
       <div className="flex items-center gap-2 px-2">
         {searcher && size < 768 
           ?
@@ -59,7 +64,7 @@ export default function  Header() {
       : ''}
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
-        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[80dvw] sm:w-[70dvw] max-w-4xl' : ''}`}>
+        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
             <use href="/sprite-core.svg#icon-search"/>
           </svg>
@@ -102,13 +107,16 @@ export default function  Header() {
             aria-label="User profile">
             <use href="/sprite-core.svg#icon-user"/>
           </svg>
-          
+          <div className="w-6.5 h-6.5 relative mr-3 ">
           <svg 
-            className='w-6.5 h-6.5' 
+            className='w-6.5 h-6.5 absolute' 
            aria-label="Shopping cart">
             <use href="/sprite-core.svg#icon-cart"/>
+            
           </svg>
-
+        <span className="rounded-full bg-emerald-500 absolute -top-3 z-10 -right-4.5  text-center justify-items-center min-w-7 w-fit  min-h-6 p-0.5 h-auto"><span>{total > 99 ? '99+' : total}</span></span>
+          </div>
+          
       </div>
     </header>
   )

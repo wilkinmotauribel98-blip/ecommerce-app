@@ -1,23 +1,36 @@
-import { Button } from "../components/ui/Button";
+import { useCart } from "@/hooks/useCart";
 import { useState, useEffect } from "react";
-import { optimizedImg } from "../components/product/ProductCard";
+import { optimizedImg } from "@/components/product/ProductCard";
+import { title } from "framer-motion/client";
 
-const cartProduct = (product, counter) => {
-    return{
-    product: product.title,
-    cant: counter,
-    id: product.id
-    }
-  };
 
 
 export default function ProductHeroSection({ product }){
   const [counter, setCounter] = useState(0);
   const review = (product.reviews.reduce((acc, r) =>  acc + r.rating, 0) / product.reviews.length)
-  const stars = Math.round(review)
-  const index = [0,1,2,3,4];
-  
+  const price = (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2);
+  const stars = Math.round(review);
+  const cart = useCart((state)=> state.cart)
+  const productQuantity = ()=>{
 
+    if (cart[product.id]) {
+    if(cart[product.id].quantity + counter <= product.stock) return cart[product.id].quantity + counter
+    return product.stock
+    }
+    return counter
+  }
+
+
+
+  const index = [0,1,2,3,4];
+  const cartProduct = {
+    image: product.images[0],
+    title: product.title,
+    price: price,
+    quantity: productQuantity()
+  }
+  const setCart = useCart((state)=> state.setCart);
+  
   useEffect(()=> setCounter(1), [product])
   return(
     <section className="flex flex-col md:flex-row mt-5 max-w-7xl gap-4  m-auto">
@@ -41,7 +54,7 @@ export default function ProductHeroSection({ product }){
         </div>
 
         <div className="flex gap-4">
-          <span className="text-xl text-emerald-400">${ (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2) }</span>
+          <span className="text-xl text-emerald-400">${price}</span>
           <span className="relative text-zinc-400">${product.price} <span className="absolute w-6/5 -left-1 h-0.5 bg-zinc-400 top-2/5 "></span></span>
           <span className="rounded text-emerald-500 bg-emerald-900 px-3 ">{Math.round(product.discountPercentage)}% OFF</span>
         </div>
@@ -65,7 +78,7 @@ export default function ProductHeroSection({ product }){
           <button 
             className={`bg-emerald-500 py-3 w-fit px-2 flex-1  text-gray-300 sm:px-10 hover:opacity-50 cursor-pointer sm:mt-0`}
             aria-label={`Add to cart`}
-            onClick={()=> localStorage.setItem('cart', JSON.stringify(cartProduct(product, counter)))}
+            onClick={()=> setCart(cartProduct, product.id)}
             >Add to cart</button>
         </div>
         <button className="border border-zinc-600 py-2 cursor-pointer rounded">Buy Now</button>

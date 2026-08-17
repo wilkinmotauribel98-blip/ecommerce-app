@@ -7,6 +7,7 @@ export default function BreadCrumbSection({ category, brand, title}) {
       aria-label="BreadCrumb"
     >
       <Link 
+        className="z-10"
         to={'/'} 
         aria-label="Link to Home"
       >Home</Link>
@@ -14,7 +15,7 @@ export default function BreadCrumbSection({ category, brand, title}) {
         <use href="/sprite-core.svg#chevron-right"></use>
       </svg>
       <Link 
-        className="capitalize" 
+        className="capitalize z-20" 
         to={`/category/${category}`}
         aria-label={`Link to Category ${category}`}
         >{category}

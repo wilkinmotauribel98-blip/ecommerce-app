@@ -19,7 +19,7 @@ export default function ProductTabsSection({product}){
     {title:'Dimentions', content: product?.dimentions },
     {title:'Minimum order quantity', content: product?.minimumOrderQuantity },
     {title:'Availability', content: product?.availabilityStatus },
-    {title:'Category', content: product?.category },
+    {title:'Category', content: product?.category.replace(/-/g, ' ') },
     {title:'Tags', content: product?.tags },
   ]
 
