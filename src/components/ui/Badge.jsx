@@ -10,7 +10,7 @@ export default function Badge({icon, title, desc, style}) {
             </svg>
             <div>
               <h3 className={`font-bold text-sm ${style ? '': "text-center"}`}>{title}</h3>
-            <p className={`text-zinc-600 text-pretty ${style ? '': "text-center"}`}>{desc}</p>
+            <p className={`text-zinc-400 text-pretty ${style ? '': "text-center"}`}>{desc}</p>
             </div>
     </li>
     </>

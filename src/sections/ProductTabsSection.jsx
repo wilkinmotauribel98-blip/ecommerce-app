@@ -1,5 +1,6 @@
 import { useState } from "react"
 import ReviewCard from "../components/ui/ReviewCard";
+import Skeleton from "../components/ui/Skeleton";
 
 const TableItem = ({title, content})=>{
   return(
@@ -10,8 +11,24 @@ const TableItem = ({title, content})=>{
   )
 }
 
-export default function ProductTabsSection({product}){
+export default function ProductTabsSection({product, loading}){
   const [tab, setTab] = useState({description:true, especifications:false, reviews:false});
+
+  if (loading) {
+    return(
+      <section className="my-5 flex flex-col gap-5 max-w-7xl m-auto" aria-label="Product tabs loading">
+        <div className="flex gap-3">
+          <Skeleton className="flex-1 h-10" />
+          <Skeleton className="flex-1 h-10" />
+          <Skeleton className="flex-1 h-10" />
+        </div>
+        <div className="flex flex-col lg:flex-row gap-10">
+          <Skeleton className="flex-1 h-44" />
+          <Skeleton className="flex-1 h-44" />
+        </div>
+      </section>
+    )
+  }
   const tableMap = [
     {title:'Brand', content: product?.brand },
     {title:'SKU', content: product?.sku },
@@ -20,7 +37,7 @@ export default function ProductTabsSection({product}){
     {title:'Minimum order quantity', content: product?.minimumOrderQuantity },
     {title:'Availability', content: product?.availabilityStatus },
     {title:'Category', content: product?.category.replace(/-/g, ' ') },
-    {title:'Tags', content: product?.tags },
+    {title:'Tags', content: product?.tags.join(', ') },
   ]
 
   return(

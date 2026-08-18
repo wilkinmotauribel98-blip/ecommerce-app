@@ -1,47 +1,48 @@
-import { useCart } from "@/hooks/useCart";
-import { useState, useEffect } from "react";
 import { optimizedImg } from "@/components/product/ProductCard";
-import { title } from "framer-motion/client";
+import AddToCard from "@/components/ui/AddToCard";
+import Skeleton from "@/components/ui/Skeleton";
 
 
+export default function ProductHeroSection({ product, loading }){
+  if (loading) {
+    return(
+      <section className="flex flex-col md:flex-row mt-5 max-w-7xl gap-4 m-auto" aria-label="Product hero loading">
+        <div className="bg-zinc-900 flex-1 mt-0 max-w-150 m-auto max-h-140 border border-zinc-600 rounded-xl overflow-hidden">
+          <Skeleton className="w-full h-full rounded-xl" />
+        </div>
+        <article className="m-auto max-w-150 flex-1 flex flex-col px-3 gap-3">
+          <Skeleton className="h-3 w-16" />
+          <Skeleton className="h-8 lg:h-10 w-3/4" />
+          <Skeleton className="h-4 w-24" />
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-6 w-40" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-1/2" />
+          <Skeleton className="h-12 w-full" />
+          <Skeleton className="h-12 w-full" />
+        </article>
+      </section>
+    )
+  }
 
-export default function ProductHeroSection({ product }){
-  const [counter, setCounter] = useState(0);
   const review = (product.reviews.reduce((acc, r) =>  acc + r.rating, 0) / product.reviews.length)
   const price = (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2);
   const stars = Math.round(review);
-  const cart = useCart((state)=> state.cart)
-  const productQuantity = ()=>{
-
-    if (cart[product.id]) {
-    if(cart[product.id].quantity + counter <= product.stock) return cart[product.id].quantity + counter
-    return product.stock
-    }
-    return counter
-  }
-
-
 
   const index = [0,1,2,3,4];
-  const cartProduct = {
-    image: product.images[0],
-    title: product.title,
-    price: price,
-    quantity: productQuantity()
-  }
-  const setCart = useCart((state)=> state.setCart);
   
-  useEffect(()=> setCounter(1), [product])
   return(
     <section className="flex flex-col md:flex-row mt-5 max-w-7xl gap-4  m-auto">
-      <div className="bg-zinc-900 flex-1 mt-0 max-w-150  m-auto max-h-140 border border-zinc-600 rounded-xl">
+      <div className="bg-zinc-900 flex-1 mt-0    m-auto  border border-zinc-600 rounded-xl">
         <img 
-          className="cover w-full -mt-12 sm:-mt-15 -ml-5"
-          src={optimizedImg(product?.images[0], 720, 800)} 
+          className="cover w-full"
+          src={optimizedImg(product?.images[0], 720, 600)} 
           alt={`image of ${product.title}`} />
       </div>
     
-      <article className="text-white m-auto max-w-150 flex-1 flex flex-col px-3 gap-3">
+      <article className="text-white m-auto  flex-1 flex flex-col px-3 gap-3">
       {product.stock > 0 ? <span className="text-emerald-500 flex items-center gap-1.5"><div className="w-2 h-2 bg-emerald-500 rounded-full "></div> In stock</span> : <span className="text-red-500 flex items-center gap-1.5"><div className="w-2 h-2 bg-red-500 rounded-full "></div>No stock</span>}
         <h2 className="text-2xl lg:text-4xl p-0 m-0">{product.title}</h2>
         {product.brand ? <h3 className="p-0 m-0 text-lg text-zinc-400">{product?.brand}</h3> : ''}
@@ -56,7 +57,7 @@ export default function ProductHeroSection({ product }){
         <div className="flex gap-4">
           <span className="text-xl text-emerald-400">${price}</span>
           <span className="relative text-zinc-400">${product.price} <span className="absolute w-6/5 -left-1 h-0.5 bg-zinc-400 top-2/5 "></span></span>
-          <span className="rounded text-emerald-500 bg-emerald-900 px-3 ">{Math.round(product.discountPercentage)}% OFF</span>
+          <span className="rounded text-emerald-400 bg-emerald-900 px-3 py-0.5">{Math.round(product.discountPercentage)}% OFF</span>
         </div>
 
         <p className="text-zinc-400 text-sm lg:text-lg">{product.description}</p>
@@ -68,19 +69,7 @@ export default function ProductHeroSection({ product }){
             <span>Minimum order quantity: {product.minimumOrderQuantity}</span> 
             <span>Availabity: in stock ({product.stock} units)</span>
         </div>
-
-        <div className="flex w-full">
-          <div className="flex h-min">
-          <button className="bg-zinc-800 text-zinc-100 w-14 h-12 text-center" onClick={()=> {if(counter > 1) setCounter(s => s - 1)}}>-</button>
-          <button className="bg-zinc-800 text-zinc-100 w-14 h-12 border-x border-zinc-700  text-center">{counter}</button>
-          <button className="bg-zinc-800 text-zinc-100 w-14 h-12  text-center" onClick={()=> {if(counter < product.stock) setCounter(s => s + 1)}}>+</button>
-          </div>
-          <button 
-            className={`bg-emerald-500 py-3 w-fit px-2 flex-1  text-gray-300 sm:px-10 hover:opacity-50 cursor-pointer sm:mt-0`}
-            aria-label={`Add to cart`}
-            onClick={()=> setCart(cartProduct, product.id)}
-            >Add to cart</button>
-        </div>
+        <AddToCard product={product} price={price}/>
         <button className="border border-zinc-600 py-2 cursor-pointer rounded">Buy Now</button>
       </article>
     </section>

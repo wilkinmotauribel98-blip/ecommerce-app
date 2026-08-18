@@ -1,16 +1,14 @@
 import { useState, useEffect, useMemo, lazy, Suspense } from "react"; 
-import { useCart } from "../../../hooks/useCart.js";
+import CartItem from "@/components/cart/CartItem.jsx";
 
 
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  
   const setSearchIcon = size < 768 ? '' : '/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
 
-  const total = useCart((state)=> state.total)
 
   
   useEffect(()=>{ 
@@ -96,7 +94,7 @@ export default function  Header() {
         </div>
 
           <svg 
-            className={`w-6.5 h-6.5 ${searcher && size < 768 ? 'hidden' : ''}` }
+            className={`w-6.5 h-6.5 cursor-pointer ${searcher && size < 768 ? 'hidden' : ''}` }
             onClick={()=> setSearcher(!searcher)}
             aria-label="Search">
             <use href={searcher ? setSearchIcon : '/sprite-core.svg#icon-search'}/>
@@ -107,16 +105,8 @@ export default function  Header() {
             aria-label="User profile">
             <use href="/sprite-core.svg#icon-user"/>
           </svg>
-          <div className="w-6.5 h-6.5 relative mr-3 ">
-          <svg 
-            className='w-6.5 h-6.5 absolute' 
-           aria-label="Shopping cart">
-            <use href="/sprite-core.svg#icon-cart"/>
-            
-          </svg>
-        <span className="rounded-full bg-emerald-500 absolute -top-3 z-10 -right-4.5  text-center justify-items-center min-w-7 w-fit  min-h-6 p-0.5 h-auto"><span>{total > 99 ? '99+' : total}</span></span>
-          </div>
-          
+         
+          <CartItem />
       </div>
     </header>
   )

@@ -1,13 +1,30 @@
 import { Link } from "react-router-dom"
+import Skeleton from "@/components/ui/Skeleton"
 
-export default function BreadCrumbSection({ category, brand, title}) {
+export default function BreadCrumbSection({ category, brand, title, loading}) {
+  if (loading) {
+    return (
+      <section 
+        className="px-3 flex gap-2 items-center w-full flex-wrap py-1"
+        aria-label="BreadCrumb loading"
+      >
+        <Skeleton className="h-4 w-10" />
+        <Skeleton className="h-3 w-3" />
+        <Skeleton className="h-4 w-16" />
+        <Skeleton className="h-3 w-3" />
+        <Skeleton className="h-4 w-28" />
+      </section>
+    )
+  }
+  
+  
   return(
     <section 
       className="px-3 text-zinc-400 flex gap-2 items-center w-full flex-wrap"
       aria-label="BreadCrumb"
     >
       <Link 
-        className="z-10"
+        className=""
         to={'/'} 
         aria-label="Link to Home"
       >Home</Link>
@@ -15,7 +32,7 @@ export default function BreadCrumbSection({ category, brand, title}) {
         <use href="/sprite-core.svg#chevron-right"></use>
       </svg>
       <Link 
-        className="capitalize z-20" 
+        className="capitalize " 
         to={`/category/${category}`}
         aria-label={`Link to Category ${category}`}
         >{category}
