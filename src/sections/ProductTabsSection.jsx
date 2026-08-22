@@ -41,7 +41,7 @@ export default function ProductTabsSection({product, loading}){
   ]
 
   return(
-    <section className="my-5 flex flex-col gap-5 max-w-7xl m-auto">
+    <section className="my-5 flex flex-col gap-5  m-auto">
       <div className="text-white flex ">
         <button 
           className={`flex-1 py-3 ${tab.description ? 'border-b-4 border-emerald-400' : ''}`} 
@@ -74,7 +74,9 @@ export default function ProductTabsSection({product, loading}){
       {
         tab.especifications ?
         <table>
-            {tableMap.map((e)=> e.content ? <TableItem key={e.title} title={e.title} content={e.content}/> : '')}
+            <tbody>
+              {tableMap.map((e)=> e.content ? <TableItem key={e.title + e.content} title={e.title} content={e.content}/> : '')}
+            </tbody>
         </table>
         : <></>
       }

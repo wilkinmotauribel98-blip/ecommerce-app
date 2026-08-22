@@ -13,13 +13,15 @@ export default function AddToCard({product, price}){
     return counter
   }
 
+
+
   const cartProduct = {
       image: product.images[0],
       title: product.title,
       price: price,
+      stock: product.stock,
       quantity: productQuantity()
     }
-
   useEffect(()=> setCounter(1), [product])
   return(
     <div className="flex w-full">
@@ -31,7 +33,10 @@ export default function AddToCard({product, price}){
           <button 
             className={`bg-emerald-500 py-3 w-fit px-2 flex-1  text-zinc-100 sm:px-10 hover:opacity-50 cursor-pointer sm:mt-0`}
             aria-label={`Add to cart`}
-            onClick={()=> setCart(cartProduct, product.id)}
+            onClick={()=> {
+              setCart(cartProduct, product.id)
+              setCounter(1)
+            } } 
             >Add to cart</button>
     </div>
   )

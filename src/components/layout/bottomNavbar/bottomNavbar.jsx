@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import Cart from "../../cart/Cart";
 
 export default function BottomNavbar() {
   return (
@@ -62,19 +62,9 @@ export default function BottomNavbar() {
           </li>
 
           <li className="text-zinc-400 flex-1 cursor-pointer"
-          aria-label="Cart link"
-          >
-            <Link to="/" 
-              className="flex flex-col items-center"
-              aria-label="Navigate to Cart page"
+            aria-label="Cart link"
             >
-              <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Contact">
-                <use href="/sprite-core.svg#icon-cart"/>
-              </svg >
-              <p className='text-md sm:text-lg'>
-                Cart
-              </p>
-            </Link>
+            <Cart navBar={true}/>
           </li>
 
             <li className=" text-zinc-400 flex-1  cursor-pointer" aria-label="Account link">

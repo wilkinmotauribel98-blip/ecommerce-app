@@ -13,7 +13,9 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="w-full max-w-360 mb-25 lg:mb-0 bg-black  flex flex-col items-center justify-center m-auto z-50">
+    <footer className="w-full max-w-360 mb-25 lg:mb-0 bg-black  flex flex-col items-center justify-center m-auto z-50"
+    aria-label="footer"
+    >
       <section className="flex flex-col md:flex-row  gap-5 px-3 w-full justify-between mb-5" aria-label="Footer Navigation Section">
         <article className="flex flex-col  " aria-label="Footer Navigation Links">
           <div className="flex items-center" aria-label="Footer Logo and Title">

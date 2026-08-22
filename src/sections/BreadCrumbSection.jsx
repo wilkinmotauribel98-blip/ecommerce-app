@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import Skeleton from "@/components/ui/Skeleton"
 
-export default function BreadCrumbSection({ category, brand, title, loading}) {
+export default function BreadCrumbSection({ category, brand, title, loading, product, cart}) {
   if (loading) {
     return (
       <section 
@@ -20,7 +20,7 @@ export default function BreadCrumbSection({ category, brand, title, loading}) {
   
   return(
     <section 
-      className="px-3 text-zinc-400 flex gap-2 items-center w-full flex-wrap"
+      className="px-3 text-zinc-400 flex mt-5 gap-2 items-center w-full flex-wrap"
       aria-label="BreadCrumb"
     >
       <Link 
@@ -31,12 +31,21 @@ export default function BreadCrumbSection({ category, brand, title, loading}) {
       <svg className="w-7 h-7">
         <use href="/sprite-core.svg#chevron-right"></use>
       </svg>
+      
+      {cart &&
+      <>
+      
+      <h2 
+        className="text-zinc-400"
+        >{title}</h2>
+    </>}
+      {product &&
+      <>
       <Link 
         className="capitalize " 
         to={`/category/${category}`}
         aria-label={`Link to Category ${category}`}
         >{category}
-        
       </Link>
       
       <svg className="w-7 h-7 ">
@@ -46,6 +55,7 @@ export default function BreadCrumbSection({ category, brand, title, loading}) {
         className="text-emerald-400"
         
         >{title}</h2>
+      </>}
     </section>
   )
   
