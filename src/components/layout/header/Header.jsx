@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, lazy, Suspense } from "react"; 
-import CartItem from "@/components/cart/CartItem.jsx";
-
+import Cart from "@/components/cart/Cart.jsx";
+import SearchSkeleton from "@/components/ui/SearchSkeleton.jsx";
+import { Link } from "react-router-dom";
 
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
@@ -43,9 +44,15 @@ export default function  Header() {
         <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</h1>
       </div>
 
-      {size >=1024 ?
-        <ul className={`flex  relative gap-8 w-max overflow-visible ${searcher && size >= 1024 ? 'hidden' : 'flex'} h-dvh z-50 lg:h-auto text-zinc-500 text-2xl bg-black items-center transition-[width] duration-200 ease `}>
-          <li  className="text-emerald-400 hover:text-gray-400  cursor-pointer" aria-label="Home">Home</li>
+      {size >= 1024 && 
+        <ul className={`flex  relative gap-8 w-max overflow-visible ${searcher && size >= 1024 ? 'hidden' : 'flex'} h-dvh z-50 lg:h-auto text-zinc-500 text-2xl bg-black items-center transition-[width] duration-200 ease `}
+          aria-label="Navigation links"
+        >
+          <li  className="text-emerald-400 hover:text-gray-400  cursor-pointer" aria-label="Home">
+              <Link to={'/'}>
+              Home
+              </Link>
+            </li>
           <li  className="text-white hover:text-gray-400" aria-label="Shop">
             <a href="/shop">Shop</a>
           </li>
@@ -59,7 +66,7 @@ export default function  Header() {
             <a href="/support">Support</a>
           </li>
           </ul>
-      : ''}
+      }
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
         <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
@@ -70,7 +77,7 @@ export default function  Header() {
           <form 
             action="search" 
             className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}
-            aria-label=""
+            aria-label="Search form"
             >
             <input  
             type="text"
@@ -85,11 +92,11 @@ export default function  Header() {
 
           {
             (searchText.length > 0 && searcher)  
-            ? 
-              <Suspense fallback={null}>
-                <Suggestions search={searchText} onClose={()=> setSearcher(false)}/>
+            &&
+              <Suspense fallback={<SearchSkeleton count={3} />}>
+                <Suggestions query={searchText} onClose={()=> setSearcher(false)}/>
               </Suspense>
-              : ''
+              
           }
         </div>
 
@@ -106,7 +113,7 @@ export default function  Header() {
             <use href="/sprite-core.svg#icon-user"/>
           </svg>
          
-          <CartItem />
+          <Cart />
       </div>
     </header>
   )
