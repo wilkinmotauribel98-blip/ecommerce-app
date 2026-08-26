@@ -18,12 +18,12 @@ export default function App() {
       <Header />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/product/:id/:title" element={<ProductPage />} />
-          <Route path="/category/:category" element={<CategoryPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/brand/:brand" element={<BrandPage />} />
+          <Route path="/ecommerce-app" element={<HomePage />} />
+          <Route path="/ecommerce-app/product/:id/:title" element={<ProductPage />} />
+          <Route path="/ecommerce-app/category/:category" element={<CategoryPage />} />
+          <Route path="/ecommerce-app/cart" element={<CartPage />} />
+          <Route path="/ecommerce-app/checkout" element={<CheckoutPage />} />
+          <Route path="/ecommerce-app/brand/:brand" element={<BrandPage />} />
         </Routes>
       </Suspense>
       <BottomNavbar />

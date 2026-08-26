@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 export function FeatureCard({className, icon, title, description}) {
   return(
     <Link
-      to={`/category/${title.toLowerCase()}`}
+      to={`/ecommerce-app/category/${title.toLowerCase()}`}
       className="flex flex-col w-max flex-1 lg:flex-row md:border-l border-zinc-800 sm:gap-0  items-center text-zinc-400 lg:gap-4 "
       aria-label={`Feature: ${title} - ${description}`}
     >
       <svg className={`${className}`}>
-        <use href={`/sprite-extra.svg#${icon}`}></use>
+        <use href={`/ecommerce-app/sprite-extra.svg#${icon}`}></use>
       </svg>
 
       <div className="flex flex-col "> 

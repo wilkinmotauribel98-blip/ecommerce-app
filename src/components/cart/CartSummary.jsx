@@ -38,7 +38,7 @@ export default function CartSummary() {
         <button className='w-full py-3 bg-green-500 rounded flex gap-2 items-center  justify-center cursor-pointer'>
           <svg 
             className='w-6.5 h-6.5 text-zinc-100 cursor-pointer' >
-            <use href="/sprite-extra.svg#icon-lock"/>
+            <use href="/ecommerce-app/sprite-extra.svg#icon-lock"/>
           </svg>
           Proceed to Checkout
         </button>
@@ -49,23 +49,23 @@ export default function CartSummary() {
           
           <svg 
             className='w-18 h-9 bg-amber-50 rounded' >
-            <use href="/payment-icons.svg#icon-visa"/>
+            <use href="/ecommerce-app/payment-icons.svg#icon-visa"/>
           </svg>
           <svg 
             className='w-18 h-9  rounded' >
-            <use href="/payment-icons.svg#icon-mastercard"/>
+            <use href="/ecommerce-app/payment-icons.svg#icon-mastercard"/>
           </svg>
           <svg 
             className='w-18 h-9  rounded' >
-            <use href="/payment-icons.svg#icon-amex"/>
+            <use href="/ecommerce-app/payment-icons.svg#icon-amex"/>
           </svg>
           <svg 
             className='w-18 h-9 bg-amber-50 rounded' >
-            <use href="/payment-icons.svg#icon-paypal"/>
+            <use href="/ecommerce-app/payment-icons.svg#icon-paypal"/>
           </svg>
           <svg 
             className='w-18 h-9 bg-amber-50 rounded' >
-            <use href="/payment-icons.svg#icon-apple-pay"/>
+            <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay"/>
           </svg>
           
         </div>

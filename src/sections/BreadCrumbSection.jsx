@@ -25,11 +25,11 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
     >
       <Link 
         className=""
-        to={'/'} 
+        to={'/ecommerce-app'} 
         aria-label="Link to Home"
       >Home</Link>
       <svg className="w-7 h-7">
-        <use href="/sprite-core.svg#chevron-right"></use>
+        <use href="/ecommerce-app/sprite-core.svg#chevron-right"></use>
       </svg>
       
       {cart &&
@@ -43,13 +43,13 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
       <>
       <Link 
         className="capitalize " 
-        to={`/category/${category}`}
+        to={`/ecommerce-app/category/${category}`}
         aria-label={`Link to Category ${category}`}
         >{category}
       </Link>
       
       <svg className="w-7 h-7 ">
-        <use href="/sprite-core.svg#chevron-right"></use>
+        <use href="/ecommerce-app/sprite-core.svg#chevron-right"></use>
       </svg>
       <h2 
         className="text-emerald-400"

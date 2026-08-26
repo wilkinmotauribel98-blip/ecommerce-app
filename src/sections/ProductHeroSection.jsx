@@ -51,7 +51,7 @@ export default function ProductHeroSection({ product, loading }){
         {product.brand && <h3 className="p-0 m-0 text-lg text-zinc-400">{product?.brand}</h3>}
         
         <div className="flex gap-1.5">
-          {index.map(e => e < stars  ?   <svg className="w-6 h-6 text-amber-400" key={e} ><use href="/sprite-extra.svg#icon-star"></use> </svg> : <svg className="w-6 h-6 text-amber-300" key={e} ><use href="/sprite-extra.svg#icon-void-star"></use> </svg> )}
+          {index.map(e => e < stars  ?   <svg className="w-6 h-6 text-amber-400" key={e} ><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg> : <svg className="w-6 h-6 text-amber-300" key={e} ><use href="/ecommerce-app/sprite-extra.svg#icon-void-star"></use> </svg> )}
           <div>
             <span>{review.toFixed(2)} ({product.reviews.length} reviews)</span>
           </div>

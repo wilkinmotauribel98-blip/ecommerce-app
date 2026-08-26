@@ -1,4 +1,7 @@
 @import "tailwindcss";
+
+
+
 input[type='checkbox'] {
   appearance: none;
   -webkit-appearance: none;

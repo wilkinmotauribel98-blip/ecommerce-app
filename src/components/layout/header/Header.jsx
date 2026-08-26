@@ -7,7 +7,7 @@ export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const setSearchIcon = size < 768 ? '' : '/sprite-core.svg#icon-close'
+  const setSearchIcon = size < 768 ? '' : '/ecommerce-app/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
 
 
@@ -32,14 +32,14 @@ export default function  Header() {
               onClick={()=> setSearcher(!searcher)}
               aria-label="search opened, click to close"
             >
-              <use href="/sprite-core.svg#icon-arrow-back"/>
+              <use href="/ecommerce-app/sprite-core.svg#icon-arrow-back"/>
             </svg> 
           : 
             <svg 
               className={` w-6.5 h-6.5 text-zinc-200 cursor-pointer`}
               aria-label="Niflix logo"
             >
-            <use href="/sprite-core.svg#icon-logo"/>
+            <use href="/ecommerce-app/sprite-core.svg#icon-logo"/>
           </svg>}
         <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</h1>
       </div>
@@ -49,7 +49,7 @@ export default function  Header() {
           aria-label="Navigation links"
         >
           <li  className="text-emerald-500 hover:text-gray-400  cursor-pointer" aria-label="Home">
-              <Link to={'/'}>
+              <Link to={'/ecommerce-app'}>
               Home
               </Link>
             </li>
@@ -71,7 +71,7 @@ export default function  Header() {
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
         <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
-            <use href="/sprite-core.svg#icon-search"/>
+            <use href="/ecommerce-app/sprite-core.svg#icon-search"/>
           </svg>
 
           <form 
@@ -104,13 +104,13 @@ export default function  Header() {
             className={`w-6.5 h-6.5 cursor-pointer ${searcher && size < 768 ? 'hidden' : ''}` }
             onClick={()=> setSearcher(!searcher)}
             aria-label="Search">
-            <use href={searcher ? setSearchIcon : '/sprite-core.svg#icon-search'}/>
+            <use href={searcher ? setSearchIcon : '/ecommerce-app/sprite-core.svg#icon-search'}/>
           </svg>
           
           <svg 
             className='w-6.5 h-6.5 hidden lg:block'
             aria-label="User profile">
-            <use href="/sprite-core.svg#icon-user"/>
+            <use href="/ecommerce-app/sprite-core.svg#icon-user"/>
           </svg>
          
           <Cart />

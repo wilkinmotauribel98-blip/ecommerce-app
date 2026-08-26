@@ -5,8 +5,8 @@ export default function YouMayAlsoLikeCard({product}){
   const navigate = useNavigate()
   return(
     <article 
-      className="text-white w-55 shrink-0 grow-0 h-fit cursor-pointer lg:min-w-50 bg-zinc-900 p-2 rounded-2xl" 
-      onClick={()=> navigate(`/product/${product.id}/${product.title}`)}
+      className="text-white  shrink-0 grow-0 h-fit cursor-pointer  bg-zinc-900 p-2 rounded-2xl" 
+      onClick={()=> navigate(`/ecommerce-app/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
     > 
       <div>
         <img src={optimizedImg(product.images[0], 400, 400)} alt={`image of ${product.title}`} />
@@ -16,7 +16,7 @@ export default function YouMayAlsoLikeCard({product}){
         <span className="sr-only">Price:</span>
         <data value={product.price}>${product.price}</data>
         <span className="flex gap-1">
-          <svg className="w-6 h-6 text-amber-300"><use href="/sprite-extra.svg#icon-star"></use></svg> 
+          <svg className="w-6 h-6 text-amber-300"><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use></svg> 
           {product.rating} ({product.reviews.length})
           </span>
       </div>

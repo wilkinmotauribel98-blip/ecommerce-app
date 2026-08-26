@@ -12,7 +12,7 @@ export default function ProductPage() {
   useEffect(()=>{
     fetchProduct(id).then(p => {
       setProduct(p)
-      navigate(`/product/${id}/${p.title.replace(/\s/g, '-')}`)
+      navigate(`/ecommerce-app/product/${id}/${p.title.replace(/\s/g, '-')}`)
     }
   )},[id, title])
   

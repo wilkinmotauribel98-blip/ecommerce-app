@@ -69,7 +69,7 @@ export default function CartItem ({product, id}) {
           <svg 
             className='w-6.5 h-6.5 text-red-500 cursor-pointer ' 
             aria-label="Delete Item">
-            <use href="/sprite-core.svg#icon-trash"/>
+            <use href="/ecommerce-app/sprite-core.svg#icon-trash"/>
           </svg>
         </button>
     </article>

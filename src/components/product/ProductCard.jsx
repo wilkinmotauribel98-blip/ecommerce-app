@@ -8,9 +8,9 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
     <article
       onClick={() => {
         if (shopStyle) {
-          window.location.href = `/category/${product?.title.toLowerCase()}`;
+          window.location.href = `/ecommerce-app/category/${product?.title.toLowerCase()}`;
         } else {
-          window.location.href = `/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`;
+          window.location.href = `/ecommerce-app/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`;
         }
       }}
       className={
@@ -73,7 +73,7 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
             <span 
               className="text-zinc-400  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
-              >Rating {<svg className="w-6 h-6 text-emerald-500"><use href="/sprite-extra.svg#icon-star"></use> </svg>} {product?.rating}</span> : ''}
+              >Rating {<svg className="w-6 h-6 text-emerald-500"><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg>} {product?.rating}</span> : ''}
           </span>
          
         </div>

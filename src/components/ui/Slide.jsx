@@ -36,7 +36,7 @@ export function Slide({product, size}) {
         >
           {product?.description}
         </p>
-        <Button title={'Shop Collection'} href={`/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`} slide={true} />
+        <Button title={'Shop Collection'} href={`/ecommerce-app/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`} slide={true} />
       </div>
     </article>
   )

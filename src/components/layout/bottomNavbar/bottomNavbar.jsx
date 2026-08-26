@@ -4,7 +4,7 @@ import Cart from "../../cart/Cart";
 export default function BottomNavbar() {
   return (
     <nav 
-      className=" max-w-full w-[95%] overflow-hidden h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
+      className="w-dvw h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
       aria-label="Mobile navigation bar"
     >
         <ul 
@@ -20,7 +20,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Home page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Home">
-                <use href="/sprite-core.svg#icon-home"/>
+                <use href="/ecommerce-app/sprite-core.svg#icon-home"/>
               </svg>
               <p className='text-md sm:text-lg'>
                 Home
@@ -37,7 +37,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Shop page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer `} aria-label="Products">
-                <use href="/sprite-core.svg#icon-shop"/>
+                <use href="/ecommerce-app/sprite-core.svg#icon-shop"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Shop
@@ -53,7 +53,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Categories page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 text-zinc-400 cursor-pointer`} aria-label="About">
-                <use href="/sprite-core.svg#icon-grid"/>
+                <use href="/ecommerce-app/sprite-core.svg#icon-grid"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Categories
@@ -72,7 +72,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Account page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer`} aria-label="User Account">
-                <use href="/sprite-core.svg#icon-user"/>
+                <use href="/ecommerce-app/sprite-core.svg#icon-user"/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Account
