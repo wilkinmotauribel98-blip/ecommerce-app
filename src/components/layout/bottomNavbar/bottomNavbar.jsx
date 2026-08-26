@@ -4,7 +4,7 @@ import Cart from "../../cart/Cart";
 export default function BottomNavbar() {
   return (
     <nav 
-      className=" w-full h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
+      className=" max-w-full w-[95%] overflow-hidden h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
       aria-label="Mobile navigation bar"
     >
         <ul 

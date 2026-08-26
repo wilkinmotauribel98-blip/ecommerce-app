@@ -20,7 +20,8 @@ export default function AddToCard({product, price}){
       title: product.title,
       price: price,
       stock: product.stock,
-      quantity: productQuantity()
+      quantity: productQuantity(),
+      category: product.category
     }
   useEffect(()=> setCounter(1), [product])
   return(

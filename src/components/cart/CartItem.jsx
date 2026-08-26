@@ -5,14 +5,14 @@ import { useCart } from '@/hooks/useCart'
 
 
 export default function CartItem ({product, id}) {
-  const {image, price, quantity,  stock, title} = product;
+  const {image, price, quantity,  stock, title, category} = product;
   const [counter, setCounter] = useState(quantity);
   const setCart = useCart((state)=> state.setCart)
   const deleteProduct = useCart((state)=> state.deleteProduct)
   useEffect(()=>{
-    const setProduct = {image:image, price:price, quantity:counter, title:title, stock:stock}
+    const setProduct = {image:image, price:price, quantity:counter, title:title, stock:stock, category: category}
     setCart(setProduct, id)
-  },[counter])
+  }, [counter])
   
   
   
@@ -24,7 +24,7 @@ export default function CartItem ({product, id}) {
         <img 
           src={optimizedImg(image, 550, 550)} alt={`image of ${title}`} 
           className="w-full"
-          alt={`image of ${title}`}
+          
           />
       </div>
       
@@ -35,7 +35,7 @@ export default function CartItem ({product, id}) {
           <span className="sr-only">price: </span>
           <data 
             value={`${price}`}
-            className="text-emerald-400 "
+            className="text-green-400 "
             >${price}</data>
         </div>
 
@@ -58,7 +58,7 @@ export default function CartItem ({product, id}) {
 
         </div>
 
-        <span className="flex-1 flex mr-auto gap-1 md:text-center items-center justify-center w-fit  text-emerald-400">
+        <span className="flex-1 flex mr-auto gap-1 md:text-center items-center justify-center w-fit  text-green-400">
           <p className="md:hidden text-zinc-400">Total: </p>
           <span className="sr-only">Total: </span>
           ${(counter * price).toFixed(2)}

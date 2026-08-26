@@ -35,17 +35,17 @@ export default function ProductHeroSection({ product, loading }){
   
   return(
     <section className="flex flex-col md:flex-row mt-5 gap-4  m-auto">
-      <div className="bg-zinc-950 flex-1 mt-0    m-auto  border border-zinc-600 rounded-xl">
+      <div className="bg-zinc-950 flex-1 mt-0  lg:max-w-140 m-auto  border border-zinc-600 rounded-xl">
         <img 
           className="cover w-full"
-          src={optimizedImg(product?.images[0], 720, 600)} 
+          src={optimizedImg(product?.images[0], 720, 720)} 
           alt={`image of ${product.title}`} />
       </div>
     
       <article className="text-white m-auto  flex-1 flex flex-col px-3 gap-3">
         
-      {product.stock > 0 ? <span className="text-emerald-500 flex items-center gap-1.5"><div className="w-2 h-2 bg-emerald-500 rounded-full "></div> In stock</span> : <span className="text-red-500 flex items-center gap-1.5"><div className="w-2 h-2 bg-red-500 rounded-full "></div>No stock</span>}
-        <h2 className="text-2xl lg:text-4xl p-0 m-0">{product.title}</h2>
+      {product.stock > 0 ? <span className="text-emerald-500 flex text-lg items-center gap-1.5"><div className="w-2 h-2 bg-emerald-500 rounded-full "></div> In stock</span> : <span className="text-red-500 flex items-center gap-1.5"><div className="w-2 h-2 bg-red-500 rounded-full "></div>No stock</span>}
+        <h2 className="text-3xl lg:text-5xl p-0 m-0">{product.title}</h2>
 
 
         {product.brand && <h3 className="p-0 m-0 text-lg text-zinc-400">{product?.brand}</h3>}

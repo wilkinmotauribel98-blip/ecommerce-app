@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { fetchProductsByCategory } from '@/api/products.js'
 const ITBIS_RATE = 0.18;
 
 export const useCart = create(
@@ -30,6 +31,15 @@ export const useCart = create(
         const tax = subtotal * ITBIS_RATE;
         const total = subtotal + tax;
         return { subtotal, tax, total }
+      },
+      fecthRecomndedProducts:async ()=>{
+        const cartIds = Object.keys(get().cart)
+        const  w = [] ;
+        const fecth = await Promise.all( Object.values(get().cart).map((e) => fetchProductsByCategory(e.category).then(a => w.push(a))));
+        const products = w.map(e => e.products.filter(e => !cartIds.includes(e.id.toString()))).map(e => e.slice(0,3))
+       
+        
+        return products.reduce((acc,e) => acc.concat(e), []).sort(()=> Math.random() - 0.5)
       }
 
     }),

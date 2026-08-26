@@ -23,7 +23,7 @@ export default function  Header() {
 
   
   return(
-    <header className={`w-full max-w-360 m-auto bg-black h-17  flex items-center justify-between   lg:relative  z-50`}>
+    <header className={`w-full max-w-400 m-auto bg-black h-17  flex items-center justify-between   lg:relative  z-50`}>
       <div className="flex items-center gap-2 px-2">
         {searcher && size < 768 
           ?
@@ -48,7 +48,7 @@ export default function  Header() {
         <ul className={`flex  relative gap-8 w-max overflow-visible ${searcher && size >= 1024 ? 'hidden' : 'flex'} h-dvh z-50 lg:h-auto text-zinc-500 text-2xl bg-black items-center transition-[width] duration-200 ease `}
           aria-label="Navigation links"
         >
-          <li  className="text-emerald-400 hover:text-gray-400  cursor-pointer" aria-label="Home">
+          <li  className="text-emerald-500 hover:text-gray-400  cursor-pointer" aria-label="Home">
               <Link to={'/'}>
               Home
               </Link>

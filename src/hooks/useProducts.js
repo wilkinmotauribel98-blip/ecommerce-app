@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
+import { fetchProduct } from '@/api/products.js'
 const heroIds = [98, 78, 81, 95, 100];
 const newArrivalsIds = [140, 87, 34, 163, 170];
 const bestSellersIds = [121, 116, 99, 80];
@@ -14,8 +14,7 @@ const categories = [
   {category: "womens-watches", id: 190,images: null, total: 5}
 ]
 
-const fetchIds = (ids) =>
-  Promise.all(ids.map((id) => fetch(`https://dummyjson.com/products/${id}`).then((res) => res.json())));
+const fetchIds = (ids) => Promise.all(ids.map((id) => fetchProduct(id)));
 
 export const useProducts = create(
   persist(
@@ -46,9 +45,7 @@ export const useProducts = create(
             fetchIds(bestSellersIds),
             Promise.all(
               categories.map((category) =>
-                fetch(`https://dummyjson.com/products/${category.id}`)
-                  .then((res) => res.json())
-                  .then((product) => ({ ...category, images: product.images }))
+                fetchProduct(category.id).then((product) => ({ ...category, images: product.images }))
               )
             ),
           ]);

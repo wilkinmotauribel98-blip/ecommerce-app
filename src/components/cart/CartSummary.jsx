@@ -17,27 +17,27 @@ export default function CartSummary() {
             Subtotal(3 Items)
           </span>
 
-          <data value={subtotal.toFixed(2)} className='ml-auto'>{subtotal.toFixed(2)}</data>
+          <data value={subtotal.toFixed(2)} className='ml-auto'>${subtotal.toFixed(2)}</data>
         </div>
         <div className="flex">
           <span>Shipping</span>
-          <span className="text-emerald-400 ml-auto text-lg">Free</span>
+          <span className="text-green-400 ml-auto text-lg">Free</span>
         </div>
         <div className='flex '>
           <p>
             Taxes
           </p>
-          <data value={tax.toFixed(2)} className='ml-auto text-zinc-300'>{tax.toFixed(2)}</data>
+          <data value={tax.toFixed(2)} className='ml-auto text-zinc-400'>${tax.toFixed(2)}</data>
         </div>
       </div>
       <div className=' py-2 flex flex-col gap-8'>
         <div className='flex'>
           <span className='text-xl'>Total</span>
-          <data value={total.toFixed(2)} className='text-emerald-400 ml-auto text-lg' >{total.toFixed(2)}</data>
+          <data value={total.toFixed(2)} className='text-green-400 ml-auto text-lg' >${total.toFixed(2)}</data>
         </div>
-        <button className='w-full py-3 bg-emerald-400 rounded flex gap-2 items-center  justify-center cursor-pointer'>
+        <button className='w-full py-3 bg-green-500 rounded flex gap-2 items-center  justify-center cursor-pointer'>
           <svg 
-            className='w-6.5 h-6.5 text-white cursor-pointer' >
+            className='w-6.5 h-6.5 text-zinc-100 cursor-pointer' >
             <use href="/sprite-extra.svg#icon-lock"/>
           </svg>
           Proceed to Checkout

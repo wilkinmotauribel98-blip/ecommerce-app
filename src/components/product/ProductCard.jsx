@@ -1,6 +1,3 @@
-import { svg } from "framer-motion/client";
-
-// utils/img.js
 export function optimizedImg(src, w, h) {
   if (!src) return '';
   return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${w}&h=${h}&fit=cover&q=80`;
