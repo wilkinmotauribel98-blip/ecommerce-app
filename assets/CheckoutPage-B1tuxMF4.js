@@ -1,0 +1,1 @@
+import{j as e}from"./index-MNWK7c3P.js";function a(){return e.jsx("main",{className:"max-w-360 m-auto z-0 bg-black overflow-hidden  w-dvw","aria-label":"Checkout Page Main Content",children:e.jsx("h1",{className:"text-white text-2xl sm:text-3xl lg:text-4xl",children:"Checkout Page"})})}export{a as default};

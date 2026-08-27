@@ -1,4 +1,4 @@
-import{j as l}from"./index-DEw526qd.js";function m(e,a,n){return e?`https://wsrv.nl/?url=${encodeURIComponent(e)}&w=${a}&h=${n}&fit=cover&q=80`:""}function $({product:e,shopStyle:a,newProduct:n,bestSeller:i,newArrivals:s}){return l.jsxs("article",{onClick:()=>{a?window.location.href=`/category/${e==null?void 0:e.title.toLowerCase()}`:window.location.href=`/product/${e.id}/${e==null?void 0:e.title.toLowerCase().replace(/\s/g,"-")}`},className:`
+import{j as l}from"./index-MNWK7c3P.js";function m(e,a,n){return e?`https://wsrv.nl/?url=${encodeURIComponent(e)}&w=${a}&h=${n}&fit=cover&q=80`:""}function $({product:e,shopStyle:a,newProduct:n,bestSeller:i,newArrivals:s}){return l.jsxs("article",{onClick:()=>{a?window.location.href=`/ecommerce-app/category/${e==null?void 0:e.title.toLowerCase()}`:window.location.href=`/ecommerce-app/product/${e.id}/${e==null?void 0:e.title.toLowerCase().replace(/\s/g,"-")}`},className:`
         border border-zinc-800 rounded-2xl flex flex-col gap-1 cursor-pointer relative hover:scale-105
         ${s?"min-h-55  w-43 bg-linear-0 to-t from-black to-zinc-500":""}
         ${a?"h-57 max-w-50 lg:max-w-48 bg-black border-zinc-800 ":""}
