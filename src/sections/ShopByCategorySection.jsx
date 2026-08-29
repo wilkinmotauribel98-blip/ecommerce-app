@@ -1,15 +1,12 @@
-import {useEffect, useState} from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { ProductCard } from '../components/product/ProductCard';
 import Skeleton from '../components/ui/Skeleton';
-
+import { Link } from 'react-router-dom';
 
 
 export default function ShopByCategorySection() {
   const products = useProducts((state) => state.categoryProducts);
   const loading = useProducts((state) => state.categoriesLoading);
-  
-
   
   const categories = products.map((category) => {
       return {
@@ -23,7 +20,12 @@ export default function ShopByCategorySection() {
     <section className="w-[95%] sm:w-[calc(100%-2rem)] h-auto bg-black m-auto   ">
       <div className="flex justify-between items-center px-1 py-4">
         <h2 className="text-white text-xl sm:text-2xl">Shop by Category</h2>
-        <span className="text-emerald-500 text-sm sm:text-lg lg:text-xl">View All</span>
+        <Link 
+        className="text-emerald-500 text-sm sm:text-lg lg:text-xl"
+        aria-label='View all categories'
+        to={'/ecommerce-app/categories'}
+        > View All
+        </Link>
       </div>
       <div className='grid gap-4 h-62 overflow-y-hidden p-2 grid-cols-[repeat(auto-fill,minmax(160px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(172px,1fr))]  ' >
         {loading || !categories.length

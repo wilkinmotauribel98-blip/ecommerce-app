@@ -1,11 +1,10 @@
 import { optimizedImg } from "../product/ProductCard";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-export default function YouMayAlsoLikeCard({product}){
+export default function YouMayAlsoLikeCard({product, category}){
   const navigate = useNavigate()
   return(
     <article 
-      className="text-white  shrink-0 grow-0 h-fit cursor-pointer  bg-zinc-900 p-2 rounded-2xl" 
+      className={`text-white cursor-pointer ${category || 'lg:min-w-50 w-55 shrink-0 grow-0'} bg-zinc-900 p-2 rounded-2xl`}
       onClick={()=> navigate(`/ecommerce-app/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
     > 
       <div>

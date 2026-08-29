@@ -35,11 +35,23 @@ export const useCart = create(
       fecthRecomndedProducts:async ()=>{
         const cartIds = Object.keys(get().cart)
         const  w = [] ;
-        const fecth = await Promise.all( Object.values(get().cart).map((e) => fetchProductsByCategory(e.category).then(a => w.push(a))));
-        const products = w.map(e => e.products.filter(e => !cartIds.includes(e.id.toString()))).map(e => e.slice(0,3))
-       
+        await Promise.all( Object.values(get().cart).map((e) => fetchProductsByCategory(e.category).then(a => w.push(a))));
+        const products = w.map(
+          e => e.products.filter(e => !cartIds.includes(e.id.toString()))
         
-        return products.reduce((acc,e) => acc.concat(e), []).sort(()=> Math.random() - 0.5)
+        ).map(e => {
+          if(cartIds.length <= 2 ) return e.slice(0,5)
+            return e.slice(0,3)
+        })
+
+       const r = products.reduce((acc, e) => acc.concat(e), []).reduce((acc, a) =>{
+        if(acc[a.id] == undefined) acc[a.id] = a
+        return acc
+       }, {})
+
+        return Object.entries(r).map(([key,value])=>{
+        return value
+       })
       }
 
     }),

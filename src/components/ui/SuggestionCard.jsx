@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 export function SuggestionCard({info, select}) {
   const navigate = useNavigate();
   const handleClick = ()=>{
-    navigate(`/product/${info.id}/${info.title.replace(/\s/g, '-')}`);
+    navigate(`/ecommerce-app/product/${info.id}/${info.title.replace(/\s/g, '-')}`);
     select();
   }
 

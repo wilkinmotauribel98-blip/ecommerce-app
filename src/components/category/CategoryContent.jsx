@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import YouMayAlsoLikeCard from "../cart/YouMayAlsoLikeCard"
 import { useState, useEffect } from "react"
 const arr =  [1,2,3,4,5]
@@ -5,8 +6,9 @@ const arr =  [1,2,3,4,5]
 export default function CategoryContent ( { content, brands}){
   const [dates, setDates ] = useState();
   const [filters, setFilters] = useState([]);
-  const [products, setProducts] = useState(content)
-  
+  const [products, setProducts] = useState(content);
+  const [open, setOpen] = useState(false);
+  const [size, setSize] = useState(window.innerWidth)
   useEffect(()=>{
     if(!brands) return
     brands.map((e)=> {
@@ -37,14 +39,9 @@ export default function CategoryContent ( { content, brands}){
       return a.includes(p)
   }
 
-
-
-
-const c = filters.filter(e => {
-        if (e.includes('stars')) return e
-      })
+const c = filters.filter(e => e.includes('stars'))
       
-      
+  
   const ratingFilter = (n)=>{
       let p;
       if(n >= 1) p = '1 stars';
@@ -71,18 +68,35 @@ const v = filters.filter(e => {
 
     }, [filters])
 
+
+    useEffect(()=>{
+      const sizer = () => {
+        setSize(window.innerWidth)
+        if(window.innerWidth < 768) setOpen(false)
+      };
+      addEventListener('resize', sizer);
+      return ()=> removeEventListener('resize', sizer)
+    },[])
+
   const handleChange = (event)=>{
     const data = event.target;
     setDates((prev) => ({...prev, [data.name]: data.checked}));
-    
-    
   }
-
   
-  
+ 
   return(
-    <section className="flex flex-col sm:flex-row  gap-8">
-      <aside className="text-white shrink-0 w-60 h-dvh border border-zinc-800 rounded-2xl">
+    <>
+    <button 
+          className="text-white hidden md:block border ml-5 border-zinc-700 py-2 px-15 rounded my-3"
+          onClick={()=>setOpen(!open)}
+        >Filters</button>
+    <section className="flex flex-col relative md:flex-row  gap-8 mb-20" >
+      
+    <div> 
+    <aside 
+      className="text-white absolute   top-0 md:relative shrink-0 w-60 transition-all bg-black   z-50 overflow-hidden  rounded-2xl"
+      style={{height: `${open ? '100dvh' : '0'}`, position: `${open ? 'relative' : 'absolute'}`}}
+    >
       <div className="flex border-b border-zinc-800 py-5 px-3">
         <h2 className="text-xl">filters</h2>
         <span className="ml-auto text-green-400">Clear All</span>
@@ -126,7 +140,7 @@ const v = filters.filter(e => {
           </div> }
 
           <div>
-            
+            <h3 className="text-white py-2">Rating</h3>
             {arr.map(e=>{
               return(<div key={e} className="flex gap-2 items-center">
               <input type="checkbox" name={`${6 - e} stars`} id="" className="bg-amber-200" />
@@ -144,9 +158,11 @@ const v = filters.filter(e => {
         </form>
       </div>
     </aside>
-      <section className="grid w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 "> 
-        {products.map(e => <YouMayAlsoLikeCard key={e.id} product={e}/> )}
+      </div>
+      <section className="grid w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] grid-rows-3 md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 "> 
+        {products.map(e => <YouMayAlsoLikeCard key={e.id} category={true} product={e}/> )}
       </section>
     </section>
+    </>
   )
 }

@@ -39,6 +39,7 @@ export const useProducts = create(
           categoriesLoading: true,
         });
         try {
+            
           const [hero, newArrivals, bestSellers, categorias] = await Promise.all([
             fetchIds(heroIds),
             fetchIds(newArrivalsIds),

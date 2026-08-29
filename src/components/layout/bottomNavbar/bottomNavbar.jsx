@@ -15,7 +15,7 @@ export default function BottomNavbar() {
             className="text-zinc-400 flex-1 cursor-pointer"
             aria-label="Home link"
           >
-            <Link to="/" 
+            <Link to="ecommerce-app" 
               className="flex flex-col items-center"
               aria-label="Navigate to Home page"
             >
@@ -48,7 +48,7 @@ export default function BottomNavbar() {
           <li className="text-zinc-400 flex-1 cursor-pointer"
           aria-label="Categories link"
           >
-            <Link to="/" 
+            <Link to="/ecommerce-app/categories" 
               className="flex flex-col items-center"
               aria-label="Navigate to Categories page"
             >
