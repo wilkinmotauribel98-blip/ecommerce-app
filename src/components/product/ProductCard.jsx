@@ -1,18 +1,18 @@
+import { Link } from "react-router-dom";
+
 export function optimizedImg(src, w, h) {
   if (!src) return '';
   return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${w}&h=${h}&fit=cover&q=80`;
 }
 
 export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newArrivals }) {
+  
   return (
+    <Link to={
+       (shopStyle) ? `/ecommerce-app/category/${product?.title.toLowerCase()}`
+         : `/ecommerce-app/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`
+    }>
     <article
-      onClick={() => {
-        if (shopStyle) {
-          window.location.href = `/ecommerce-app/category/${product?.title.toLowerCase()}`;
-        } else {
-          window.location.href = `/ecommerce-app/product/${product.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`;
-        }
-      }}
       className={
         `
         border border-zinc-800 rounded-2xl flex flex-col gap-1 cursor-pointer relative hover:scale-105
@@ -77,6 +77,6 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
           </span>
          
         </div>
-    </article>
+    </article></Link>
   )
 }

@@ -2,17 +2,18 @@ import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import Cart from "@/components/cart/Cart.jsx";
 import SearchSkeleton from "@/components/ui/SearchSkeleton.jsx";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
   const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
   const setSearchIcon = size < 768 ? '' : '/ecommerce-app/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
-
+  const navigate = useNavigate();
 
   
   useEffect(()=>{ 
+    
     const sizer =()=>{
       setSize(window.innerWidth)
       if(size >= 1024) setSearcher(false);
@@ -69,7 +70,7 @@ export default function  Header() {
       }
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
-        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 py-3 px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
+        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 items-center  px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
           <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
             <use href="/ecommerce-app/sprite-core.svg#icon-search"/>
           </svg>
@@ -78,15 +79,18 @@ export default function  Header() {
             action="search" 
             className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}
             aria-label="Search form"
+            onSubmit={(e)=> navigate('/ecommerce-app/')}
             >
             <input  
-            type="text"
+            type="search"
+            name="q"
             label="Search for articles"
             aria-label="Search for articles" 
-            value={searchText} 
+            value={searchText}
+             
             onChange={(e)=> setSearchText(e.target.value)} 
             placeholder="Search for articles" 
-            className={`caret-emerald-500 focus:border-0 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
+            className={`caret-emerald-500 focus:border-0 h-12 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
           />
           </form>
 

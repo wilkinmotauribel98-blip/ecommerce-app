@@ -20,9 +20,9 @@ export function Slide({product, size}) {
         className=" object-cover z-10 pb-8 aspect-16/15 xl:max-w-120 m-auto relative" 
          />
       </div>
-      <div className="z-10 w-6/10  top-0 sm:top-10 lg:top-15 absolute ml-4 sm:ml-10 flex flex-col gap-2 sm:gap-6 h-full " >
+      <div className="z-10 w-6/10 top-0 sm:top-10 lg:top-15 absolute ml-4 sm:ml-10 flex flex-col gap-2 sm:gap-6 h-full " >
         <h2 
-        className="text-shadow-amber-500 text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-zinc-300  font-light text-balance "
+        className="text-shadow-amber-500  text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-zinc-300  font-light text-balance "
         aria-label={`Title for ${product?.title}`}
         style={{textShadow: '0px 0px 10px rgba(255, 255, 255, 0.1)', width: `${size * 0.6}px`}}
         >

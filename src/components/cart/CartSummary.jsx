@@ -1,17 +1,27 @@
 import { useCart } from '@/hooks/useCart'
-
-
-export default function CartSummary() {
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+export default function CartSummary({checkout}) {
   const recalcTotal = useCart((state) => state.recalcTotal)
+  const navigate = useNavigate();
   const { subtotal, tax, total } = recalcTotal();
- 
+  
   
   return (
-    <section className="text-white lg:max-w-75 w-full mb-10 p-6 h-min flex flex-col gap-6 rounded-2xl border border-zinc-800"
+    <section className="text-white  lg:max-w-75 w-full mb-10 p-6 h-min flex flex-col gap-6 rounded-2xl border border-zinc-800"
     aria-label='Chekout section'
     >
       <div className='flex flex-col gap-2 text-zinc-400 pb-7 border-b border-zinc-700'>
-        <h2 className='text-xl my-4 text-white  border-b border-zinc-800 pb-7' >Order Summary</h2>
+        <div className='flex items-center pb-7 border-b border-zinc-800'>
+          <h2 className='text-xl  text-white' >Order Summary</h2>
+          {
+            !checkout || <Link to={'/ecommerce-app/cart'}
+            className='ml-auto text-green-400'
+            >
+              Edit cart
+            </Link>
+          }
+        </div>
         <div className='flex'>
           <span>
             Subtotal(3 Items)
@@ -35,15 +45,23 @@ export default function CartSummary() {
           <span className='text-xl'>Total</span>
           <data value={total.toFixed(2)} className='text-green-400 ml-auto text-lg' >${total.toFixed(2)}</data>
         </div>
-        <button className='w-full py-3 bg-green-500 rounded flex gap-2 items-center  justify-center cursor-pointer'>
+        
+
+      {
+        checkout || 
+        <>
+        <button 
+          className='w-full py-3 bg-green-500 rounded flex gap-2 items-center  justify-center cursor-pointer'
+          onClick={()=> navigate('/ecommerce-app/checkout')}
+        >
           <svg 
             className='w-6.5 h-6.5 text-zinc-100 cursor-pointer' >
             <use href="/ecommerce-app/sprite-extra.svg#icon-lock"/>
           </svg>
           Proceed to Checkout
         </button>
-
-      <div className='flex flex-col gap-3 '>
+        
+        <div className='flex flex-col gap-3 '>
         <h3 className='text-white text-lg pl-3 '>Payment Methods</h3>
         <div className='flex gap-2 px-3'>
           
@@ -70,6 +88,8 @@ export default function CartSummary() {
           
         </div>
       </div>
+        </>
+      }
     </div>
 
     </section>
