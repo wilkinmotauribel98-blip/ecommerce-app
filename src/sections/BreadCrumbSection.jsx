@@ -5,7 +5,7 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
   if (loading) {
     return (
       <section 
-        className="px-3 flex gap-2 items-center w-full flex-wrap py-1"
+        className=" flex gap-2 items-center w-full flex-wrap py-1"
         aria-label="BreadCrumb loading"
       >
         <Skeleton className="h-4 w-10" />
@@ -20,7 +20,7 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
   
   return(
     <section 
-      className="px-3 text-zinc-400 flex mt-5 gap-2 items-center w-full flex-wrap"
+      className=" text-zinc-400 flex mt-5 gap-2 items-center w-full flex-wrap"
       aria-label="BreadCrumb"
     >
       <Link 

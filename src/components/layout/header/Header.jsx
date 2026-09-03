@@ -11,7 +11,15 @@ export default function  Header() {
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
   const navigate = useNavigate();
 
-  
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const searchValue = formData.get('query');
+    setSearcher(false) 
+    navigate(`/ecommerce-app/results/search?q=${encodeURIComponent(searchValue)}`);
+    
+  }
+
   useEffect(()=>{ 
     
     const sizer =()=>{
@@ -79,15 +87,15 @@ export default function  Header() {
             action="search" 
             className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}
             aria-label="Search form"
-            onSubmit={(e)=> navigate('/ecommerce-app/')}
+            onSubmit={handleSubmit}
             >
             <input  
             type="search"
-            name="q"
+            name="query"
             label="Search for articles"
             aria-label="Search for articles" 
             value={searchText}
-             
+            
             onChange={(e)=> setSearchText(e.target.value)} 
             placeholder="Search for articles" 
             className={`caret-emerald-500 focus:border-0 h-12 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}

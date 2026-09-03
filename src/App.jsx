@@ -12,6 +12,7 @@ const CheckoutPage = lazy(()=>import('@/pages/CheckoutPage.jsx'));
 const CategoryPage = lazy(()=> import('@/pages/CategoryPage'));
 const BrandPage = lazy(()=> import('@/pages/BrandPage'));
 const CategoriesPage = lazy(()=> import('@/pages/CategoriesPage'));
+const ResultsPage = lazy(()=> import('@/pages/ResultsPage'))
 export default function App() {
   return (
     <>
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/ecommerce-app/checkout" element={<CheckoutPage />} />
           <Route path="/ecommerce-app/brand/:brand" element={<BrandPage />} />
           <Route path="/ecommerce-app/categories" element={<CategoriesPage />} />
+          <Route path='/ecommerce-app/results/search?' element={<ResultsPage/>} />
         </Routes>
       </Suspense>
       <BottomNavbar />
