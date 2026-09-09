@@ -15,6 +15,7 @@ export const useCart = create(
         }, 0)
         set({total : s});
       },
+      
       deleteProduct: (id) =>{
         set((state) => {
           const newItems = {...state.cart}
@@ -26,12 +27,14 @@ export const useCart = create(
         }, 0)
         set({total : s});
       },
+
       recalcTotal: ()=>{
         const subtotal = Object.values(get().cart).reduce((acc, e) => acc + (e.quantity * e.price), 0);
         const tax = subtotal * ITBIS_RATE;
         const total = subtotal + tax;
         return { subtotal, tax, total }
       },
+
       fecthRecomndedProducts:async ()=>{
         const cartIds = Object.keys(get().cart)
         const  w = [] ;
@@ -51,7 +54,7 @@ export const useCart = create(
 
         return Object.entries(r).map(([key,value])=>{
         return value
-       })
+       }).sort(() => Math.random() - 0.5)
       }
 
     }),

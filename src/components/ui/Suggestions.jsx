@@ -16,15 +16,15 @@ export default function Suggestions ({query, onClose}){
     },[query]);
     
     if(loading) return <SearchSkeleton count={3} />
-    
     if(!suggestions.length) return
 
   return(
-    <div className="absolute top-17 w-[70dvw] max-w-4xl flex flex-col rounded-xl overflow-hidden bg-gray-600 z-20">
-                  {suggestions.slice(0,3).map(e => <SuggestionCard info={e} key={e.id} select={onClose}/>)}
-                  <h2 className="text-emerald-600 ml-4 p-1.5 sm:text-2xl ">
-                    {suggestions.length > 0 ? `See all results for  "${query}"`: 'No results'}
-                  </h2>
-              </div> 
+    <div 
+    className="absolute top-17 w-[70dvw] max-w-4xl flex flex-col rounded-xl overflow-hidden bg-gray-600 z-20">
+      {suggestions.slice(0,3).map(e => <SuggestionCard info={e} key={e.id} />)}
+      <h2 className="text-emerald-600 ml-4 p-1.5 sm:text-2xl ">
+        {suggestions.length > 0 ? `See all results for  "${query}"`: 'No results'}
+      </h2>
+  </div> 
   )
 }

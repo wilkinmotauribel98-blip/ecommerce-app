@@ -5,18 +5,15 @@ import CartSummary from "../cart/CartSummary";
 export default function ShippingForm() {
   const countries = Country.getAllCountries();
   const [cities, setCities ] = useState(City.getCitiesOfCountry('DO'))
-  
-  
-  
+
   const handleChange = (event)=>{
     const data = event.target.value;
     setCities(City.getCitiesOfCountry(data))
   } 
 
-
   return (
     <section className="text-zinc-200 w-full flex flex-col gap-5 ">
-      <form action="" className="flex flex-col gap-3 bg-zinc-900 rounded-2xl pb-5 pt-7 px-5" >
+      <form action="" className="flex flex-col gap-3 bg-zinc-950 rounded-2xl pb-5 pt-7 px-5" >
         <div className="flex flex-col gap-1 ">
           <label htmlFor="email">Email address</label>
           <input 
@@ -79,7 +76,6 @@ export default function ShippingForm() {
           <label htmlFor="phone-number">Phone (optional)</label>
           <input type="tel" name="phone-number" id="phone-number" required  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="809-123-456" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
         </div>
-
       </form>
       <PaymentForm />
       

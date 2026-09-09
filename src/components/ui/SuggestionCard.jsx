@@ -1,20 +1,16 @@
-
 import { optimizedImg } from "../product/ProductCard"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 
-export function SuggestionCard({info, select}) {
-  const navigate = useNavigate();
-  const handleClick = ()=>{
-    navigate(`/ecommerce-app/product/${info.id}/${info.title.replace(/\s/g, '-')}`);
-    select();
-  }
+export function SuggestionCard({info}) {
 
+  
   return(
-    <article 
+   <Link
+   to={`/ecommerce-app/product/${info.id}/${info.title}`}
+   >
+     <article 
       className="flex items-center hover:bg-zinc-700  cursor-pointer  bg-zinc-800 border-b border-b-gray-500 z-90" 
-      onClick={handleClick}
-    
     >
         <img 
           src={optimizedImg(info.images[0], 200, 200)} 
@@ -33,5 +29,6 @@ export function SuggestionCard({info, select}) {
           <span className="m-0 p-0 text-emerald-600">${info.price}</span>
       </div>
     </article>
+   </Link>
   )
 }

@@ -1,8 +1,8 @@
 import { optimizedImg } from "@/components/product/ProductCard";
 import AddToCard from "@/components/ui/AddToCard";
 import Skeleton from "@/components/ui/Skeleton";
-
-
+import AverageRating from "../components/ui/AverageRating";
+import PriceSection from "../components/ui/PriceSection";
 export default function ProductHeroSection({ product, loading }){
   if (loading) {
     return(
@@ -27,11 +27,9 @@ export default function ProductHeroSection({ product, loading }){
     )
   }
 
-  const review = (product.reviews.reduce((acc, r) =>  acc + r.rating, 0) / product.reviews.length)
-  const price = (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2);
-  const stars = Math.round(review);
 
-  const index = [0,1,2,3,4];
+  const price = (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2);
+  
   
   return(
     <section className="flex flex-col md:flex-row mt-5 gap-4  m-auto">
@@ -49,28 +47,10 @@ export default function ProductHeroSection({ product, loading }){
 
 
         {product.brand && <h3 className="p-0 m-0 text-lg text-zinc-400">{product?.brand}</h3>}
+        <AverageRating reviews={product.reviews}/>
         
-        <div className="flex gap-1.5">
-          {index.map(e => e < stars  ?   <svg className="w-6 h-6 text-amber-400" key={e} ><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg> : <svg className="w-6 h-6 text-amber-300" key={e} ><use href="/ecommerce-app/sprite-extra.svg#icon-void-star"></use> </svg> )}
-          <div>
-            <span>{review.toFixed(2)} ({product.reviews.length} reviews)</span>
-          </div>
-        </div>
 
-        <div className="flex gap-4">
-          <span>
-            <span className="sr-only">Discounted price: </span>
-            <data className="text-xl text-emerald-400" value={`${price}`}>${price}</data>
-          </span>
-          <span className="line-through decoration-2 decoration-zinc-400 ">
-            <span className="sr-only">Original pirce:</span>
-            <data className="relative text-zinc-400">${product.price}</data>
-          </span>
-          <span className="rounded text-emerald-400 bg-emerald-900 px-3 py-0.5">
-            <span className="sr-only">Discount of:</span>
-            {Math.round(product.discountPercentage)}% OFF
-            </span>
-        </div>
+        <PriceSection product={product}/>
 
         <p className="text-zinc-400 text-sm lg:text-lg">{product.description}</p>
 

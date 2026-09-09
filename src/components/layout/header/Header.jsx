@@ -1,16 +1,15 @@
-import { useState, useEffect, useMemo, lazy, Suspense } from "react"; 
+import { useState, useEffect, lazy, Suspense } from "react"; 
+import { Link,useNavigate } from "react-router-dom";
 import Cart from "@/components/cart/Cart.jsx";
 import SearchSkeleton from "@/components/ui/SearchSkeleton.jsx";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 export default function  Header() {
   const [size, setSize] = useState(window.innerWidth);
-  const [searcher, setSearcher] = useState(false);
   const [searchText, setSearchText] = useState('');
+  const [searcher, setSearcher] = useState(false)
   const setSearchIcon = size < 768 ? '' : '/ecommerce-app/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
   const navigate = useNavigate();
-
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -19,7 +18,10 @@ export default function  Header() {
     navigate(`/ecommerce-app/results/search?q=${encodeURIComponent(searchValue)}`);
     
   }
+  const url = window.location.href
 
+  
+  
   useEffect(()=>{ 
     
     const sizer =()=>{
@@ -30,9 +32,11 @@ export default function  Header() {
     return ()=> removeEventListener('resize', sizer)
   },[]);
 
+  useEffect(()=>setSearcher(false),[url])
+
   
   return(
-    <header className={`w-full max-w-400 m-auto bg-black h-17  flex items-center justify-between   lg:relative  z-50`}>
+    <header className={`w-full max-w-400 m-auto  bg-black h-17  flex items-center justify-between  lg:relative  z-50`}>
       <div className="flex items-center gap-2 px-2">
         {searcher && size < 768 
           ?
@@ -50,7 +54,10 @@ export default function  Header() {
             >
             <use href="/ecommerce-app/sprite-core.svg#icon-logo"/>
           </svg>}
-        <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`}>NIFLIX</h1>
+          <Link to={'/ecommerce-app'}>
+            <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`} 
+            >NIFLIX</h1>
+        </Link>
       </div>
 
       {size >= 1024 && 
@@ -95,7 +102,7 @@ export default function  Header() {
             label="Search for articles"
             aria-label="Search for articles" 
             value={searchText}
-            
+            autoComplete="off"
             onChange={(e)=> setSearchText(e.target.value)} 
             placeholder="Search for articles" 
             className={`caret-emerald-500 focus:border-0 h-12 focus:outline-0 overflow-hidden   ${searcher ? 'w-4/4' : 'w-0'} `}
@@ -106,7 +113,7 @@ export default function  Header() {
             (searchText.length > 0 && searcher)  
             &&
               <Suspense fallback={<SearchSkeleton count={3} />}>
-                <Suggestions query={searchText} onClose={()=> setSearcher(false)}/>
+                <Suggestions query={searchText} />
               </Suspense>
               
           }

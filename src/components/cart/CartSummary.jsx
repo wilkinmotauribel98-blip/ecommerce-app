@@ -12,32 +12,32 @@ export default function CartSummary({checkout}) {
     aria-label='Chekout section'
     >
       <div className='flex flex-col gap-2 text-zinc-400 pb-7 border-b border-zinc-700'>
-        <div className='flex items-center pb-7 border-b border-zinc-800'>
+        <div className='flex justify-between items-center pb-7 border-b border-zinc-800'>
           <h2 className='text-xl  text-white' >Order Summary</h2>
           {
             !checkout || <Link to={'/ecommerce-app/cart'}
-            className='ml-auto text-green-400'
+            className=' text-green-400'
             >
               Edit cart
             </Link>
           }
         </div>
-        <div className='flex'>
+        <div className='flex justify-between'>
           <span>
             Subtotal(3 Items)
           </span>
 
-          <data value={subtotal.toFixed(2)} className='ml-auto'>${subtotal.toFixed(2)}</data>
+          <data value={subtotal.toFixed(2)} className=''>${subtotal.toFixed(2)}</data>
         </div>
-        <div className="flex">
+        <div className="flex justify-between">
           <span>Shipping</span>
-          <span className="text-green-400 ml-auto text-lg">Free</span>
+          <span className="text-green-400 text-lg">Free</span>
         </div>
-        <div className='flex '>
+        <div className='flex justify-between'>
           <p>
             Taxes
           </p>
-          <data value={tax.toFixed(2)} className='ml-auto text-zinc-400'>${tax.toFixed(2)}</data>
+          <data value={tax.toFixed(2)} className=' text-zinc-400'>${tax.toFixed(2)}</data>
         </div>
       </div>
       <div className=' py-2 flex flex-col gap-8'>

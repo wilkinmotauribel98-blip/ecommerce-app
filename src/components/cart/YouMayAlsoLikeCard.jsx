@@ -10,7 +10,7 @@ export default function YouMayAlsoLikeCard({product, category}){
       <div>
         <img src={optimizedImg(product.images[0], 400, 400)} alt={`image of ${product.title}`} />
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <h3 className="text-zinc-400">{product.title}</h3>
         <span className="sr-only">Price:</span>
         <data value={product.price}>${product.price}</data>

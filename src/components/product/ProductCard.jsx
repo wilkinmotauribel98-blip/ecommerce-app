@@ -16,9 +16,9 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
       className={
         `
         border border-zinc-800 rounded-2xl flex flex-col gap-1 cursor-pointer relative hover:scale-105
-        ${newArrivals ? 'min-h-55  w-43 bg-linear-0 to-t from-black to-zinc-500' : ''}
-        ${shopStyle ? 'h-57 max-w-50 lg:max-w-48 bg-black border-zinc-800 ' : ''}
-        ${bestSeller ? 'h-58  ' : ''}
+        ${newArrivals && 'min-h-55  w-43 bg-linear-0 to-t from-black to-zinc-500'}
+        ${shopStyle && 'h-57 max-w-50 lg:max-w-48 bg-black border-zinc-800 '}
+        ${bestSeller && 'h-58  '}
         `
       }  
       aria-label={
@@ -32,9 +32,9 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
       
 
       <div className={`
-        ${newArrivals ? 'absolute top-7 w-35 ml-3' : ''}
-        ${shopStyle ? ' w-full max-w-45 mx-auto' : ''} 
-        ${bestSeller ? 'w-full max-w-45 mx-auto -mt-10 ' : ''} 
+        ${newArrivals && 'absolute top-7 w-35 ml-3' }
+        ${shopStyle && ' w-full max-w-45 mx-auto' } 
+        ${bestSeller && 'w-full max-w-45 mx-auto -mt-10 '} 
         
         `}>
           <img 
@@ -56,9 +56,9 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
 
           <span 
             className={`
-            ${newArrivals ? 'text-zinc-400' : ''}
+            ${newArrivals && 'text-zinc-400'}
             ${shopStyle ? 'text-center ml-3  w-full text-zinc-400' : 'ml-3'}
-            ${bestSeller ? 'text-emerald-500 flex gap-2' : ''}
+            ${bestSeller && 'text-emerald-500 flex gap-2'}
             `
            }
            aria-label={
@@ -66,14 +66,16 @@ export  function ProductCard({ product, shopStyle, newProduct, bestSeller, newAr
             `$${product?.price.toString().replace(/\..*/, "")}`}`
            }
             >
-            {shopStyle ? `${product?.products}+ products`:  ``}
-            {newArrivals ? `$${product?.price.toString().replace(/\..*/, "")}` : ''}
-            {bestSeller ? `$${product?.price}` : ''}
-            {bestSeller ? 
+            {shopStyle && `${product?.products}+ products`}
+            {newArrivals && `$${product?.price.toString().replace(/\..*/, "")}`}
+            {bestSeller && `$${product?.price}`}
+            {bestSeller && 
             <span 
               className="text-zinc-400  flex gap-1.5 items-center"
               aria-label={`Rating ${product?.rating}`}
-              >Rating {<svg className="w-6 h-6 text-emerald-500"><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg>} {product?.rating}</span> : ''}
+              >Rating 
+              <svg className="w-6 h-6 text-emerald-500"><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg> 
+              {product?.rating}</span>}
           </span>
          
         </div>

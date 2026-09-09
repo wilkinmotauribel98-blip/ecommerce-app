@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 export default function FooterDesktopDetails() {
   return (
     <>
-        <nav className="flex-1" name="footer-navigation" aria-label="Footer Navigation Links">
+        <nav className="flex-1 " name="footer-navigation" aria-label="Footer Navigation Links">
           <span className='text-zinc-200' aria-label="Shop">Shop</span>
           <ul>
             <li className='text-zinc-400' aria-label="All Products">
@@ -45,24 +45,24 @@ export default function FooterDesktopDetails() {
 
         <nav className="flex-1 " name="footer-social" aria-label="Social Media Links">
           <h3 className='text-zinc-200' aria-label="Follow us">Follow us</h3>
-          <ul className='flex gap-4' aria-label="Social Media Links">
+          <ul className='flex gap-4 mt-2' aria-label="Social Media Links">
             <li className='text-zinc-400' aria-label="Instagram">
-              <svg width="44" height="44" aria-hidden="true">
+              <svg  aria-hidden="true" className="border cursor-pointer w-10 h-10 p-2 border-zinc-800 rounded-full">
                 <use href="/ecommerce-app/sprite-extra.svg#icon-instagram"></use>
               </svg>   
             </li>
             <li className='text-zinc-400' aria-label="YouTube">
-              <svg className="w-11 h-11 text-zinc-400 hover:text-gray-400 cursor-pointer">
+              <svg className="w-10 h-10 p-2 border border-zinc-800 rounded-full text-zinc-400 hover:text-gray-400 cursor-pointer">
                 <use href="/ecommerce-app/sprite-extra.svg#icon-youtube"></use>
               </svg>
             </li>
             <li className='text-zinc-400' aria-label="Twitter">
-              <svg className="w-11 h-11 text-zinc-400 hover:text-gray-400 cursor-pointer">
+              <svg className="w-10 h-10 p-2 text-zinc-400 border border-zinc-800 rounded-full hover:text-gray-400 cursor-pointer">
                 <use href="/ecommerce-app/sprite-extra.svg#icon-twitter"></use>
               </svg>
             </li>
             <li className='text-zinc-400' aria-label="Facebook">
-              <svg className="w-11 h-11 text-zinc-400 hover:text-gray-400 cursor-pointer">
+              <svg className="w-10 h-10 p-2 border border-zinc-800 rounded-full  text-zinc-400 hover:text-gray-400 cursor-pointer">
                 <use href="/ecommerce-app/sprite-extra.svg#icon-facebook"></use>
               </svg>    
             </li>

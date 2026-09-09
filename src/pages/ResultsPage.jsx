@@ -20,7 +20,7 @@ export default function ResultsPage(){
       <BreadCrumbSection loading={!results} cart={true} title={'Search Results'} />
       <h1 className="text-white mt-2  text-3xl sm:text-4xl l">Search Results</h1>
       <p className="text-zinc-400">Results for <span className="text-green-400 text-xl">"{query}"</span></p>
-      <RenderResults results={results}/>
+      <RenderResults results={results} query={query}/>
 
     </main>
   )
