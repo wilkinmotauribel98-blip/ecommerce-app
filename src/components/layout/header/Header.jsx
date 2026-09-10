@@ -70,7 +70,7 @@ export default function  Header() {
               </Link>
             </li>
           <li  className="text-white hover:text-gray-400" aria-label="Shop">
-            <a href="/shop">Shop</a>
+            <a href="/ecommerce-app/shop">Shop</a>
           </li>
           <li  className="text-white hover:text-gray-400" aria-label="Categories">
             <a href="/ecommerce-app/categories">Categories</a>

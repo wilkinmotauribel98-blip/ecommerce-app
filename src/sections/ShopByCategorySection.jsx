@@ -1,5 +1,5 @@
 import { useProducts } from '../hooks/useProducts';
-import { ProductCard } from '../components/product/ProductCard';
+import  ProductCard  from '@/components/product/ProductCard';
 import Skeleton from '../components/ui/Skeleton';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ export default function ShopByCategorySection() {
         {loading || !categories.length
           ? [0,1,2,3,4].map(i => <Skeleton key={i} className="h-62 w-full" />)
           : categories.map((i) => (
-          <ProductCard key={i.title} product={i} shopStyle={true} />
+          <ProductCard key={i.title} product={i} variant='shop' />
         )) }
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useProducts } from "../hooks/useProducts";
-import { ProductCard } from "../components/product/ProductCard";
+import  ProductCard from "@/components/product/ProductCard";
 import Skeleton from "../components/ui/Skeleton";
 const newIds = [0,1,2,3,4];
 
@@ -35,7 +35,7 @@ export default function NewArrivalsSection(params) {
       <div className="flex gap-4 ml-auto">
         {loading || !products.length
           ? ids.map(i => <Skeleton key={i} className="h-55 w-43" />)
-          : ids.map(e => <ProductCard key={`arrival ${products[e]?.id}`} newProduct={true} newArrivals={true} product={products[e]} />)}
+          : ids.map(e => <ProductCard key={`arrival ${products[e]?.id}`} isNew={true} variant="newArrivals" product={products[e]} />)}
       </div>
     </section>  
   )
