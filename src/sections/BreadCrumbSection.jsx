@@ -44,8 +44,8 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
       <Link 
         className="capitalize " 
         to={`/ecommerce-app/category/${category}`}
-        aria-label={`Link to Category ${category}`}
-        >{category}
+        aria-label={`Link to Category ${category.replace(/-/g, ' ')}`}
+        >{category.replace(/-/g, ' ')}
       </Link>
       
       <svg className="w-7 h-7 ">

@@ -32,7 +32,7 @@ export default function BottomNavbar() {
             className="text-zinc-400 flex-1 cursor-pointer"
             aria-label="Shop link"
           >
-            <Link to="/" 
+            <Link to="/ecommerce-app/shop" 
               className="flex flex-col items-center"
               aria-label="Navigate to Shop page"
             >

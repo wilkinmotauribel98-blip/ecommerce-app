@@ -29,7 +29,7 @@ export default function RenderAllProducts (){
   
    return(
     <section className="flex max-w-360 flex-col gap-10 w-[95%] m-auto mt-10" >
-      <section className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] grid-rows-4  gap-5">
+      <section className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))]  sm:grid-cols-[repeat(auto-fill,minmax(255px,1fr))] grid-rows-4  gap-5">
         {products.map(pr =><ProductCard variant="allProducts" product={pr} key={pr.id} />)}
       </section>
       <div className="flex gap-2 w-fit m-auto">
