@@ -1,12 +1,14 @@
-import { useState, useEffect, lazy, Suspense } from "react"; 
-import { Link,useNavigate } from "react-router-dom";
+import { useState, useEffect, lazy, Suspense , useContext, act} from "react"; 
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "@/components/cart/Cart.jsx";
 import SearchSkeleton from "@/components/ui/SearchSkeleton.jsx";
-
+import { PageContext } from "../../../context/PageContext.jsx";
 export default function  Header() {
+  const a = window.location.pathname.split('/')
   const [size, setSize] = useState(window.innerWidth);
   const [searchText, setSearchText] = useState('');
-  const [searcher, setSearcher] = useState(false)
+  const [searcher, setSearcher] = useState(false);
+  const {actualPage, setActualPage} = useContext(PageContext)
   const setSearchIcon = size < 768 ? '' : '/ecommerce-app/sprite-core.svg#icon-close'
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
   const navigate = useNavigate();
@@ -18,12 +20,9 @@ export default function  Header() {
     navigate(`/ecommerce-app/results/search?q=${encodeURIComponent(searchValue)}`);
     
   }
-  const url = window.location.href
 
-  
-  
+  const url = window.location.href
   useEffect(()=>{ 
-    
     const sizer =()=>{
       setSize(window.innerWidth)
       if(size >= 1024) setSearcher(false);
@@ -31,8 +30,11 @@ export default function  Header() {
     addEventListener('resize', sizer)
     return ()=> removeEventListener('resize', sizer)
   },[]);
-
-  useEffect(()=>setSearcher(false),[url])
+  
+  useEffect(()=>{
+    setActualPage(a[a.length - 1])
+    setSearcher(false)
+  },[url])
 
   
   return(
@@ -64,22 +66,22 @@ export default function  Header() {
         <ul className={`flex  relative gap-8 w-max overflow-visible ${searcher && size >= 1024 ? 'hidden' : 'flex'} h-dvh z-50 lg:h-auto text-zinc-500 text-2xl bg-black items-center transition-[width] duration-200 ease `}
           aria-label="Navigation links"
         >
-          <li  className="text-emerald-500 hover:text-gray-400  cursor-pointer" aria-label="Home">
+          <li  className={`${actualPage !== 'shop' && actualPage !== 'support' && actualPage !== 'categories' && actualPage !== 'new-arrivals'? 'text-emerald-500 ' : 'text-white hover:text-gray-400'}  cursor-pointe`} aria-label="Home">
               <Link to={'/ecommerce-app'}>
               Home
               </Link>
             </li>
-          <li  className="text-white hover:text-gray-400" aria-label="Shop">
+          <li  className={`${actualPage === 'shop' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`}  aria-label="Shop">
             <a href="/ecommerce-app/shop">Shop</a>
           </li>
-          <li  className="text-white hover:text-gray-400" aria-label="Categories">
+          <li  className={`${actualPage === 'categories' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Categories">
             <a href="/ecommerce-app/categories">Categories</a>
           </li>
-          <li  className="text-white hover:text-gray-400" aria-label="Discover">
-            <a href="/discover">Discover</a>
+          <li  className={`${actualPage === 'new-arrivals' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`} aria-label="Discover">
+            <a href="/ecommerce-app/new-arrivals">New Arrivals</a>
           </li>
-          <li  className="text-white hover:text-gray-400" aria-label="Support">
-            <a href="/support">Support</a>
+          <li className={`${actualPage === 'support' ? 'text-emerald-500 ' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Support">
+            <a href="/ecommerce-app/support">Support</a>
           </li>
           </ul>
       }

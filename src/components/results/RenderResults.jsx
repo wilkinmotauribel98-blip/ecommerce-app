@@ -1,11 +1,11 @@
 import YouMayAlsoLikeCard from "@/components/cart/YouMayAlsoLikeCard";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-export default function RenderResults({ results, query }){
+export default function RenderResults({ results }){
     const [searchParams, setSearchParams] = useSearchParams();
     const [products, setProducts] = useState();
     const page = Number(searchParams.get('page')) || 1;
-    
+
     function goToPage(i) {
       setSearchParams((prev)=>{
         const params = new URLSearchParams(prev);
@@ -16,6 +16,7 @@ export default function RenderResults({ results, query }){
 
     useEffect(()=> { 
       setProducts(results?.products.slice((page - 1 ) * 24, page * 24))
+      window.scrollTo(0, 0);
     }, [page, results])
     
   return(

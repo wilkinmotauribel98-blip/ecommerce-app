@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import Cart from "../../cart/Cart";
+import { PageContext } from "@/context/PageContext";
+import { useContext } from "react";
 
 export default function BottomNavbar() {
+  const {actualPage} = useContext(PageContext)
+  
+  
   return (
     <nav 
       className="w-dvw h-20 fixed bottom-0 bg-black z-50 justify-center items-center flex lg:hidden"
@@ -16,7 +21,7 @@ export default function BottomNavbar() {
             aria-label="Home link"
           >
             <Link to="ecommerce-app" 
-              className="flex flex-col items-center"
+              className={`flex flex-col ${actualPage !== 'shop' && actualPage !== 'support' && actualPage !== 'categories' && actualPage !== 'new-arrivals' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Home page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Home">
@@ -33,7 +38,7 @@ export default function BottomNavbar() {
             aria-label="Shop link"
           >
             <Link to="/ecommerce-app/shop" 
-              className="flex flex-col items-center"
+              className={`flex flex-col ${actualPage === 'shop' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Shop page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer `} aria-label="Products">
@@ -49,10 +54,10 @@ export default function BottomNavbar() {
           aria-label="Categories link"
           >
             <Link to="/ecommerce-app/categories" 
-              className="flex flex-col items-center"
+              className={`flex flex-col ${actualPage === 'categories'  && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Categories page"
             >
-              <svg className={` w-7 h-7 sm:w-9 sm:h-8 text-zinc-400 cursor-pointer`} aria-label="About">
+              <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="About">
                 <use href="/ecommerce-app/sprite-core.svg#icon-grid"/>
               </svg >
               <p className='text-md sm:text-lg'>
@@ -61,21 +66,19 @@ export default function BottomNavbar() {
             </Link>
           </li>
 
-          <li className="text-zinc-400 flex-1 cursor-pointer"
-            aria-label="Cart link"
-            >
-            <Cart navBar={true}/>
-          </li>
+        
 
-            <li className=" text-zinc-400 flex-1  cursor-pointer" aria-label="Account link">
-            <Link to="/" className="flex flex-col items-center"
-              aria-label="Navigate to Account page"
+            <li className=" text-zinc-400 flex-1 w-min  cursor-pointer" aria-label="Account link">
+            <Link 
+            to="/ecommerce-app/new-arrivals" 
+            aria-label="Navigate to new arrivals page"
+            className={`flex flex-col  ${actualPage === 'new-arrivals'  && 'text-emerald-400'}  items-center`}
             >
-              <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer`} aria-label="User Account">
-                <use href="/ecommerce-app/sprite-core.svg#icon-user"/>
+              <svg className={` w-7 h-7 sm:w-9  sm:h-8  cursor-pointer`} aria-label="User Account">
+                <use href="/ecommerce-app/sprite-core.svg#icon-new-arrivals"/>
               </svg >
               <p className='text-md sm:text-lg'>
-                Account
+                Arrivals
               </p>
             </Link>
           </li>

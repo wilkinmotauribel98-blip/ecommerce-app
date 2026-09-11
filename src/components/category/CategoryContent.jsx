@@ -1,7 +1,6 @@
-import { div } from "framer-motion/client";
 import YouMayAlsoLikeCard from "../cart/YouMayAlsoLikeCard"
 import { useState, useEffect } from "react"
-const arr =  [1,2,3,4,5]
+const arr = [1,2,3,4,5]
 
 export default function CategoryContent ( { content, brands}){
   const [dates, setDates ] = useState();

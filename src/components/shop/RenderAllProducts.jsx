@@ -10,9 +10,6 @@ export default function RenderAllProducts (){
     fetchPageProducts(page - 1 ).then(e=>setProducts(e.products))
     window.scrollTo(0, 0);
   }, [page])
-
-
-  
   
   function goToPage(i) {
       setSearchParams((prev)=>{
@@ -35,7 +32,7 @@ export default function RenderAllProducts (){
       <div className="flex gap-2 w-fit m-auto">
         {pages.map(e => <button
         key={e}
-        className={`py-2 px-4 cursor-pointer ${e+ 1 == page ? 'bg-green-400' : 'bg-zinc-500'}  rounded`}
+        className={`py-2 px-2.5 cursor-pointer ${e+ 1 == page ? 'bg-green-400' : 'bg-zinc-500'}  rounded`}
         onClick={()=> goToPage(e + 1)}
          >{e + 1}</button>)}
       </div>

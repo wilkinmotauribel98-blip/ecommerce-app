@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation  } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { useEffect } from 'react';
-
+import { PageContextProvider } from '@/context/PageContext';
 import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
 import BottomNavbar from '@/components/layout/bottomNavbar/bottomNavbar'
@@ -34,8 +34,11 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+    <PageContextProvider>
       <Header />
       <BottomNavbar />
+    </PageContextProvider>
+      
       <Suspense fallback={null}>
         <Routes>
           <Route path="/ecommerce-app" element={<HomePage />} />
