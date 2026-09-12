@@ -1,14 +1,34 @@
-import { useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchPageProducts } from "../../api/products";
-import ProductCard from "../product/ProductCard";
+import ProductCard, { optimizedImg } from "../product/ProductCard";
+import AllProductsSkeleton from "./AllProductsSkeleton";
+import { preloadImages, minDelay } from "@/utils/loading";
+
 export default function RenderAllProducts (){
   const [searchParams, setSearchParams] = useSearchParams()
   const [products, setProducts] = useState()
+  const [loading, setLoading] = useState(true)
   const page = Number(searchParams.get('page')) || 1;
   useEffect(()=>{
-    fetchPageProducts(page - 1 ).then(e=>setProducts(e.products))
+    let cancelled = false;
+    setLoading(true);
+    const startedAt = Date.now();
+    fetchPageProducts(page - 1).then(e=>{
+      if (cancelled) return;
+      // Espera al fetch + precarga de imágenes + tiempo mínimo,
+      // para que el skeleton sea perceptible y no haya pop-in.
+      Promise.all([
+        preloadImages(e.products.map(p => optimizedImg(p.images?.[0], 280, 280))),
+        minDelay(600, startedAt),
+      ]).then(()=>{
+        if (cancelled) return;
+        setProducts(e.products);
+        setLoading(false);
+      });
+    })
     window.scrollTo(0, 0);
+    return ()=> { cancelled = true; };
   }, [page])
   
   function goToPage(i) {
@@ -22,7 +42,7 @@ export default function RenderAllProducts (){
   
   const pages = Array.from({length: Math.ceil(194 / 24)}).map((_,i) => i);
     
-  if(!products) return
+  if(loading || !products) return <AllProductsSkeleton />
   
    return(
     <section className="flex max-w-360 flex-col gap-10 w-[95%] m-auto mt-10" >

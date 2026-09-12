@@ -5,6 +5,7 @@ import { PageContextProvider } from '@/context/PageContext';
 import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
 import BottomNavbar from '@/components/layout/bottomNavbar/bottomNavbar'
+import PageSkeleton from '@/components/ui/PageSkeleton'
 import '@/index.css'
 
 const HomePage = lazy(()=>import('@/pages/Home.jsx'));
@@ -39,7 +40,7 @@ export default function App() {
       <BottomNavbar />
     </PageContextProvider>
       
-      <Suspense fallback={null}>
+      <Suspense fallback={<PageSkeleton />}>
         <Routes>
           <Route path="/ecommerce-app" element={<HomePage />} />
           <Route path="/ecommerce-app/product/:id/:title" element={<ProductPage />} />

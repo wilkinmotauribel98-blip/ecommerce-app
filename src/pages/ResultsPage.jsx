@@ -4,23 +4,45 @@ import { searchProducts } from "@/api/products";
 
 import BreadCrumbSection from "@/sections/BreadCrumbSection";
 import RenderResults from "@/components/results/RenderResults";
+import ResultsSkeleton from "@/components/results/ResultsSkeleton";
+import { optimizedImg } from "@/components/product/ProductCard";
+import { preloadImages, minDelay } from "@/utils/loading";
 
 export default function ResultsPage(){
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState();
+  const [loading, setLoading] = useState(true);
   const query = searchParams.get('q');
-  useEffect(()=>{ 
+  useEffect(()=>{
     if(!query) return
-    searchProducts(query).then(r => setResults(r))
+    let cancelled = false;
+    setLoading(true);
+    const startedAt = Date.now();
+    searchProducts(query).then(r => {
+      if (cancelled) return;
+      // Espera al fetch + precarga de imágenes + tiempo mínimo,
+      // para que el skeleton sea perceptible y no haya pop-in.
+      Promise.all([
+        preloadImages(r.products.map(p => optimizedImg(p.images?.[0], 400, 400))),
+        minDelay(600, startedAt),
+      ]).then(()=>{
+        if (cancelled) return;
+        setResults(r);
+        setLoading(false);
+      });
+    })
+    return ()=> { cancelled = true; };
   },[query])
 
-  if(!results) return
+  if(!query) return null
   return(
     <main className="mb-10 min-h-dvh max-w-360 w-[95%] m-auto z-0 bg-black overflow-hidden  " aria-label="Results Page Main Content">
-      <BreadCrumbSection loading={!results} cart={true} title={'Search Results'} />
+      <BreadCrumbSection loading={loading && !results} cart={true} title={'Search Results'} />
       <h1 className="text-white mt-2  text-3xl sm:text-4xl l">Search Results</h1>
       <p className="text-zinc-400">Results for <span className="text-green-400 text-xl">"{query}"</span></p>
-      <RenderResults results={results} query={query}/>
+      {(loading || !results)
+        ? <ResultsSkeleton />
+        : <RenderResults results={results} query={query}/>}
 
     </main>
   )
