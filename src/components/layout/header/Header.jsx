@@ -77,9 +77,7 @@ export default function  Header() {
           <li  className={`${actualPage === 'categories' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Categories">
             <a href="/ecommerce-app/categories">Categories</a>
           </li>
-          <li  className={`${actualPage === 'new-arrivals' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`} aria-label="Discover">
-            <a href="/ecommerce-app/new-arrivals">New Arrivals</a>
-          </li>
+          
           <li className={`${actualPage === 'support' ? 'text-emerald-500 ' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Support">
             <a href="/ecommerce-app/support">Support</a>
           </li>

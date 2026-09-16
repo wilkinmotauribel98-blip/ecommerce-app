@@ -2,6 +2,7 @@ import { useCart } from '@/hooks/useCart'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 export default function CartSummary({checkout}) {
+  const cart = useCart((state) => state.cart)
   const recalcTotal = useCart((state) => state.recalcTotal)
   const navigate = useNavigate();
   const { subtotal, tax, total } = recalcTotal();
@@ -24,7 +25,7 @@ export default function CartSummary({checkout}) {
         </div>
         <div className='flex justify-between'>
           <span>
-            Subtotal(3 Items)
+            Subtotal ({Object.keys(cart).length} Items)
           </span>
 
           <data value={subtotal.toFixed(2)} className=''>${subtotal.toFixed(2)}</data>

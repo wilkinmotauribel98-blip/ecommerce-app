@@ -70,15 +70,15 @@ export default function BottomNavbar() {
 
             <li className=" text-zinc-400 flex-1 w-min  cursor-pointer" aria-label="Account link">
             <Link 
-            to="/ecommerce-app/new-arrivals" 
-            aria-label="Navigate to new arrivals page"
-            className={`flex flex-col  ${actualPage === 'new-arrivals'  && 'text-emerald-400'}  items-center`}
+            to="/ecommerce-app/support" 
+            aria-label="Navigate to Support page"
+            className={`flex flex-col  ${actualPage === 'support'  && 'text-emerald-400'}  items-center`}
             >
               <svg className={` w-7 h-7 sm:w-9  sm:h-8  cursor-pointer`} aria-label="User Account">
-                <use href="/ecommerce-app/sprite-core.svg#icon-new-arrivals"/>
+                <use href="/ecommerce-app/sprite-core.svg#icon-support"/>
               </svg >
               <p className='text-md sm:text-lg'>
-                Arrivals
+                Support
               </p>
             </Link>
           </li>

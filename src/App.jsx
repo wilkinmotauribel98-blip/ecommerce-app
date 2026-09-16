@@ -17,24 +17,20 @@ const CategoryPage = lazy(()=> import('@/pages/CategoryPage'));
 const CategoriesPage = lazy(()=> import('@/pages/CategoriesPage'));
 const ResultsPage = lazy(()=> import('@/pages/ResultsPage'));
 const NotFoundPage = lazy(()=> import('@/pages/NotFoundPage'));
+const SupportPage = lazy(()=> import('@/pages/SupportPage'))
 
 
-;
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
+  useEffect(() => {window.scrollTo(0, 0);}, [pathname]);
   return null;
 }
 
 export default function App() {
   return (
     <>
-      <ScrollToTop />
+    <ScrollToTop />
     <PageContextProvider>
       <Header />
       <BottomNavbar />
@@ -50,6 +46,7 @@ export default function App() {
           <Route path="/ecommerce-app/categories" element={<CategoriesPage />} />
           <Route path='/ecommerce-app/results/search?' element={<ResultsPage/>} />
           <Route path='/ecommerce-app/shop' element={<ShopPage />} />
+          <Route path='/ecommerce-app/support' element={<SupportPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>

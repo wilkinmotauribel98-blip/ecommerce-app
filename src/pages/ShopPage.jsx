@@ -4,7 +4,7 @@ export default function ShopPage() {
 
 
   return(
-    <main className="mb-10" >
+    <main className="mb-10 max-w-400 m-auto" >
       <ShopHeroSection />
       <RenderAllProducts />
     </main>

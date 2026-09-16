@@ -5,22 +5,7 @@ export default function FooterMobileDetails() {
 
   return (
     <>
-      <Detail title="Shop" content={
-        <ul aria-label="Shop Information">
-          <li className='text-zinc-300' aria-label="All Products">
-            <Link to="/products">All Products</Link>
-          </li>
-          <li className='text-zinc-300' aria-label="New Arrivals">
-            <Link to="/new-arrivals">New Arrivals</Link>
-          </li>
-          <li className='text-zinc-300' aria-label="Best Sellers">
-            <Link to="/best-sellers">Best Sellers</Link>
-          </li>
-          <li className='text-zinc-300' aria-label="Sale Items">
-            <Link to="/sale-items">Sale Items</Link>
-          </li>
-        </ul>
-      } />
+      
       <Detail title="Customer Care" content={
         <ul aria-label="Customer Care Information">
           <li className='text-zinc-300' aria-label="Contact Us">

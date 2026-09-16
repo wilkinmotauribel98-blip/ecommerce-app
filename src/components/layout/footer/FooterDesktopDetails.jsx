@@ -3,27 +3,6 @@ import { Link } from "react-router-dom"
 export default function FooterDesktopDetails() {
   return (
     <>
-        <nav className="flex-1 " name="footer-navigation" aria-label="Footer Navigation Links">
-          <span className='text-zinc-200' aria-label="Shop">Shop</span>
-          <ul>
-            <li className='text-zinc-400' aria-label="All Products">
-              <Link >
-                All Products
-              </Link>
-            </li>
-            <li className='text-zinc-400' aria-label="New Arrivals">
-              <Link>
-                New Arrivals
-              </Link>
-            </li>
-            <li className='text-zinc-400' aria-label="Best Sellers">
-              <Link>
-               Best Sellers
-              </Link>
-            </li>
-            <li className='text-zinc-400' aria-label="Categories">Categories</li>
-          </ul>
-        </nav>
         <nav className="flex-1" name="footer-customer-care" aria-label="Customer Care Links">
           <span className='text-zinc-200' aria-label="Customer Care">Customer Care</span>
           <ul>

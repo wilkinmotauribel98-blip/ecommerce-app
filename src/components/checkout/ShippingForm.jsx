@@ -44,17 +44,17 @@ export default function ShippingForm() {
         <div className="flex flex-col sm:flex-row gap-5 ">
           <div className="flex flex-1  flex-col gap-1">
             <label htmlFor="fname">First name</label>
-            <input type="text" name="fname" placeholder="donald" id="fname" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded" />
+            <input type="text" name="fname" placeholder="Jhon" id="fname" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded" />
           </div>
           <div className="flex flex-1 w-full flex-col gap-1">
             <label htmlFor="lname">Last name</label>
-            <input type="text" name="" id="lname" placeholder="trump" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
+            <input type="text" name="" id="lname" placeholder="Doe" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="addres">Address</label>
-          <input type="text" id="addres" placeholder="Street adress" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
+          <input type="text" id="addres" placeholder="Street address" className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
           <input type="text"  placeholder="Apartment, suit, etc (optional)" id="optional-addres" className="bg-zinc-950 mt-2 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"/>
         </div>
 

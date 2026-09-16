@@ -20,8 +20,6 @@ export default function ResultsPage(){
     const startedAt = Date.now();
     searchProducts(query).then(r => {
       if (cancelled) return;
-      // Espera al fetch + precarga de imágenes + tiempo mínimo,
-      // para que el skeleton sea perceptible y no haya pop-in.
       Promise.all([
         preloadImages(r.products.map(p => optimizedImg(p.images?.[0], 400, 400))),
         minDelay(600, startedAt),

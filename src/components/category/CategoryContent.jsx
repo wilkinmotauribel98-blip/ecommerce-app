@@ -6,7 +6,7 @@ export default function CategoryContent ( { content, brands}){
   const [dates, setDates ] = useState();
   const [filters, setFilters] = useState([]);
   const [products, setProducts] = useState(content);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(window.innerWidth > 768);
   const [size, setSize] = useState(window.innerWidth)
   useEffect(()=>{
     if(!brands) return
