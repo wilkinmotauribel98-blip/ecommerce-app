@@ -1,66 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
 
-    <symbol id="icon-mastercard" viewBox="0 0 48 32">
-      <circle cx="19" cy="16" r="11" fill="#EB001B"/>
-      <circle cx="29" cy="16" r="11" fill="#F79E1B"/>
-      <path
-        fill="#FF5F00"
-        d="M24 7.2a11 11 0 0 0 0 17.6 11 11 0 0 0 0-17.6Z"/>
-    </symbol>
-
-    <symbol id="icon-amex" viewBox="0 0 48 32">
-      <rect width="48" height="32" rx="4" fill="#2E77BC"/>
-      <text
-        x="24"
-        y="14"
-        text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="6"
-        font-weight="700"
-        fill="#fff">
-        AMERICAN
-      </text>
-      <text
-        x="24"
-        y="21"
-        text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="6"
-        font-weight="700"
-        fill="#fff">
-        EXPRESS
-      </text>
-    </symbol>
-
-    <symbol id="icon-paypal" viewBox="0 0 48 32">
-      <path
-        fill="#003087"
-        d="M17.2 7h6.5c4.4 0 6.8 2.1 6.2 5.8-.6 3.7-3.5 5.7-7.6 5.7h-2.6l-1.1 6.5h-4.8L17.2 7Z"/>
-
-      <path
-        fill="#009CDE"
-        d="M21.2 5h6.3c4.4 0 6.8 2.1 6.2 5.8-.5 3.1-2.7 5.1-5.8 5.6l.2-1.1c.6-3.7-1.8-5.8-6.2-5.8h-2.1L21.2 5Z"/>
-    </symbol>
-
-    <symbol id="icon-apple-pay" viewBox="0 0 48 32">
-      <text
-        x="24"
-        y="21"
-        text-anchor="middle"
-        font-family="Arial, sans-serif"
-        font-size="10"
-        font-weight="700"
-        fill="#000">
-         Pay
-      </text>
-    </symbol>
-
-
+    <!-- CARD NETWORKS -->
 
     <symbol id="icon-visa" viewBox="0 0 48 32">
       <text
-        x="24"
-        y="21"
+        x="24" y="21"
         text-anchor="middle"
         font-family="Arial, sans-serif"
         font-size="12"
@@ -70,4 +14,85 @@
         VISA
       </text>
     </symbol>
+
+    <symbol id="icon-mastercard" viewBox="0 0 48 32">
+      <circle cx="19" cy="16" r="11" fill="#EB001B"/>
+      <circle cx="29" cy="16" r="11" fill="#F79E1B"/>
+      <path fill="#FF5F00" d="M24 7.2a11 11 0 0 0 0 17.6 11 11 0 0 0 0-17.6Z"/>
+    </symbol>
+
+    <symbol id="icon-amex" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="4" fill="#2E77BC"/>
+      <text x="24" y="14" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="#fff">AMERICAN</text>
+      <text x="24" y="21" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="#fff">EXPRESS</text>
+    </symbol>
+
+    <symbol id="icon-discover" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="4" fill="#F5F5F5"/>
+      <circle cx="34" cy="16" r="8" fill="#F58220"/>
+      <text x="20" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="6.5" font-weight="700" font-style="italic" fill="#000">DISCOVER</text>
+    </symbol>
+
+    <!-- PAYPAL -->
+
+    <symbol id="icon-paypal-logomark" viewBox="0 0 48 48">
+      <path fill="#fff" d="M17.5 10h11.8c6.7 0 10.6 3.1 9.6 8.8-1 6.5-5.9 10-12.8 10h-4l-1.8 10.2H12L17.5 10Z"/>
+      <path fill="#fff" d="M20.5 7h11.7c6.7 0 10.6 3.1 9.6 8.8-.8 5.3-4.5 8.8-9.8 9.8l.4-2c1-6.5-2.9-10-9.8-10h-3.7l1.6-6.6Z"/>
+    </symbol>
+
+    <symbol id="icon-paypal-mark" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="6" fill="#001C64"/>
+      <path fill="#0070E0" d="M20.5 10h5.8c3.3 0 5.2 1.5 4.7 4.3-.5 3.2-2.9 4.9-6.3 4.9h-2l-.9 5h-3.6L20.5 10Z"/>
+      <path fill="#00B9FF" d="M23.3 8.3h5.7c3.3 0 5.2 1.5 4.7 4.3-.4 2.6-2.2 4.3-4.8 4.8l.2-1c.5-3.2-1.4-4.9-4.7-4.9h-1.8l.7-3.2Z"/>
+    </symbol>
+
+    <symbol id="icon-paypal-badge" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="4" fill="transparent"/>
+      <text x="24" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="" font-weight="700" font-style="italic">
+        <tspan fill="#003087">Pay</tspan><tspan fill="#009CDE">Pal</tspan>
+      </text>
+    </symbol>
+
+    <!-- APPLE PAY -->
+    <symbol id="icon-apple-logomark" viewBox="0 0 36 48">
+       <path fill="#fff" d="M32.6 25.4c-.05-4.9 4-7.3 4.2-7.4-2.3-3.3-5.8-3.8-7.1-3.9-3-.3-5.9 1.8-7.4 1.8-1.5 0-3.9-1.7-6.4-1.7-3.3.05-6.3 1.9-8 4.9-3.4 5.9-.9 14.7 2.5 19.5 1.6 2.4 3.6 5 6.2 4.9 2.5-.1 3.4-1.6 6.4-1.6 3 0 3.8 1.6 6.4 1.5 2.6-.05 4.3-2.4 6-4.8 1.9-2.7 2.6-5.4 2.7-5.5-.05-.05-5.2-2-5.5-8Zm-5-14.7c1.4-1.7 2.3-4.1 2.1-6.5-2 .1-4.5 1.4-6 3.1-1.3 1.5-2.4 4-2.1 6.3 2.2.2 4.5-1.1 6-2.9Z"/>
+    </symbol>
+
+    <symbol id="icon-apple-pay-mark" viewBox="0 0 65 32">
+      
+      <path
+        fill="#fff"
+        d="M16.6 12.1c-.4.5-1 .9-1.7.8-.1-.7.2-1.4.6-1.9.4-.5 1.1-.9 1.7-.9.1.7-.2 1.4-.6 2Zm.6 1c-.9-.1-1.7.5-2.2.5-.5 0-1.1-.5-1.9-.5-1 0-1.9.6-2.4 1.5-1 1.8-.3 4.4.7 5.9.5.7 1.1 1.5 1.9 1.5.7 0 1-.5 1.9-.5s1.1.5 1.9.5c.8 0 1.3-.7 1.8-1.5.6-.8.8-1.6.8-1.7 0 0-1.6-.6-1.6-2.4 0-1.5 1.2-2.2 1.3-2.2-.7-1-1.7-1.1-2.2-1.1Z"/>
+      <text x="30" y="21" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#fff">Pay</text>
+    </symbol>
+
+   <symbol id="icon-apple-pay-badge" viewBox="0 0 65 32">
+  <rect x="0.5" y="0.5" width="64" height="31" rx="6" fill="#000" stroke="#4D4D4D" stroke-width="1"/>
+  <g transform="translate(15, 9.3) scale(0.026)">
+    <path
+      fill="#fff"
+      d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+  </g>
+  <text x="28" y="20.5" font-family="-apple-system, 'SF Pro Text', Arial, sans-serif" font-size="13" font-weight="500" fill="#fff">Pay</text>
+</symbol>
+
+    <!-- GOOGLE PAY -->
+  <symbol id="icon-google-logomark" viewBox="0 0 30 48">
+    <path fill="#fff" d="M46.5 24.5c0-1.7-.15-3.4-.45-5H24v9.5h12.6c-.55 3-2.2 5.5-4.7 7.2v6h7.6c4.5-4.1 7-10.2 7-17.7Z"/>
+    <path fill="#fff" d="M24 47c6.5 0 11.9-2.1 15.9-5.8l-7.6-6c-2.1 1.4-4.9 2.3-8.3 2.3-6.4 0-11.8-4.3-13.7-10.1H2.4v6.2C6.4 41.7 14.5 47 24 47Z"/>
+    <path fill="#fff" d="M10.3 27.4c-.5-1.4-.8-3-.8-4.4s.3-3 .8-4.4v-6.2H2.4C.85 15.5 0 19.6 0 23s.85 7.5 2.4 10.6l7.9-6.2Z"/>
+    <path fill="#fff" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.9-6.9C35.9 2.3 30.5 0 24 0 14.5 0 6.4 5.3 2.4 13.4l7.9 6.2C12.2 13.8 17.6 9.5 24 9.5Z"/>
+  </symbol>
+
+  <symbol id="icon-google-pay-badge" viewBox="0 0 65 32">
+  
+  <g transform="translate(8, 8) scale(0.055)">
+    <path fill="#4285F4" d="M255.68 133.5c0-10.6-.95-20.8-2.7-30.6H130.5v57.9h70.4c-3 16.4-12.3 30.3-26.3 39.6v32.9h42.5c24.9-22.9 39.3-56.7 39.3-96.8z"/>
+    <path fill="#34A853" d="M130.5 261.1c35.6 0 65.5-11.8 87.3-32l-42.5-32.9c-11.8 7.9-26.9 12.6-44.8 12.6-34.4 0-63.6-23.2-74-54.4H12.7v34c21.7 43.1 66.4 72.7 117.8 72.7z"/>
+    <path fill="#FBBC05" d="M56.5 154.4c-2.7-7.9-4.2-16.4-4.2-25.1s1.5-17.2 4.2-25.1V70.2H12.7C4.6 86.4 0 104.7 0 129.3s4.6 42.9 12.7 59.1z"/>
+    <path fill="#EA4335" d="M130.5 51.8c19.4 0 36.8 6.7 50.5 19.7l37.9-37.9C196 12.5 166.1 0 130.5 0 79.1 0 34.4 29.6 12.7 72.7l43.8 34c10.4-31.2 39.6-54.9 74-54.9z"/>
+  </g>
+  <text x="27" y="20.5" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#fff">Pay</text>
+</symbol>
+
 </svg>

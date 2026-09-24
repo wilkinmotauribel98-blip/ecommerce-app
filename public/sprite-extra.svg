@@ -64,6 +64,10 @@
   <path d="M22 34h4"/>
 </symbol>
 
+  <symbol id='icon-check' viewBox="0 -960 960 960"  fill="#e3e3e3">
+    <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+  </symbol>
+
   <symbol id="icon-easy-returns" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 12a8 8 0 0 1-14 5.5"/>
     <polyline points="4 20 4 14 10 14"/>

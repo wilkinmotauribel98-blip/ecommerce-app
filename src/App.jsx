@@ -2,6 +2,7 @@ import { Routes, Route, useLocation  } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { useEffect } from 'react';
 import { PageContextProvider } from '@/context/PageContext';
+import { CheckoutContextProvider } from "@/context/CheckoutContext"
 import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
 import BottomNavbar from '@/components/layout/bottomNavbar/bottomNavbar'

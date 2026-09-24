@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import Skeleton from "@/components/ui/Skeleton"
 
-export default function BreadCrumbSection({ category, brand, title, loading, product, cart}) {
+export default function BreadCrumbSection({ category,  title, loading, product, cart}) {
   if (loading) {
     return (
       <section 
@@ -44,8 +44,8 @@ export default function BreadCrumbSection({ category, brand, title, loading, pro
       <Link 
         className="capitalize " 
         to={`/ecommerce-app/category/${category}`}
-        aria-label={`Link to Category ${category.replace(/-/g, ' ')}`}
-        >{category.replace(/-/g, ' ')}
+        aria-label={`Link to Category ${category?.replace(/-/g, ' ')}`}
+        >{category?.replace(/-/g, ' ')}
       </Link>
       
       <svg className="w-7 h-7 ">

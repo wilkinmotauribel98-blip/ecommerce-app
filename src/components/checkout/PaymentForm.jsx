@@ -1,94 +1,185 @@
-import { useState, useEffect, useRef } from "react"
+import { useForm } from "react-hook-form";
+import CardForm from "./CardForm";
+import { CheckoutContext } from "@/context/CheckoutContext";
+import { useContext, useEffect } from "react";
+import { useCheckout } from "@/hooks/useCheckout";
+
+const PayButton = ({title, symbol})=>{
+  return(
+    <a href="" className="w-full" >
+      <button className="bg-emerald-400 w-full py-1 mt-3 flex  items-center justify-center text-center cursor-pointer rounded " readOnly >
+        <svg className="w-13 h-7 hidden sm:block rounded">
+          <use href={`/ecommerce-app/payment-icons.svg#icon-${symbol}`} />
+        </svg>
+        {title}
+      </button>
+    </a> 
+  )
+}
+
+
 export default function PaymentForm() {
-  const [expiryValue, setExpireValue] = useState('');
-  const [cvcValue, setCvcValue] = useState('');
-  const [cardValue, setCardValue ] = useState('');
-  const prevWord = useRef('')
-  const permiso = useRef(true)
-  const handleChange = (e)=>{
-     const value = e.target.value.split("")
-                let arr = []
-                 if(value.length > 7) arr = value.slice(0, 7)
-                else arr = value
-                
-                const c = []
-                if(arr[0] > 1) arr.unshift('0')
+  const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit)
+  const { register, setValue, watch, handleSubmit } = useForm({defaultValues: {'payment-method': 'card'}})
+  const paymentMethod = watch('payment-method');
+  const { setCurrentStep } = useContext(CheckoutContext);
 
-                const a = c.concat(arr).filter(e =>{  
-                  if(parseInt(e) || e.includes('/') || e == '0') return e
-                }) 
-                  if(a[0] == 1 && a[1] > 2) a[1] = 2  
-                  if(a.length == 0 || a.length == 1) permiso.current = true;
-                  if((a.length == 3 ) && !value.includes('/')) {
-                    
-                    
-                    a[3] = a[2]
-                    a[2] = '/'
-                  } 
-                  if(a.length === 2 && permiso.current) {
-                    permiso.current = false 
-                    a[2] = '/'
-                  }
-                setExpireValue(a.join(""))
+  const onSubmit = (data)=> {
+    setCurrentStep('review');
+    onPaymentFormSubmit(data)
   }
-
+  
   return (
-    <form action="" className="text-zinc-200 py-5 px-3  flex flex-col gap-2 rounded-xl bg-zinc-900">
-      <div className="flex flex-col gap-1">
-        <label htmlFor="payment-numberInput">Card number</label>
-        <div className="flex items-center w-full border-zinc-700 bg-zinc-950 border ">
-          <input 
-            type="text" 
-            id="payment-numberInput" 
-            placeholder="1234 5678 9012 3456" 
-            autoComplete="cc-number"
-            value={cardValue} 
-            className="focus:outline-0 w-full  py-2 px-2 rounded"
-            onChange={(e)=>{
-               setCardValue(e.target.value.replace(/\D/g, '').slice(0, 16).match(/.{1,4}/g)?.join(' ') || '')
-            }}
-            />
+    <section className="">
+      <h1 className="text-3xl text-white font-bold">Payment</h1>
+      <p className="text-zinc-400 mb-5">Enter your shipping details to ensure your order arrives safely at your doorstep.</p>
 
-          <svg 
-            className='w-19 h-10 bg-amber-50 rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-visa"/>
-          </svg>
-        </div>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="flex flex-1 flex-col gap-1">
-          <label htmlFor="payment-expiryInput">Expiry date</label>
-          <input 
-            type="text" 
-            name="" id="payment-expiryInput" 
-            placeholder="MM/YY" 
-            className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"
-            inputMode="numeric"
-            pattern="[0-9]{2}/[0-9]{4}"
-            autoComplete="cc-exp"
-            onChange={handleChange}
-            value={expiryValue}
-            required
-            />
-        </div>
-
-        <div className="flex  flex-1 flex-col gap-1">
-          <label htmlFor="payment-cvcInput">CVV</label>
-          <input 
-            type="text" 
-            name="" id="payment-cvcInput" 
-            placeholder="123" 
-            className="bg-zinc-950 border focus:outline-0 border-zinc-700 py-2 px-2 rounded"
-            inputMode="numeric"
-            required
-            value={cvcValue}
-            pattern="[0-9]{3}"
-            onChange={(e)=>setCvcValue(e.target.value.replace(/\D/g, '').split('').slice(0, 3).join(''))}
+      <form 
+      className="text-zinc-200 py-5 px-3 border border-zinc-800 flex flex-col gap-2 rounded-xl bg-gray-950" 
+      onSubmit={handleSubmit(onSubmit)}
+      >
+      <div>
+      <fieldset className="flex flex-col gap-3" 
+      >
+        
+          <label htmlFor="payment-card" className="flex gap-3 items-center cursor-pointer" >
             
-            />
+            <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
+              <input
+                type="radio"
+                id="payment-card"
+                value="card"
+                className="peer absolute inset-0 opacity-0 cursor-pointer"
+                {...register('payment-method', { required: true })}
+              />
+             
+              <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
+            </span>
+
+            <svg className="w-18 h-9 rounded">
+              <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />
+            </svg>
+
+            <span className="flex flex-col">
+              <span>Credit / Debit Card</span>
+              <span className="text-zinc-400">Visa, Mastercard, American Express</span>
+            </span>
+
+            <div className="flex gap-2 px-3 ml-auto">
+              <svg className="w-13 h-7 hidden sm:block bg-amber-50 rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-visa" />
+              </svg>
+              <svg className="w-13 h-7 hidden sm:block rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-mastercard" />
+              </svg>
+              <svg className="w-13 h-7 hidden sm:block rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-amex" />
+              </svg>
+            </div>
+          </label>
+
+          <label htmlFor="paypal" className="flex gap-3 items-center cursor-pointer">
+            
+            <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
+              <input
+                type="radio"
+                id="paypal"
+                value="paypal"
+                className="peer absolute inset-0 opacity-0 cursor-pointer"
+                {...register('payment-method', { required: true })}
+              />
+             
+              <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
+            </span>
+
+            <svg className="w-18 h-9 rounded">
+              <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark" />
+            </svg>
+
+            <span className="flex flex-col">
+              <span>PayPal</span>
+              <span className="text-zinc-400">Pay with your PayPal account.</span>
+            </span>
+
+            <div className="flex gap-2 px-3 ml-auto">
+              <svg className="w-13 h-7 hidden sm:block rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-paypal-badge" />
+              </svg>
+              
+            </div>
+          </label>
+
+
+           <label htmlFor="applePay" className="flex gap-3 items-center cursor-pointer">
+            
+            <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
+              <input
+                type="radio"
+                id="applePay"
+                value="applePay"
+                className="peer absolute inset-0 opacity-0 cursor-pointer"
+                {...register('payment-method', { required: true })}
+              />
+             
+              <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
+            </span>
+
+            <svg className="w-18 h-9 rounded">
+              <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-mark" />
+            </svg>
+
+            <span className="flex flex-col">
+              <span>Apple Pay</span>
+              <span className="text-zinc-400">Pay with Apple Pay.</span>
+            </span>
+
+            <div className="flex gap-2 px-3 ml-auto">
+              <svg className="w-13 h-7 hidden sm:block rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-badge" />
+              </svg>
+              
+            </div>
+          </label>
+
+
+           <label htmlFor="googlePay" className="flex gap-3 items-center cursor-pointer">
+            
+            <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
+              <input
+                type="radio"
+                id="googlePay"
+                value="googlePay"
+                className="peer absolute inset-0 opacity-0 cursor-pointer"
+                {...register('payment-method', { required: true })}
+              />
+             
+              <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
+            </span>
+
+            <svg className="w-19 h-9 rounded">
+              <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />
+            </svg>
+
+            <span className="flex flex-col">
+              <span>Google Pay</span>
+              <span className="text-zinc-400">Pay with Google Pay.</span>
+            </span>
+
+            <div className="flex gap-2 px-3 ml-auto">
+              <svg className="w-13 h-7 hidden sm:block rounded">
+                <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />
+              </svg>
+              
+            </div>
+          </label>
+      </fieldset>
         </div>
-      </div>
+
+      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register}/>}
+      {paymentMethod == 'paypal' && <PayButton title={'Pay with PayPal'} symbol={'paypal-logomark'} />}
+      {paymentMethod == 'applePay' && <PayButton title={'Pay with Apple Pay'} symbol={'apple-logomark'}/>}
+      {paymentMethod == 'googlePay' && <PayButton title={'Pay with Google Pay'} symbol={'google-logomark'} />}
     </form>
+    </section>
   )
 }

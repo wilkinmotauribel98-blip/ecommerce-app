@@ -65,7 +65,6 @@ export default function CartSummary({checkout}) {
         <div className='flex flex-col gap-3 '>
         <h3 className='text-white text-lg pl-3 '>Payment Methods</h3>
         <div className='flex gap-2 px-3'>
-          
           <svg 
             className='w-18 h-9 bg-amber-50 rounded' >
             <use href="/ecommerce-app/payment-icons.svg#icon-visa"/>

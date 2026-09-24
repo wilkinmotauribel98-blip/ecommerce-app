@@ -7,7 +7,7 @@ export function SuggestionCard({info}) {
   
   return(
    <Link
-   to={`/ecommerce-app/product/${info.id}/${info.title}`}
+   to={`/ecommerce-app/product/${info.id}/${info.title.replace(/\s/g, '-')}`}
    >
      <article 
       className="flex items-center hover:bg-zinc-700  cursor-pointer  bg-zinc-800 border-b border-b-gray-500 z-90" 

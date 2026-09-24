@@ -1,12 +1,13 @@
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { searchProducts } from "@/api/products";
+import { optimizedImg } from "@/components/product/ProductCard";
+import { preloadImages, minDelay } from "@/utils/loading";
 
 import BreadCrumbSection from "@/sections/BreadCrumbSection";
 import RenderResults from "@/components/results/RenderResults";
 import ResultsSkeleton from "@/components/results/ResultsSkeleton";
-import { optimizedImg } from "@/components/product/ProductCard";
-import { preloadImages, minDelay } from "@/utils/loading";
+
 
 export default function ResultsPage(){
   const [searchParams] = useSearchParams();
