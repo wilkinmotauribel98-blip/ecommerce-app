@@ -2,7 +2,12 @@
 
     <!-- CARD NETWORKS -->
 
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
+
+    <!-- CARD NETWORKS -->
+
     <symbol id="icon-visa" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="4" fill="#fff"/>
       <text
         x="24" y="21"
         text-anchor="middle"
@@ -16,6 +21,7 @@
     </symbol>
 
     <symbol id="icon-mastercard" viewBox="0 0 48 32">
+      <rect width="48" height="32" rx="4" fill="#fff"/>
       <circle cx="19" cy="16" r="11" fill="#EB001B"/>
       <circle cx="29" cy="16" r="11" fill="#F79E1B"/>
       <path fill="#FF5F00" d="M24 7.2a11 11 0 0 0 0 17.6 11 11 0 0 0 0-17.6Z"/>
@@ -33,6 +39,7 @@
       <text x="20" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="6.5" font-weight="700" font-style="italic" fill="#000">DISCOVER</text>
     </symbol>
 
+</svg>
     <!-- PAYPAL -->
 
     <symbol id="icon-paypal-logomark" viewBox="0 0 48 48">

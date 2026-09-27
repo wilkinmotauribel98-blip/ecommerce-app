@@ -17,13 +17,13 @@ export default function CheckoutContent(){
   
   return(
     <main className="max-w-360 mb-20 m-auto gap-10 justify-center flex flex-col lg:flex-row mt-10 z-0 bg-black overflow-hidden  w-[95%]" aria-label="Checkout Page Main Content">
-          <section className="flex flex-col gap-5 items-center">
+          <section className="flex flex-col gap-5 items-center w-full max-w-3xl">
               <CheckoutSteps />
               {currentStep === SHIPPING_FORM && <ShippingForm />}
               {currentStep === PAYMENT_FORM && <PaymentForm />}
               {currentStep === REVIEW && <Review />}
           </section>
-          <CartSummary checkout={true} />
+          
         </main>
   )
 }

@@ -42,7 +42,7 @@ export default function PaymentForm() {
       <fieldset className="flex flex-col gap-3" 
       >
         
-          <label htmlFor="payment-card" className="flex gap-3 items-center cursor-pointer" >
+          <label htmlFor="payment-card" className="flex gap-1.5 items-center cursor-pointer" >
             
             <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
               <input
@@ -56,13 +56,13 @@ export default function PaymentForm() {
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
             </span>
 
-            <svg className="w-18 h-9 rounded">
+            <svg className="w-14  h-9 rounded">
               <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />
             </svg>
 
             <span className="flex flex-col">
               <span>Credit / Debit Card</span>
-              <span className="text-zinc-400">Visa, Mastercard, American Express</span>
+              <span className="text-zinc-400 text-sm sm:text-md">Visa, Mastercard, American Express</span>
             </span>
 
             <div className="flex gap-2 px-3 ml-auto">
@@ -78,7 +78,7 @@ export default function PaymentForm() {
             </div>
           </label>
 
-          <label htmlFor="paypal" className="flex gap-3 items-center cursor-pointer">
+          <label htmlFor="paypal" className="flex gap-1.5 items-center cursor-pointer">
             
             <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
               <input
@@ -92,13 +92,13 @@ export default function PaymentForm() {
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
             </span>
 
-            <svg className="w-18 h-9 rounded">
+            <svg className="w-14  h-9 rounded">
               <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark" />
             </svg>
 
             <span className="flex flex-col">
               <span>PayPal</span>
-              <span className="text-zinc-400">Pay with your PayPal account.</span>
+              <span className="text-zinc-400 text-sm sm:text-md">Pay with your PayPal account.</span>
             </span>
 
             <div className="flex gap-2 px-3 ml-auto">
@@ -110,7 +110,7 @@ export default function PaymentForm() {
           </label>
 
 
-           <label htmlFor="applePay" className="flex gap-3 items-center cursor-pointer">
+           <label htmlFor="applePay" className="flex gap-1.5 items-center cursor-pointer">
             
             <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
               <input
@@ -124,13 +124,13 @@ export default function PaymentForm() {
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
             </span>
 
-            <svg className="w-18 h-9 rounded">
+            <svg className="w-14 h-9 rounded">
               <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-mark" />
             </svg>
 
             <span className="flex flex-col">
               <span>Apple Pay</span>
-              <span className="text-zinc-400">Pay with Apple Pay.</span>
+              <span className="text-zinc-400 text-sm sm:text-md">Pay with Apple Pay.</span>
             </span>
 
             <div className="flex gap-2 px-3 ml-auto">
@@ -142,7 +142,7 @@ export default function PaymentForm() {
           </label>
 
 
-           <label htmlFor="googlePay" className="flex gap-3 items-center cursor-pointer">
+           <label htmlFor="googlePay" className="flex gap-1.5 items-center cursor-pointer">
             
             <span className="relative size-5 shrink-0 rounded-full border-2 border-white/20 has-checked:border-emerald-500 transition-colors">
               <input
@@ -156,13 +156,13 @@ export default function PaymentForm() {
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
             </span>
 
-            <svg className="w-19 h-9 rounded">
+            <svg className="w-14 h-9 rounded">
               <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />
             </svg>
 
             <span className="flex flex-col">
               <span>Google Pay</span>
-              <span className="text-zinc-400">Pay with Google Pay.</span>
+              <span className="text-zinc-400 text-sm sm:text-md">Pay with Google Pay.</span>
             </span>
 
             <div className="flex gap-2 px-3 ml-auto">

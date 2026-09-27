@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 
 
 export const useCheckout = create(
   persist(
-    (set, get) => ({
+    (set) => ({
       shippingForm: {},
       paymentForm: {},
       isSaved: false,
@@ -14,8 +14,11 @@ export const useCheckout = create(
       isReviewed: false,
       isDone: false,
       onShippingFormSubmit: (data)=> set({shippingForm: data, isSaved: true, isShippingFormFullFiled: true}),
-      onPaymentFormSubmit: (data) => set({paymentForm: data, isPaymentFormFullFiled: true})
+      onPaymentFormSubmit: (data) => set({paymentForm: data, isPaymentFormFullFiled: true}),
+      setIsReviewed: () => set({isReviewed: true}),
+      setIsDone: (value) => set({isDone: value}),
     }),
-    {name: 'shipping-form'}
+    {name: 'user-info', storage: createJSONStorage(() => sessionStorage)},
+    
   )
 )

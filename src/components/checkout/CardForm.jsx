@@ -1,13 +1,29 @@
 import { useRef } from "react"
 import { useCheckout } from "@/hooks/useCheckout"
+import { useState, useEffect } from "react";
+const liveCardPatterns = {
+  visa: /^4/,
+  mastercard: /^(5[1-5]|2(2[2-9]|[3-6][0-9]|7[01]|720))/,
+  amex: /^3[47]/,
+  discover: /^6(?:011|5)/,
+};
 
-
+function detectCardTypeLive(input) {
+  const clean = input.replace(/[\s-]/g, '');
+  for (const [type, regex] of Object.entries(liveCardPatterns)) {
+    if (regex.test(clean)) return type;
+  }
+  return null; // aún no coincide con ninguno, o no coincide con las 4 soportadas
+}
 
 export default function CardForm({register, setValue, watch}){
-  const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit)
-  const expiryValue = watch('expiry-date')
+  const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit);
+  const isPaymentFormFullFiled = useCheckout((state) => state.isPaymentFormFullFiled);
+  const paymentForm = useCheckout((state) => state.paymentForm);
+  const [cardType, setCardType] = useState('visa')
+  const expiryValue = watch('expiryDate')
     const cvcValue = watch('ccv')
-    const cardValue = watch('card-number')
+    const cardValue = watch('cardNumber')
     const permiso = useRef(true)
 
 
@@ -35,9 +51,17 @@ export default function CardForm({register, setValue, watch}){
                     a[2] = '/'
                   }
                 
-                setValue('expiry-date', a.join(''), { shouldValidate: true})
+                setValue('expiryDate', a.join(''), { shouldValidate: true})
   }
 
+
+  useEffect(()=>{
+    if(isPaymentFormFullFiled){
+      setValue('cardNumber',paymentForm.cardNumber, {shouldValidate: false})
+      setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
+      setValue('ccv', paymentForm.ccv, {shouldValidate: false})
+    }
+  }, [])
 
   return(
     <>
@@ -51,18 +75,24 @@ export default function CardForm({register, setValue, watch}){
             autoComplete="cc-number"
             value={cardValue || ''} 
             className="focus:outline-0 w-full  py-2 px-2 rounded"
-            {...register('card-number', {
+            {...register('cardNumber', {
               required: true,
-              pattern: /[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}/
+              pattern: /^[0-9]{4}(\s?[0-9]{4}){2,3}\s?[0-9]{1,4}$/
             })}
             onChange={(e)=>{
+                setCardType(detectCardTypeLive(e.target.value))
                const formated = e.target.value.replace(/\D/g, '').slice(0, 16).match(/.{1,4}/g)?.join(' ') || '';
-               setValue('card-number', formated, { shouldValidate: true })
+               setValue('cardNumber', formated, { shouldValidate: true })
             }}
             
             />
 
-          
+          <svg className="w-10 h-10 mr-2">
+                {cardType
+                 ? 
+                <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
+                : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
+              </svg>
         </div>
       </div>
 
@@ -75,7 +105,7 @@ export default function CardForm({register, setValue, watch}){
             placeholder="MM/YY" 
             className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
             autoComplete="cc-exp"
-            {...register('expiry-date', {
+            {...register('expiryDate', {
               required: true,
               pattern: /[0-9]{2}\/[0-9]{4}/
             } )}

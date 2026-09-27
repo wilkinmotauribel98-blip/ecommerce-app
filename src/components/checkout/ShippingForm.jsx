@@ -8,7 +8,7 @@ export default function ShippingForm() {
   const shippingInfo = useCheckout((state) => state.shippingForm)
   const onShippingFormSubmit = useCheckout((state) => state.onShippingFormSubmit)
   const isSaved = useCheckout((state)=> state.isSaved)
-  const { currentStep, setCurrentStep } = useContext(CheckoutContext)
+  const { setCurrentStep } = useContext(CheckoutContext)
   const { register, handleSubmit, setValue, watch, formState:{ errors } } = useForm({defaultValues: {
     'country' : 'DO' 
   }})
@@ -19,16 +19,18 @@ export default function ShippingForm() {
     setCities(City.getCitiesOfCountry(data))
   } 
 
-  const onSubmit = (data)=> onShippingFormSubmit(data);
+  const onSubmit = (data)=> {
+    onShippingFormSubmit(data)
+    setCurrentStep('payment')
+  };
 
   useEffect(()=>{
-  setCurrentStep('shipping') 
   if(isSaved){
-    setValue('pnumber', shippingInfo.pnumber, {shouldValidate: true});
-    setValue('pcode', shippingInfo.pcode, {shouldValidate: true})
+    setValue('phoneNumber', shippingInfo.phoneNumber, {shouldValidate: true});
+    setValue('postalCode', shippingInfo.postalCode, {shouldValidate: true})
     setValue('email', shippingInfo.email, {shouldValidate: true})
-    setValue('name', shippingInfo.name, {shouldValidate: true})
-    setValue('lname', shippingInfo.lname, {shouldValidate: true})
+    setValue('firstName', shippingInfo.firstName, {shouldValidate: true})
+    setValue('lastName', shippingInfo.lastName , {shouldValidate: true})
     setValue('address', shippingInfo.address, {shouldValidate: true})
   }
   
@@ -83,26 +85,26 @@ export default function ShippingForm() {
             <label htmlFor="fname" >First name</label>
             <input type="text" 
             placeholder="Jhon" 
-            {...register('name', {
+            {...register('firstName', {
               required: true,
               minLength: 2,
             })} 
             id="fname"
-            value={watch('name') || ''} 
+            value={watch('firstName') || ''} 
             className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded" />
-            {errors.name?.type == "minLength" && <p className="text-red-500">Name is too short.</p>}
-            {errors.name?.type == 'required' && <p className="text-red-500">Name is required.</p>}
+            {errors.firstName?.type == "minLength" && <p className="text-red-500">First name is too short.</p>}
+            {errors.firstName?.type == 'required' && <p className="text-red-500">First name is required.</p>}
           </div>
           <div className="flex flex-1 w-full flex-col gap-1">
             <label htmlFor="lname">Last name</label>
             <input 
             type="text" 
             id="lname" 
-            {...register('lname', {
+            {...register('lastName', {
               required: true,
               minLength: 2,
             })} 
-            value={watch('lname') || ''}
+            value={watch('lastName') || ''}
             placeholder="Doe" 
             className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"/>
             {errors.lname?.type == "minLength" && <p className="text-red-500">Last name is too short.</p>}
@@ -138,29 +140,28 @@ export default function ShippingForm() {
             <label htmlFor="pcode">Postal code</label>
             <input 
               type="text" name="pcode" 
-              {...register('pcode', {required: true, pattern:/[0-9]{5}/ })}  
+              {...register('postalCode', {required: true, pattern:/[0-9]{5}/ })}  
               id="pcode"  
               placeholder="10100"
-              value={watch('pcode') || ''} 
+              value={watch('postalCode') || ''} 
               className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
-              onChange={(e)=> setValue('pcode', e.target.value, {shouldValidate: true})}
+              onChange={(e)=> setValue('postalCode', e.target.value, {shouldValidate: true})}
               />
-              {errors.pcode?.type == "pattern" && <p className="text-red-500">Please enter a valid postal code</p>}
-              {errors.pcode?.type == 'required' && <p className="text-red-500">Postal code is required.</p>}
+              {errors.postalCode?.type == "pattern" && <p className="text-red-500">Please enter a valid postal code</p>}
+              {errors.postalCode?.type == 'required' && <p className="text-red-500">Postal code is required.</p>}
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
           <label htmlFor="phone-number">Phone Number</label>
-          <input type="tel" 
-          name="phone-number" 
-          {...register('pnumber', {
+          <input type="tel"  
+          {...register('phoneNumber', {
             required: true,
             pattern: /[0-9]{3}-[0-9]{3}-[0-9]{4}/
           })} 
           id="phone-number"
           placeholder="809-123-4567" 
-          value={watch('pnumber') || ''}
+          value={watch('phoneNumber') || ''}
           className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
           onChange={(e)=>{
             const formatted = e.target.value
@@ -170,11 +171,11 @@ export default function ShippingForm() {
             ?.slice(1)
             ?.filter(Boolean)
             ?.join('-') || '';     
-            setValue('pnumber', formatted, {shouldValidate: true} )
+            setValue('phoneNumber', formatted, {shouldValidate: true} )
           }}
           />
-          {errors.pnumber?.type == "pattern" && <p className="text-red-500">Please enter a valid phone number</p>}
-          {errors.pnumber?.type == 'required' && <p className="text-red-500">Phone number is required.</p>}
+          {errors.phoneNumber?.type == "pattern" && <p className="text-red-500">Please enter a valid phone number</p>}
+          {errors.phoneNumber?.type == 'required' && <p className="text-red-500">Phone number is required.</p>}
         </div>
        
 

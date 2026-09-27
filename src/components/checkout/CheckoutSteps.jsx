@@ -1,5 +1,5 @@
 import { useCheckout } from "@/hooks/useCheckout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CheckoutContext } from "@/context/CheckoutContext";
 
 function Step({step, stepName, isFulfiled}) {
@@ -8,6 +8,7 @@ function Step({step, stepName, isFulfiled}) {
   const onActive = 'text-black bg-emerald-300'
   const unActive = 'text-zinc-300 border border-zinc-500 '
 
+  useEffect(()=>{ window.scrollTo(0, 0)}, [currentStep])
   return(
     <>
     <button 
@@ -20,8 +21,8 @@ function Step({step, stepName, isFulfiled}) {
             <use href="/ecommerce-app/sprite-extra.svg#icon-check"/>
           </svg> : step}
       </button>
-      <span className="capitalize">{stepName}</span>
-      {step !== 4 && <hr className="w-20 text-emerald-300"/>}
+      <span className="capitalize text-sm sm:text-lg">{stepName}</span>
+      {step !== 4 && <hr className="w-20 hidden md:block text-emerald-300"/>}
 
     </>
   )
@@ -33,8 +34,11 @@ export default function CheckoutSteps() {
   const isPaymentFormFullFiled = useCheckout((state) => state.isPaymentFormFullFiled);
   const isReviewed = useCheckout((state) => state.isReviewed);
   const isDone = useCheckout((state)=> state.isDone)
+
+
+
   return (
-    <section className="text-white flex gap-2 items-center  ">
+    <section className="text-white flex gap-1.5 items-center  ">
       <Step step={1} stepName={'shipping'} isFulfiled={isShippingFormFullFiled}/>
       <Step step={2} stepName={'payment'} isFulfiled={isPaymentFormFullFiled}/>
       <Step step={3} stepName={'review'} isFulfiled={isReviewed}/>
