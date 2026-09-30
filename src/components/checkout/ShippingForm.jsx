@@ -1,14 +1,17 @@
 import { Country, City } from "country-state-city"
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { useCheckout } from "@/hooks/useCheckout";
-import { CheckoutContext } from "@/context/CheckoutContext";
+import { useNavigate } from "react-router-dom"
+
+
+
 export default function ShippingForm() {
   const countries = Country.getAllCountries();
+  const navigate = useNavigate();
   const shippingInfo = useCheckout((state) => state.shippingForm)
   const onShippingFormSubmit = useCheckout((state) => state.onShippingFormSubmit)
   const isSaved = useCheckout((state)=> state.isSaved)
-  const { setCurrentStep } = useContext(CheckoutContext)
   const { register, handleSubmit, setValue, watch, formState:{ errors } } = useForm({defaultValues: {
     'country' : 'DO' 
   }})
@@ -20,8 +23,9 @@ export default function ShippingForm() {
   } 
 
   const onSubmit = (data)=> {
+
     onShippingFormSubmit(data)
-    setCurrentStep('payment')
+    navigate('/ecommerce-app/checkout/payment')
   };
 
   useEffect(()=>{

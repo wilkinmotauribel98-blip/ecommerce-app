@@ -1,19 +1,16 @@
 import { useCheckout } from "@/hooks/useCheckout";
-import { useContext, useEffect } from "react";
-import { CheckoutContext } from "@/context/CheckoutContext";
+import { useLocation } from "react-router-dom";
 
 function Step({step, stepName, isFulfiled}) {
-  const { currentStep, setCurrentStep } = useContext(CheckoutContext);
-  const onFullFiled = 'bg-emerald-300 text-white';
-  const onActive = 'text-black bg-emerald-300'
+  const onFullFiled = 'bg-emerald-400 text-white';
+  const onActive = 'text-black bg-emerald-400'
   const unActive = 'text-zinc-300 border border-zinc-500 '
-
-  useEffect(()=>{ window.scrollTo(0, 0)}, [currentStep])
+  const { pathname } = useLocation();
+  const currentStep = pathname.split('/').pop();
   return(
     <>
     <button 
-      onClick={()=> setCurrentStep(stepName)} 
-      className={`${isFulfiled ? onFullFiled : currentStep == stepName ? onActive : unActive} rounded-full w-7 h-7 text-center cursor-pointer `}
+      className={`${isFulfiled ? onFullFiled : currentStep == stepName ? onActive : unActive} rounded-full w-7 h-7 text-center `}
       >
       {isFulfiled ? <svg 
             className='w-6.5 h-6.5' 
@@ -30,12 +27,7 @@ function Step({step, stepName, isFulfiled}) {
 
 
 export default function CheckoutSteps() {
-  const isShippingFormFullFiled = useCheckout((state)=> state.isShippingFormFullFiled);
-  const isPaymentFormFullFiled = useCheckout((state) => state.isPaymentFormFullFiled);
-  const isReviewed = useCheckout((state) => state.isReviewed);
-  const isDone = useCheckout((state)=> state.isDone)
-
-
+  const {isShippingFormFullFiled, isPaymentFormFullFiled, isReviewed, isDone} = useCheckout((state)=> state);
 
   return (
     <section className="text-white flex gap-1.5 items-center  ">

@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import CardForm from "./CardForm";
-import { CheckoutContext } from "@/context/CheckoutContext";
-import { useContext, useEffect } from "react";
 import { useCheckout } from "@/hooks/useCheckout";
+
+import { useNavigate } from "react-router-dom";
 
 const PayButton = ({title, symbol})=>{
   return(
@@ -19,13 +19,14 @@ const PayButton = ({title, symbol})=>{
 
 
 export default function PaymentForm() {
+   const { register, setValue, watch, handleSubmit } = useForm({defaultValues: {'payment-method': 'card'}})
+   const navigate = useNavigate();
   const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit)
-  const { register, setValue, watch, handleSubmit } = useForm({defaultValues: {'payment-method': 'card'}})
   const paymentMethod = watch('payment-method');
-  const { setCurrentStep } = useContext(CheckoutContext);
+
 
   const onSubmit = (data)=> {
-    setCurrentStep('review');
+    navigate('/ecommerce-app/checkout/review');
     onPaymentFormSubmit(data)
   }
   

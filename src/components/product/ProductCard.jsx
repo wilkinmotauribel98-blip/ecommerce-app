@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import PriceSection from "../ui/PriceSection";
 import AverageRating from "../ui/AverageRating";
 import { useCart } from "../../hooks/useCart";
@@ -54,8 +53,9 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
   const config = VARIANT_CONFIG[variant];
   const displayText =  config.getText(product);
   const navigate = useNavigate()
-  const cart = useCart((state)=> state.cart)
-  const setCart = useCart((state)=> state.setCart);
+  const { cart, setCart }= useCart((state)=> state)
+
+
   const productQuantity = ()=>{
     if (cart[product.id]) {
     if(cart[product.id].quantity + 1 <= product.stock) return cart[product.id].quantity + 1
@@ -63,11 +63,13 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
     }
     return 1
   }
+
+
   const cartProduct = {
-      image: product.images[0],
-      title: product.title,
-      price: (product.price - (product.price / 100 * product.discountPercentage)).toFixed(2),
-      stock: product.stock,
+      image: product?.images[0],
+      title: product?.title,
+      price: (product?.price - (product?.price / 100 * product?.discountPercentage)).toFixed(2),
+      stock: product?.stock,
       quantity: productQuantity(),
       category: product.category
     }
@@ -95,7 +97,7 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
         )}
 
         <div className={`${variant === 'allProducts' ? 'w-full justify-end px-2 flex flex-col pl-3 gap-2 flex-1' : 'absolute bottom-3 w-full'} `}>
-           { variant === 'allProducts' && <span className="sm:absolute w-fit top-3 capitalize left-4 bg-emerald-700 text-emerald-300  rounded-full px-2">{product.category.replace(/-/g, ' ')}</span> 
+           { variant === 'allProducts' && <span className="sm:absolute w-fit top-3 capitalize left-4 bg-emerald-700 text-emerald-300  rounded-full px-2">{product?.category.replace(/-/g, ' ')}</span> 
           }
 
           <h3 className={`text-white p-0 m-0 ${config.titleClass}`}>

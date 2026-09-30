@@ -11,11 +11,6 @@ export async function fetchCategories() {
   return json
 }
 
-export async function fetchPageProducts(page) {
-  const res = await fetch(`https://dummyjson.com/products?limit=24&skip=${page * 24}`);
-  const json = await res.json();
-  return json
-}
 
 
 

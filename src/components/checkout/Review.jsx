@@ -1,8 +1,8 @@
 import { useCheckout } from "@/hooks/useCheckout"
-import { useContext } from "react";
-import { CheckoutContext } from "@/context/CheckoutContext";
 import { useCart } from "@/hooks/useCart";
+import { useNavigate } from "react-router-dom";
 import Item from "@/components/checkout/Item";
+
 const cardPatterns = {
   visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
   mastercard: /^(5[1-5][0-9]{14}|2(2[2-9][0-9]{12}|[3-6][0-9]{13}|7[01][0-9]{12}|720[0-9]{12}))$/,
@@ -24,13 +24,11 @@ function getCardType(cardNumber) {
 
 
 export default function Review(){
-  const { setCurrentStep } = useContext(CheckoutContext);
-  const {subtotal, tax, total} = useCart((state) => state.recalcTotal());
-  const shippingForm = useCheckout((state) => state.shippingForm);
-  const paymentForm = useCheckout((state) => state.paymentForm);
+  const navigate = useNavigate();
+  const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
+  const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone } = useCheckout((state) => state);
   const cartItems = useCart((state) => state.cart);
   const cardType = getCardType(paymentForm.cardNumber)
-  const setIsReviewed  = useCheckout((state) => state.setIsReviewed);
 
   
   return (
@@ -93,8 +91,8 @@ export default function Review(){
       <section className="flex flex-col gap-2    p-3" >
          <h2 className="text-xl mb-1">Order Items</h2> 
           <div>
-            {Object.values(cartItems).map((item) => (
-              <Item key={item.id} item={item} />
+            {Object.entries(cartItems).map(([key, item]) => (
+              <Item key={key} item={item} id={key} />
             ))} 
             <div className='border-gray-800 border-t mt-2 pt-2 px-2'>
             <div className="flex justify-between mt-2">
@@ -122,7 +120,7 @@ export default function Review(){
     
           <div className="border-t border-gray-800 mt-2 pt-2 px-2">
             <div className="flex justify-between mt-2">
-              <span className="text-white">Total (18%)</span>
+              <span className="text-white text-xl">Total</span>
               <span className="text-emerald-300">
                 ${total.toFixed(2)}
               </span>
@@ -132,7 +130,9 @@ export default function Review(){
               className='bg-emerald-400 w-full py-1 mt-3 flex  items-center justify-center text-center cursor-pointer rounded'
               onClick={()=> {
                 setIsReviewed();
-                setCurrentStep('done');
+                navigate('/ecommerce-app/checkout/done');
+                setOrderNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));
+                setIsDone(true)
               }}
             >
               Place Order

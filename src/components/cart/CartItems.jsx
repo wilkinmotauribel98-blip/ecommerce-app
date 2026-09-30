@@ -1,4 +1,3 @@
-import { object } from "framer-motion/client";
 import CartItem from "./CartItem"
 import CartSummary from "./CartSummary";
 import { useCart } from '@/hooks/useCart'

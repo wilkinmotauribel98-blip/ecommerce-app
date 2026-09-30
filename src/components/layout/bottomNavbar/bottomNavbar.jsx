@@ -4,7 +4,7 @@ import { PageContext } from "@/context/PageContext";
 import { useContext } from "react";
 
 export default function BottomNavbar() {
-  const {actualPage} = useContext(PageContext)
+  const {currentPage} = useContext(PageContext)
   
   
   return (
@@ -21,7 +21,7 @@ export default function BottomNavbar() {
             aria-label="Home link"
           >
             <Link to="ecommerce-app" 
-              className={`flex flex-col ${actualPage !== 'shop' && actualPage !== 'support' && actualPage !== 'categories' && actualPage !== 'new-arrivals' && 'text-emerald-400'}  items-center`}
+              className={`flex flex-col ${currentPage !== 'shop' && currentPage !== 'support' && currentPage !== 'categories' && currentPage !== 'new-arrivals' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Home page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Home">
@@ -38,7 +38,7 @@ export default function BottomNavbar() {
             aria-label="Shop link"
           >
             <Link to="/ecommerce-app/shop" 
-              className={`flex flex-col ${actualPage === 'shop' && 'text-emerald-400'}  items-center`}
+              className={`flex flex-col ${currentPage === 'shop' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Shop page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer `} aria-label="Products">
@@ -54,7 +54,7 @@ export default function BottomNavbar() {
           aria-label="Categories link"
           >
             <Link to="/ecommerce-app/categories" 
-              className={`flex flex-col ${actualPage === 'categories'  && 'text-emerald-400'}  items-center`}
+              className={`flex flex-col ${currentPage === 'categories'  && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Categories page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="About">
@@ -72,7 +72,7 @@ export default function BottomNavbar() {
             <Link 
             to="/ecommerce-app/support" 
             aria-label="Navigate to Support page"
-            className={`flex flex-col  ${actualPage === 'support'  && 'text-emerald-400'}  items-center`}
+            className={`flex flex-col  ${currentPage === 'support'  && 'text-emerald-400'}  items-center`}
             >
               <svg className={` w-7 h-7 sm:w-9  sm:h-8  cursor-pointer`} aria-label="User Account">
                 <use href="/ecommerce-app/sprite-core.svg#icon-support"/>

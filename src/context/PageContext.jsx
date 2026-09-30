@@ -1,14 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
+import { useLocation } from "react-router-dom";
 
 export const PageContext = createContext(null);
 
 export function PageContextProvider({children}) {
-  const a = window.location.pathname.split('/')
-  const [actualPage, setActualPage] = useState(a[a.length - 1]);
+  const location = useLocation();
+  const currentPage = location.pathname.split('/').pop();
   
   return(
     <PageContext.Provider
-    value={{actualPage, setActualPage}}
+    value={{currentPage}}
   >
     {children}
   </PageContext.Provider>
