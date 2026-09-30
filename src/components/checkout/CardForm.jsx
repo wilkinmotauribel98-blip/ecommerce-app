@@ -1,6 +1,7 @@
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useCheckout } from "@/hooks/useCheckout"
-import { useState, useEffect } from "react";
+import { pattern } from "framer-motion/client";
+
 const liveCardPatterns = {
   visa: /^4/,
   mastercard: /^(5[1-5]|2(2[2-9]|[3-6][0-9]|7[01]|720))/,
@@ -13,16 +14,16 @@ function detectCardTypeLive(input) {
   for (const [type, regex] of Object.entries(liveCardPatterns)) {
     if (regex.test(clean)) return type;
   }
-  return null; // aún no coincide con ninguno, o no coincide con las 4 soportadas
+  return null; 
 }
 
-export default function CardForm({register, setValue, watch}){
+export default function CardForm({register, setValue, watch, errors}){
   const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit);
   const isPaymentFormFullFiled = useCheckout((state) => state.isPaymentFormFullFiled);
   const paymentForm = useCheckout((state) => state.paymentForm);
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
-    const cvcValue = watch('ccv')
+    const cvvValue = watch('cvv')
     const cardValue = watch('cardNumber')
     const permiso = useRef(true)
 
@@ -93,7 +94,10 @@ export default function CardForm({register, setValue, watch}){
                 <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
                 : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
               </svg>
+
         </div>
+        {errors.cardNumber?.type === 'pattern' && <p className="text-red-500">Enter a valid Card number</p>}
+        {errors.cardNumber?.type === 'required' && <p className="text-red-500">Card Number is required </p>}
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
@@ -107,12 +111,14 @@ export default function CardForm({register, setValue, watch}){
             autoComplete="cc-exp"
             {...register('expiryDate', {
               required: true,
-              pattern: /[0-9]{2}\/[0-9]{4}/
+              pattern: /^(0[1-9]|1[0-2])\/([0-9]{2})$/
             } )}
             onChange={handleChange}
             value={expiryValue || ''}
             
             />
+            {errors.expiryDate?.type === 'pattern' && <p className="text-red-500">Enter a valid expiration date (MM/YY)</p>}
+            {errors.expiryDate?.type === 'required' && <p className="text-red-500">Expiration date is required </p>}
         </div>
 
         <div className="flex flex-1 flex-col gap-1">
@@ -123,12 +129,17 @@ export default function CardForm({register, setValue, watch}){
             placeholder="123" 
             className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
             inputMode="numeric"
-            required
-            value={cvcValue || ''}
-            pattern="[0-9]{3}"
-            {...register('ccv')}
-            onChange={(e)=> setValue('ccv', e.target.value.replace(/\D/g, '').split('').slice(0, 3).join(''), {shouldValidate: true})}  
+            
+            value={cvvValue || ''}
+            {...register('cvv', {
+              pattern: /^[0-9]{3,4}$/,
+              required: true
+
+            })}
+            onChange={(e)=> setValue('cvv', e.target.value.replace(/\D/g, '').split('').slice(0, 3).join(''), {shouldValidate: true})}  
             />
+            {errors.cvv?.type === 'pattern' && <p className="text-red-500">Enter a valid cvv</p>}
+            {errors.cvv?.type === 'required' && <p className="text-red-500">cvv is required </p>}
         </div>
       </div>
       <input type="submit" value="Save & continue" className="bg-emerald-400 py-1 mt-3 cursor-pointer rounded" onSubmit={(data)=>onPaymentFormSubmit(data)}/>

@@ -12,11 +12,8 @@ export default function  Header() {
   const [searcher, setSearcher] = useState(false);
 
   const { currentPage } = useContext(PageContext)
-  const { pathname, search } = useLocation();
-
-  const setSearchIcon = size < 768 ? '' : '/ecommerce-app/sprite-core.svg#icon-close'
+  const { pathname, search } = useLocation()
   const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
-  
   
 
   function handleSubmit(e) {
@@ -92,14 +89,14 @@ export default function  Header() {
       }
 
       <div className="mr-3 lg:mr-9 flex gap-2 sm:gap-3 text-zinc-200 items-center">
-        <div className={`flex bg-zinc-900 ${searcher ? 'border-emerald-400 border-2 items-center  px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl' : ''}`}>
-          <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher ? '' : 'hidden'}`}>
+        <div className={`flex bg-zinc-900 ${searcher && 'border-emerald-400 border-2 items-center  px-7 gap-5 mt-2 justify-center rounded-full w-[70dvw] max-w-4xl'}`}>
+          <svg className={`w-4.5 h-4.5 text-emerald-400 mt-0.5 ${searcher || 'hidden'}`}>
             <use href="/ecommerce-app/sprite-core.svg#icon-search"/>
           </svg>
 
           <form 
             action="search" 
-            className={`flex items-center w-full ${searcher ? 'justify-center' : ''}`}
+            className={`flex items-center w-full ${searcher && 'justify-center'}`}
             aria-label="Search form"
             onSubmit={handleSubmit}
             >
@@ -127,17 +124,13 @@ export default function  Header() {
         </div>
 
           <svg 
-            className={`w-6.5 h-6.5 cursor-pointer ${searcher && size < 768 ? 'hidden' : ''}` }
+            className={`w-6.5 h-6.5 cursor-pointer ${searcher && size < 768 && 'hidden' }` }
             onClick={()=> setSearcher(!searcher)}
             aria-label="Search">
-            <use href={searcher ? setSearchIcon : '/ecommerce-app/sprite-core.svg#icon-search'}/>
+            <use href={searcher ? size < 768 || '/ecommerce-app/sprite-core.svg#icon-close' : '/ecommerce-app/sprite-core.svg#icon-search'}/>
           </svg>
           
-          <svg 
-            className='w-6.5 h-6.5 hidden lg:block'
-            aria-label="User profile">
-            <use href="/ecommerce-app/sprite-core.svg#icon-user"/>
-          </svg>
+        
          
           <Cart />
       </div>

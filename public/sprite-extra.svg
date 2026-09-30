@@ -68,6 +68,11 @@
     <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
   </symbol>
 
+  <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 21s-7-6.2-7-11.5C5 5.36 8.13 2 12 2s7 3.36 7 7.5C19 14.8 12 21 12 21Z"/>
+  <circle cx="12" cy="9.5" r="2.5"/>
+</symbol>
+
   <symbol id="icon-easy-returns" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 12a8 8 0 0 1-14 5.5"/>
     <polyline points="4 20 4 14 10 14"/>

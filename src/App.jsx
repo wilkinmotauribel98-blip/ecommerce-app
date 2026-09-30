@@ -45,6 +45,7 @@ export default function App() {
             <Route path="payment" element={<PaymentForm />} />
             <Route path="review" element={<Review />} />
             <Route path="done" element={<Done />} />
+            
           </Route>
           <Route path="/ecommerce-app/categories" element={<CategoriesPage />} />
           <Route path='/ecommerce-app/results/search?' element={<ResultsPage/>} />

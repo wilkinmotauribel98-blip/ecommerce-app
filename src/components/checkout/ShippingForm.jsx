@@ -13,7 +13,7 @@ export default function ShippingForm() {
   const onShippingFormSubmit = useCheckout((state) => state.onShippingFormSubmit)
   const isSaved = useCheckout((state)=> state.isSaved)
   const { register, handleSubmit, setValue, watch, formState:{ errors } } = useForm({defaultValues: {
-    'country' : 'DO' 
+    'country' : 'Dominican Republic' 
   }})
   const [cities, setCities ] = useState(City.getCitiesOfCountry('DO'))
 
@@ -80,7 +80,7 @@ export default function ShippingForm() {
             className=" border focus:outline-0 border-zinc-800 py-2 px-1 rounded"
             {...register('country')}
             >
-            {countries.map(e => <option key={e.isoCode} value={e.isoCode} >{e.name}</option>)}
+            {countries.map(e => <option key={e.isoCode} value={e.name} >{e.name}</option>)}
           </select>
         </div>
 

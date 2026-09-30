@@ -19,7 +19,7 @@ const PayButton = ({title, symbol})=>{
 
 
 export default function PaymentForm() {
-   const { register, setValue, watch, handleSubmit } = useForm({defaultValues: {'payment-method': 'card'}})
+   const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'payment-method': 'card'}})
    const navigate = useNavigate();
   const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit)
   const paymentMethod = watch('payment-method');
@@ -176,7 +176,7 @@ export default function PaymentForm() {
       </fieldset>
         </div>
 
-      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register}/>}
+      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register} errors={errors}/>}
       {paymentMethod == 'paypal' && <PayButton title={'Pay with PayPal'} symbol={'paypal-logomark'} />}
       {paymentMethod == 'applePay' && <PayButton title={'Pay with Apple Pay'} symbol={'apple-logomark'}/>}
       {paymentMethod == 'googlePay' && <PayButton title={'Pay with Google Pay'} symbol={'google-logomark'} />}

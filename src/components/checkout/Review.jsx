@@ -23,7 +23,7 @@ function getCardType(cardNumber) {
 
 
 
-export default function Review(){
+export default function Review({title, description}){
   const navigate = useNavigate();
   const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
   const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone } = useCheckout((state) => state);
@@ -33,14 +33,14 @@ export default function Review(){
   
   return (
     <section className="text-white w-full ">
-      <h1 className="text-3xl font-bold ">Review Your Order</h1>
-      <p className="text-zinc-400">Please review your order details before completing your purchase.</p>
+      <h1 className="text-3xl font-bold ">{title || 'Review Your Order'} </h1>
+      <p className="text-zinc-400">{description || 'Please review your order details before completing your purchase.'}</p>
       <div className="bg-gray-900/20 border border-gray-800 rounded-xl  mt-5 ">
         <article className="flex gap-2 border border-gray-800 rounded  p-2" >
          <svg 
             className='w-6.5 h-6.5' 
             aria-label="Check">
-            <use href="/ecommerce-app/sprite-extra.svg#icon-check"/>
+            <use href="/ecommerce-app/sprite-extra.svg#icon-location"/>
           </svg>
           <div>
             <h2 className="text-lg mb-1">Shipping Address</h2>
@@ -52,7 +52,7 @@ export default function Review(){
         <button 
           type="button" 
           className="text-emerald-400 ml-auto mb-auto cursor-pointer"
-          onClick={()=> setCurrentStep('shipping')}
+          onClick={()=> navigate('/ecommerce-app/checkout/shipping')}
           >Edit</button>
       </article>
 
@@ -66,7 +66,7 @@ export default function Review(){
             <h2 className="text-lg mb-1">Payment Method</h2>
             <span className="text-zinc-200 flex items-center">
               <svg className="w-10 h-10 mr-2">
-                {cardType !== 'diners' && cardType !== 'jcb'
+                {cardType !== null
                  ? 
                 <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
                 : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
@@ -84,7 +84,7 @@ export default function Review(){
         <button 
           type="button" 
           className="text-emerald-400 ml-auto mb-auto cursor-pointer"
-          onClick={()=> setCurrentStep('payment')}
+          onClick={()=> navigate('/ecommerce-app/checkout/payment')}
           >Edit</button>
       </article>
 
