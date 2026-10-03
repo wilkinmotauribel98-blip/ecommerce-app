@@ -5,7 +5,7 @@ export default function CategoryCard ({category}){
   return(
     <article 
       className="bg-zinc-950 border border-zinc-800 rounded pb-2  flex flex-col cursor-pointer"
-      onClick={()=> navigate(`/ecommerce-app/category/${category.category}`)}
+      onClick={()=> navigate(`/category/${category.category}`)}
       aria-label={`${category.category} category Link`}
     >
       <div >

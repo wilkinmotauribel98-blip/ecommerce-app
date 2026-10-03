@@ -4,7 +4,7 @@ import { PageContextProvider } from '@/context/PageContext'
 
 import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
-import BottomNavbar from '@/components/layout/bottomNavbar/bottomNavbar'
+import BottomNavbar from '@/components/layout/bottomNavbar/BottomNavbar'
 import PageSkeleton from '@/components/ui/PageSkeleton'
 import ShippingForm from "@/components/checkout/ShippingForm"
 import PaymentForm from '@/components/checkout/PaymentForm'
@@ -35,11 +35,11 @@ export default function App() {
       
       <Suspense fallback={<PageSkeleton />}>
         <Routes>
-          <Route path="/ecommerce-app" element={<HomePage />} />
-          <Route path="/ecommerce-app/product/:id/:title" element={<ProductPage />} />
-          <Route path="/ecommerce-app/category/:category" element={<CategoryPage />} />
-          <Route path="/ecommerce-app/cart" element={<CartPage />} />
-          <Route path="/ecommerce-app/checkout" element={<CheckoutPage />} >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id/:title" element={<ProductPage />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} >
             <Route index element={<Navigate to="shipping" replace />} />
             <Route path="shipping" element={<ShippingForm />} />
             <Route path="payment" element={<PaymentForm />} />
@@ -47,10 +47,10 @@ export default function App() {
             <Route path="done" element={<Done />} />
             
           </Route>
-          <Route path="/ecommerce-app/categories" element={<CategoriesPage />} />
-          <Route path='/ecommerce-app/results/search?' element={<ResultsPage/>} />
-          <Route path='/ecommerce-app/shop' element={<ShopPage />} />
-          <Route path='/ecommerce-app/support' element={<SupportPage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path='/results/search?' element={<ResultsPage/>} />
+          <Route path='/shop' element={<ShopPage />} />
+          <Route path='/support' element={<SupportPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>

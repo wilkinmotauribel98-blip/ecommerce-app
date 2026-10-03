@@ -26,8 +26,18 @@ export async function fetchProductsByCategory(category) {
   return {products, brands}
 }
 
+export async function fetchAllProducts(limit = 194) {
+  const res = await fetch(`https://dummyjson.com/products?limit=${limit}&select=id,title,price,discountPercentage,rating,stock,brand,category,thumbnail,images,description`);
+  if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
+  const json = await res.json();
+  return json.products ?? [];
+}
+
 export async function searchProducts(query) {
-  const res = await fetch(`https://dummyjson.com/products/search?q=${query}`);
+  const q = encodeURIComponent(query.trim());
+  if (!q) return { products: [] };
+  const res = await fetch(`https://dummyjson.com/products/search?q=${q}&limit=10&select=id,title,price,thumbnail,category`);
+  if (!res.ok) throw new Error(`Search failed: ${res.status}`);
   const json = await res.json();
   return json
 }

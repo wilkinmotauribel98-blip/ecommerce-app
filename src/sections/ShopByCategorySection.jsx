@@ -23,7 +23,7 @@ export default function ShopByCategorySection() {
         <Link 
         className="text-emerald-500 text-sm sm:text-lg lg:text-xl"
         aria-label='View all categories'
-        to={'/ecommerce-app/categories'}
+        to={'/categories'}
         > View All
         </Link>
       </div>

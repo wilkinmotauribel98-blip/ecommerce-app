@@ -1,11 +1,12 @@
 import  { useProducts } from "@/hooks/useProducts"
 import { useEffect } from "react"
+
 import  HeroSection  from "@/sections/heroSection"
 import  CategorySection  from "@/sections/CategorySection"
 import  NewArrivalsSection  from "@/sections/NewArrivalsSection"
 import  ShopByCategorySection  from "@/sections/ShopByCategorySection"
 import  BestSellersSection  from "@/sections/BestSellersSection"
-import  WhyChooseUsSection  from "@/sections/whyChooseUsSection"
+import  WhyChooseUsSection  from "@/sections/WhyChooseUsSection"
 import  NewsletterSection  from "@/sections/NewsletterSection"
 
 

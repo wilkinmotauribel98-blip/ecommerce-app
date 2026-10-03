@@ -1,10 +1,8 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
 
 
 
 export const useCheckout = create(
-  persist(
     (set) => ({
       shippingForm: {},
       paymentForm: {},
@@ -20,8 +18,6 @@ export const useCheckout = create(
       setIsReviewed: () => set({isReviewed: true}),
       setIsDone: (value) => set({isDone: value}),
     }),
-    {name: 'user-info', storage: createJSONStorage(() => sessionStorage)},
     
-  )
 
 )

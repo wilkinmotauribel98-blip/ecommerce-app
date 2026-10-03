@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 export function FeatureCard({className, icon, title, description, hidden}) {
   return(
     <Link
-      to={`/ecommerce-app/category/${title.toLowerCase().replace(/\s/g, '-')}`}
+      to={`/category/${title.toLowerCase().replace(/\s/g, '-')}`}
       className={`flex flex-col ${hidden} w-max flex-1 lg:flex-row md:border-l border-zinc-800 sm:gap-0  items-center text-zinc-400 lg:gap-4 `}
       aria-label={`Feature: ${title} - ${description}`}
     >

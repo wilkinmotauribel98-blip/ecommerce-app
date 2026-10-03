@@ -7,7 +7,8 @@ export default function CategoryContent ( { content, brands}){
   const [filters, setFilters] = useState([]);
   const [products, setProducts] = useState(content);
   const [open, setOpen] = useState(window.innerWidth > 768);
-  const [size, setSize] = useState(window.innerWidth)
+  const [filtereds, setFiltereds] = useState({});
+
   useEffect(()=>{
     if(!brands) return
     brands.map((e)=> {
@@ -70,7 +71,6 @@ const v = filters.filter(e => {
 
     useEffect(()=>{
       const sizer = () => {
-        setSize(window.innerWidth)
         if(window.innerWidth < 768) setOpen(false)
       };
       addEventListener('resize', sizer);
@@ -78,10 +78,26 @@ const v = filters.filter(e => {
     },[])
 
   const handleChange = (event)=>{
+    setFiltereds(prev => {
+      return {...prev, [event.target.name]: event.target.checked}
+    })
+    
     const data = event.target;
     setDates((prev) => ({...prev, [data.name]: data.checked}));
   }
-  
+
+  const handleClear = ()=>{
+    const inputs = document.querySelectorAll('input[type="checkbox"]');
+    inputs.forEach(input => input.checked = false);
+    
+    setDates((prev) => {
+      const cleared = {};
+      for (const key in prev) {
+        cleared[key] = false;
+      }
+      return cleared;
+    });
+  } 
  
   return(
     <>
@@ -98,7 +114,9 @@ const v = filters.filter(e => {
     >
       <div className="flex border-b border-zinc-800 py-5 px-3">
         <h2 className="text-xl">filters</h2>
-        <span className="ml-auto text-green-400">Clear All</span>
+        <button className="ml-auto text-green-400" onClick={handleClear}>
+          Clear All
+        </button>
       </div>
       <div className="px-3 flex flex-col gap-5 border-b py-5 border-zinc-800">
         <h3>Price</h3>

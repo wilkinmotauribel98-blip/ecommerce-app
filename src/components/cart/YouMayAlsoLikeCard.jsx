@@ -5,7 +5,7 @@ export default function YouMayAlsoLikeCard({product, category}){
   return(
     <article 
       className={`text-white cursor-pointer ${category || 'lg:min-w-50 w-55 shrink-0 grow-0'} bg-zinc-900 p-2 rounded-2xl`}
-      onClick={()=> navigate(`/ecommerce-app/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
+      onClick={()=> navigate(`/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
     > 
       <div>
         <img src={optimizedImg(product.images[0], 400, 400)} alt={`image of ${product.title}`} />

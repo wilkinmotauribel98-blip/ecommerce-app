@@ -25,7 +25,7 @@ export default function ShippingForm() {
   const onSubmit = (data)=> {
 
     onShippingFormSubmit(data)
-    navigate('/ecommerce-app/checkout/payment')
+    navigate('/checkout/payment')
   };
 
   useEffect(()=>{

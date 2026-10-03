@@ -1,4 +1,4 @@
-import SupportHeader from "@/components/support/SupprtHeader"
+import SupportHeader from "@/components/support/SupportHeader"
 import MainContent from "@/components/support/MainContent"
 export default function SupportPage(){
   return(

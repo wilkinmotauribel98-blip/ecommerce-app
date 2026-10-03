@@ -12,7 +12,7 @@ export default function NotFoundPage() {
         Let's get you back on track
         </p>
         <Link
-        to={'/ecommerce-app'}
+        to={'/'}
         >
           <button className="bg-green-500 cursor-pointer rounded py-4 px-15 text-white">
           Back to Home

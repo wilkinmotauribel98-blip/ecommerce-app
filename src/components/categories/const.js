@@ -141,13 +141,3 @@ export const categories = [
  }
  ]
 
- 
- export  const recolector = async ()=>{
-  const w = [];
-   await Promise.all(categories.map(e => fetch(`${e.url}`).then(e => e.json()).then(e => w.push(e))))
-   const b = w.map(e => {
-    return {image: e.products[0].images[0], total : e.total , category: e.products[0].category}
-   })
-   console.log(b);
-   
- }  

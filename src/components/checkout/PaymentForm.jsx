@@ -17,19 +17,43 @@ const PayButton = ({title, symbol})=>{
   )
 }
 
+const cardPatterns = {
+  visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+  mastercard: /^(5[1-5][0-9]{14}|2(2[2-9][0-9]{12}|[3-6][0-9]{13}|7[01][0-9]{12}|720[0-9]{12}))$/,
+  amex: /^3[47][0-9]{13}$/,
+  discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+  diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+  jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
+};
+
+function getCardType(cardNumber) {
+  for (const [cardType, pattern] of Object.entries(cardPatterns)) {
+    if (pattern.test(cardNumber.replace(/\s/g, ''))) {
+      return cardType;
+    }
+  }
+  return null;
+}
+
 
 export default function PaymentForm() {
    const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'payment-method': 'card'}})
    const navigate = useNavigate();
-  const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit)
+  const {onPaymentFormSubmit, isShippingFormFullFiled} = useCheckout((state) => state);
   const paymentMethod = watch('payment-method');
 
 
   const onSubmit = (data)=> {
-    navigate('/ecommerce-app/checkout/review');
+    navigate('/checkout/review');
+    data.lastNumbers = watch('cardNumber').slice(-4)
+    data.cardNumber = null;
+    data.expiryDate = null;
+    data.cvv = null;
+    data.cardType = getCardType(watch('cardNumber'));
     onPaymentFormSubmit(data)
   }
-  
+  if(!isShippingFormFullFiled) return null;
+
   return (
     <section className="">
       <h1 className="text-3xl text-white font-bold">Payment</h1>

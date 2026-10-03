@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { fetchProduct } from '@/api/products.js'
+import { fetchAllProducts } from '@/api/products.js'
 const heroIds = [98, 78, 81, 95, 100];
 const newArrivalsIds = [140, 87, 34, 163, 170];
 const bestSellersIds = [121, 116, 99, 80];
@@ -14,7 +14,10 @@ const categories = [
   {category: "womens-watches", id: 190,images: null, total: 5}
 ]
 
-const fetchIds = (ids) => Promise.all(ids.map((id) => fetchProduct(id)));
+const pickByIds = (all, ids) => {
+  const map = new Map(all.map((p) => [p.id, p]));
+  return ids.map((id) => map.get(id)).filter(Boolean);
+};
 
 export const useProducts = create(
   persist(
@@ -39,17 +42,16 @@ export const useProducts = create(
           categoriesLoading: true,
         });
         try {
-            
-          const [hero, newArrivals, bestSellers, categorias] = await Promise.all([
-            fetchIds(heroIds),
-            fetchIds(newArrivalsIds),
-            fetchIds(bestSellersIds),
-            Promise.all(
-              categories.map((category) =>
-                fetchProduct(category.id).then((product) => ({ ...category, images: product.images }))
-              )
-            ),
-          ]);
+          // 1 request instead of N+1 (21x fetchProduct)
+          const all = await fetchAllProducts();
+
+          const hero = pickByIds(all, heroIds);
+          const newArrivals = pickByIds(all, newArrivalsIds);
+          const bestSellers = pickByIds(all, bestSellersIds);
+          const categorias = categories.map((category) => {
+            const match = all.find((p) => p.id === category.id);
+            return { ...category, images: match?.images ?? [] };
+          });
 
           set({
             heroProducts: hero,

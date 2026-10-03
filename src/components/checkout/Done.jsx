@@ -3,12 +3,14 @@ import { useCheckout } from '@/hooks/useCheckout'
 import { useNavigate } from 'react-router-dom';
 
 export default function Done(){
-  const { orderNumber } = useCheckout((state) => state);
+  const { orderNumber, isPaymentFormFullFiled, isShippingFormFullFiled, isReviewed } = useCheckout((state) => state);
   const navigate = useNavigate()
   const handleCopyClick = (orderNumber) => {
     navigator.clipboard.writeText(orderNumber)
   }
 
+  if(!isPaymentFormFullFiled || !isShippingFormFullFiled || !isReviewed) return null;
+  
   return(
     <section className="flex items-center flex-col justify-center gap-3">
       <svg className="w-50 h-50 rounded">
@@ -31,7 +33,7 @@ export default function Done(){
         </div>
         
         <button className="border border-emerald-400 w-full py-2 mt-3 flex text-white  items-center justify-center text-center cursor-pointer rounded " 
-        onClick={()=> navigate('/ecommerce-app')}
+        onClick={()=> navigate('/')}
         >
           Continue Shopping
         </button>

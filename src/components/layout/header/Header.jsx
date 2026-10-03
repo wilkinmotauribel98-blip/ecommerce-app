@@ -9,11 +9,12 @@ export default function  Header() {
   const navigate = useNavigate();
   const [size, setSize] = useState(window.innerWidth);
   const [searchText, setSearchText] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [searcher, setSearcher] = useState(false);
 
   const { currentPage } = useContext(PageContext)
   const { pathname, search } = useLocation()
-  const Suggestions = lazy(()=> import('../../ui/Suggestions.jsx'))
+  const Suggestions = lazy(()=> import('@/components/ui/Suggestions.jsx'))
   
 
   function handleSubmit(e) {
@@ -21,7 +22,7 @@ export default function  Header() {
     const formData = new FormData(e.target);
     const searchValue = formData.get('query');
     setSearcher(false) 
-    navigate(`/ecommerce-app/results/search?q=${encodeURIComponent(searchValue)}`);
+    navigate(`/results/search?q=${encodeURIComponent(searchValue)}`);
     
   }
 
@@ -39,6 +40,15 @@ export default function  Header() {
     setSearcher(false)
     window.scrollTo(0, 0)
   },[pathname, search])
+
+  useEffect(()=>{
+    if (!searchText.trim()) {
+      setDebouncedQuery('');
+      return;
+    }
+    const t = setTimeout(() => setDebouncedQuery(searchText.trim()), 350);
+    return () => clearTimeout(t);
+  },[searchText]);
 
   
   return(
@@ -60,7 +70,7 @@ export default function  Header() {
             >
             <use href="/ecommerce-app/sprite-core.svg#icon-logo"/>
           </svg>}
-          <Link to={'/ecommerce-app'}>
+          <Link to={'/'}>
             <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`} 
             >NIFLIX</h1>
         </Link>
@@ -71,19 +81,19 @@ export default function  Header() {
           aria-label="Navigation links"
         >
           <li  className={`${currentPage !== 'shop' && currentPage !== 'support' && currentPage !== 'categories' ? 'text-emerald-500 ' : 'text-white hover:text-gray-400'}  cursor-pointe`} aria-label="Home">
-              <Link to={'/ecommerce-app'}>
+              <Link to={'/'}>
               Home
               </Link>
             </li>
           <li  className={`${currentPage === 'shop' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`}  aria-label="Shop">
-            <a href="/ecommerce-app/shop">Shop</a>
+            <Link to="/shop">Shop</Link>
           </li>
           <li  className={`${currentPage === 'categories' ? 'text-emerald-500' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Categories">
-            <a href="/ecommerce-app/categories">Categories</a>
+            <Link to="/categories">Categories</Link>
           </li>
           
           <li className={`${currentPage === 'support' ? 'text-emerald-500 ' : 'hover:text-gray-400 text-white'}  cursor-pointe`}   aria-label="Support">
-            <a href="/ecommerce-app/support">Support</a>
+            <Link to="/support">Support</Link>
           </li>
           </ul>
       }
@@ -114,10 +124,10 @@ export default function  Header() {
           </form>
 
           {
-            (searchText.length > 0 && searcher)  
+            (debouncedQuery.length > 0 && searcher)  
             &&
               <Suspense fallback={<SearchSkeleton count={3} />}>
-                <Suggestions query={searchText} />
+                <Suggestions query={debouncedQuery} />
               </Suspense>
               
           }

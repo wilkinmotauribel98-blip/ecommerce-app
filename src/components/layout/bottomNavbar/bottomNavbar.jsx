@@ -20,7 +20,7 @@ export default function BottomNavbar() {
             className="text-zinc-400 flex-1 cursor-pointer"
             aria-label="Home link"
           >
-            <Link to="ecommerce-app" 
+            <Link to="/" 
               className={`flex flex-col ${currentPage !== 'shop' && currentPage !== 'support' && currentPage !== 'categories' && currentPage !== 'new-arrivals' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Home page"
             >
@@ -37,7 +37,7 @@ export default function BottomNavbar() {
             className="text-zinc-400 flex-1 cursor-pointer"
             aria-label="Shop link"
           >
-            <Link to="/ecommerce-app/shop" 
+            <Link to="/shop" 
               className={`flex flex-col ${currentPage === 'shop' && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Shop page"
             >
@@ -53,7 +53,7 @@ export default function BottomNavbar() {
           <li className="text-zinc-400 flex-1 cursor-pointer"
           aria-label="Categories link"
           >
-            <Link to="/ecommerce-app/categories" 
+            <Link to="/categories" 
               className={`flex flex-col ${currentPage === 'categories'  && 'text-emerald-400'}  items-center`}
               aria-label="Navigate to Categories page"
             >
@@ -70,7 +70,7 @@ export default function BottomNavbar() {
 
             <li className=" text-zinc-400 flex-1 w-min  cursor-pointer" aria-label="Account link">
             <Link 
-            to="/ecommerce-app/support" 
+            to="/support" 
             aria-label="Navigate to Support page"
             className={`flex flex-col  ${currentPage === 'support'  && 'text-emerald-400'}  items-center`}
             >

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 import { useCheckout } from "@/hooks/useCheckout"
-import { pattern } from "framer-motion/client";
+
 
 const liveCardPatterns = {
   visa: /^4/,
@@ -17,15 +17,14 @@ function detectCardTypeLive(input) {
   return null; 
 }
 
+
 export default function CardForm({register, setValue, watch, errors}){
-  const onPaymentFormSubmit = useCheckout((state) => state.onPaymentFormSubmit);
-  const isPaymentFormFullFiled = useCheckout((state) => state.isPaymentFormFullFiled);
-  const paymentForm = useCheckout((state) => state.paymentForm);
+  const {onPaymentFormSubmit, isPaymentFormFullFiled, paymentForm} = useCheckout((state) => state);
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
     const cvvValue = watch('cvv')
     const cardValue = watch('cardNumber')
-    const permiso = useRef(true)
+    const isAllowed = useRef(true)
 
 
   const handleChange = (e)=>{
@@ -41,14 +40,14 @@ export default function CardForm({register, setValue, watch, errors}){
                   if(parseInt(e) || e.includes('/') || e == '0') return e
                 }) 
                   if(a[0] == 1 && a[1] > 2) a[1] = 2  
-                  if(a.length == 0 || a.length == 1) permiso.current = true;
+                  if(a.length == 0 || a.length == 1) isAllowed.current = true;
                   if((a.length == 3 ) && !value.includes('/')) {
 
                     a[3] = a[2]
                     a[2] = '/'
                   } 
-                  if(a.length === 2 && permiso.current) {
-                    permiso.current = false 
+                  if(a.length === 2 && isAllowed.current) {
+                    isAllowed.current = false 
                     a[2] = '/'
                   }
                 
@@ -60,9 +59,10 @@ export default function CardForm({register, setValue, watch, errors}){
     if(isPaymentFormFullFiled){
       setValue('cardNumber',paymentForm.cardNumber, {shouldValidate: false})
       setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
-      setValue('ccv', paymentForm.ccv, {shouldValidate: false})
+      setValue('cvv', paymentForm.cvv, {shouldValidate: false})
     }
   }, [])
+
 
   return(
     <>

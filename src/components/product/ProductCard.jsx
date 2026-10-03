@@ -79,8 +79,8 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
       <article className={`border border-zinc-800 rounded-2xl  gap-1 cursor-pointer relative hover:scale-105 ${config.articleClass}`}
         onClick={()=>{    
       variant === 'shop'
-      ? navigate(`/ecommerce-app/category/${product?.title.toLowerCase()}`)
-      : navigate(`/ecommerce-app/product/${product?.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`)
+      ? navigate(`/category/${product?.title.toLowerCase()}`)
+      : navigate(`/product/${product?.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`)
     
         }}
       >

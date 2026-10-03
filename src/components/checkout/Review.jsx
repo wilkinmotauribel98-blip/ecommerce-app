@@ -3,24 +3,6 @@ import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import Item from "@/components/checkout/Item";
 
-const cardPatterns = {
-  visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-  mastercard: /^(5[1-5][0-9]{14}|2(2[2-9][0-9]{12}|[3-6][0-9]{13}|7[01][0-9]{12}|720[0-9]{12}))$/,
-  amex: /^3[47][0-9]{13}$/,
-  discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
-  diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
-  jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
-};
-
-function getCardType(cardNumber) {
-  for (const [cardType, pattern] of Object.entries(cardPatterns)) {
-    if (pattern.test(cardNumber.replace(/\s/g, ''))) {
-      return cardType;
-    }
-  }
-  return null;
-}
-
 
 
 export default function Review({title, description}){
@@ -28,8 +10,10 @@ export default function Review({title, description}){
   const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
   const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone } = useCheckout((state) => state);
   const cartItems = useCart((state) => state.cart);
-  const cardType = getCardType(paymentForm.cardNumber)
+  const {isPaymentFormFullFiled, isShippingFormFullFiled} = useCheckout((state) => state);
 
+  
+  if(!isPaymentFormFullFiled || !isShippingFormFullFiled) return null;
   
   return (
     <section className="text-white w-full ">
@@ -52,7 +36,7 @@ export default function Review({title, description}){
         <button 
           type="button" 
           className="text-emerald-400 ml-auto mb-auto cursor-pointer"
-          onClick={()=> navigate('/ecommerce-app/checkout/shipping')}
+          onClick={()=> navigate('/checkout/shipping')}
           >Edit</button>
       </article>
 
@@ -66,9 +50,9 @@ export default function Review({title, description}){
             <h2 className="text-lg mb-1">Payment Method</h2>
             <span className="text-zinc-200 flex items-center">
               <svg className="w-10 h-10 mr-2">
-                {cardType !== null
+                {paymentForm.cardType !== null
                  ? 
-                <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
+                <use href={`/ecommerce-app/payment-icons.svg#icon-${paymentForm.cardType}` } />
                 : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
               </svg>
               
@@ -77,14 +61,14 @@ export default function Review({title, description}){
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              {paymentForm.cardNumber.slice(-4)}
+              {paymentForm.lastNumbers}
             </span>
             
           </div>
         <button 
           type="button" 
           className="text-emerald-400 ml-auto mb-auto cursor-pointer"
-          onClick={()=> navigate('/ecommerce-app/checkout/payment')}
+          onClick={()=> navigate('/checkout/payment')}
           >Edit</button>
       </article>
 
@@ -130,7 +114,7 @@ export default function Review({title, description}){
               className='bg-emerald-400 w-full py-1 mt-3 flex  items-center justify-center text-center cursor-pointer rounded'
               onClick={()=> {
                 setIsReviewed();
-                navigate('/ecommerce-app/checkout/done');
+                navigate('/checkout/done');
                 setOrderNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));
                 setIsDone(true)
               }}

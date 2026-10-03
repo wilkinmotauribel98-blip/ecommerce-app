@@ -16,7 +16,7 @@ export default function CartSummary({checkout}) {
         <div className='flex justify-between items-center pb-7 border-b border-zinc-800'>
           <h2 className='text-xl  text-white' >Order Summary</h2>
           {
-            !checkout || <Link to={'/ecommerce-app/cart'}
+            !checkout || <Link to={'/cart'}
             className=' text-green-400'
             >
               Edit cart
@@ -53,7 +53,7 @@ export default function CartSummary({checkout}) {
         <>
         <button 
           className='w-full py-3 bg-green-500 rounded flex gap-2 items-center  justify-center cursor-pointer'
-          onClick={()=> navigate('/ecommerce-app/checkout')}
+          onClick={()=> navigate('/checkout')}
         >
           <svg 
             className='w-6.5 h-6.5 text-zinc-100 cursor-pointer' >

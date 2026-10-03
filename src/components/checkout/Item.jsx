@@ -6,7 +6,7 @@ export default function Item({item, id}) {
   return(
     <article 
       className="flex gap-2 items-center border-t border-gray-800 cursor-pointer" 
-      onClick={()=> navigate(`/ecommerce-app/product/${id}/${item.title.replace(/ /g, '-')}`)}
+      onClick={()=> navigate(`/product/${id}/${item.title.replace(/ /g, '-')}`)}
     >
       <img src={item.image} alt={item.title} className="w-20 h-30  sm:w-30 object-cover rounded"/>
       <div className="flex flex-col gap-1">

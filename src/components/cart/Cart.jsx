@@ -6,7 +6,7 @@ export default function Cart({navBar}) {
 
    return(
     <Link
-    to={'/ecommerce-app/cart'}
+    to={'/cart'}
     aria-label="Navigate to cart page"
     className="flex flex-col items-center"
     >

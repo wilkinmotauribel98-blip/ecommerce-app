@@ -25,7 +25,7 @@ export default function BreadCrumbSection({ category,  title, loading, product, 
     >
       <Link 
         className=""
-        to={'/ecommerce-app'} 
+        to={'/'} 
         aria-label="Link to Home"
       >Home</Link>
       <svg className="w-7 h-7">
@@ -43,7 +43,7 @@ export default function BreadCrumbSection({ category,  title, loading, product, 
       <>
       <Link 
         className="capitalize " 
-        to={`/ecommerce-app/category/${category}`}
+        to={`/category/${category}`}
         aria-label={`Link to Category ${category?.replace(/-/g, ' ')}`}
         >{category?.replace(/-/g, ' ')}
       </Link>

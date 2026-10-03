@@ -14,7 +14,6 @@ export default function AddToCard({product, price}){
   }
 
 
-
   const cartProduct = {
       image: product.images[0],
       title: product.title,
@@ -27,9 +26,20 @@ export default function AddToCard({product, price}){
   return(
     <div className="flex w-full">
           <div className="flex h-min">
-          <button className="bg-zinc-800 cursor-pointer text-zinc-100 w-14 h-12 text-center" onClick={()=> {if(counter > 1) setCounter(s => s - 1)}}>-</button>
-          <button className="bg-zinc-800 text-zinc-100 w-14 h-12 border-x border-zinc-700  text-center">{counter}</button>
-          <button className="bg-zinc-800 cursor-pointer text-zinc-100 w-14 h-12  text-center" onClick={()=> {if(counter < product.stock) setCounter(s => s + 1)}}>+</button>
+          <button 
+            className="bg-zinc-800 cursor-pointer text-zinc-100 w-14 h-12 text-center" 
+            onClick={()=> {if(counter > 1) setCounter(s => s - 1)}}
+            aria-label={`Decrease quantity`}
+            >-</button>
+          <button 
+            className="bg-zinc-800 text-zinc-100 w-14 h-12 border-x border-zinc-700 text-center"
+            aria-label={`Current quantity: ${counter}`}
+            >{counter}</button>
+          <button  
+          className="bg-zinc-800 cursor-pointer text-zinc-100 w-14 h-12  text-center" 
+          aria-label={`Increase quantity`}
+          onClick={()=> {if(counter < product.stock) setCounter(s => s + 1)}}
+          >+</button>
           </div>
           <button 
             className={`bg-emerald-500 py-3 w-fit px-2 flex-1  text-zinc-100 sm:px-10 hover:opacity-50 cursor-pointer sm:mt-0`}
