@@ -1,7 +1,7 @@
 import  { useProducts } from "@/hooks/useProducts"
 import { useEffect } from "react"
 
-import  HeroSection  from "@/sections/heroSection"
+import  HeroSection  from "@/sections/HeroSection"
 import  CategorySection  from "@/sections/CategorySection"
 import  NewArrivalsSection  from "@/sections/NewArrivalsSection"
 import  ShopByCategorySection  from "@/sections/ShopByCategorySection"
