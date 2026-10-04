@@ -61,7 +61,7 @@ export default function Review({title, description}){
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
               <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              {paymentForm.lastNumbers}
+              {paymentForm.last4}
             </span>
             
           </div>

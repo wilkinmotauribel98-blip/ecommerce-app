@@ -33,9 +33,9 @@ const VARIANT_CONFIG = {
     getText: (p) => `$${Math.floor(p?.price)}`,
   },
   allProducts:{
-    articleClass: 'relative w-full py-4  z-10 sm:flex-col flex ',
-    imgWrapperClass: 'w-3/10 sm:w-full sm:pt-6 ',
-    titleClass: '',
+    articleClass: 'relative w-full py-4  z-10 flex-col flex ',
+    imgWrapperClass: ' ',
+    titleClass: 'text-white text-xl ',
     textClass: 'text-zinc-400 ml-3',
     getText: (p) => `$${Math.floor(p?.price)}`,
   },
@@ -96,7 +96,7 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
           <div className="w-full h-20 inset-y-2/8 inset-x-0 absolute bg-radial-[at_50%_50%] from-emerald-700 to-transparent to-60%" />
         )}
 
-        <div className={`${variant === 'allProducts' ? 'w-full justify-end px-2 flex flex-col pl-3 gap-2 flex-1' : 'absolute bottom-3 w-full'} `}>
+        <div className={`${variant === 'allProducts' ? 'w-full justify-end px-2 flex flex-col pl-3  flex-1' : 'absolute bottom-3 w-full'} `}>
            { variant === 'allProducts' && <span className="sm:absolute w-fit top-3 capitalize left-4 bg-emerald-700 text-emerald-300  rounded-full px-2">{product?.category.replace(/-/g, ' ')}</span> 
           }
 
@@ -108,7 +108,7 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
               <span className="text-xl text-zinc-500">{product.brand}</span>
               <AverageRating reviews={product.reviews}/>
               <PriceSection product={product} />
-              <button className="text-emerald-500 z-50 text-center border border-eme gap-2 w-full flex justify-center rounded py-1 bg-emerald-900  border-emerald-600"
+              <button className="text-emerald-500 z-50 text-center border mt-3 gap-2 w-full flex justify-center rounded py-1 bg-emerald-900  border-emerald-600"
               onClick={()=> setCart(cartProduct, product.id)}
               >
                 <svg 

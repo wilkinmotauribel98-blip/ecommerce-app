@@ -18,8 +18,8 @@ function detectCardTypeLive(input) {
 }
 
 
-export default function CardForm({register, setValue, watch, errors}){
-  const {onPaymentFormSubmit, isPaymentFormFullFiled, paymentForm} = useCheckout((state) => state);
+export default function CardForm({register, setValue, watch, errors, allowChanges, setAllowChanges}) {
+  const {onPaymentFormSubmit, isPaymentFormFullFiled, paymentForm, setIsPaymentFormFullFiled} = useCheckout((state) => state);
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
     const cvvValue = watch('cvv')
@@ -63,6 +63,15 @@ export default function CardForm({register, setValue, watch, errors}){
     }
   }, [])
 
+const cardChange = (e)=>{
+  e.preventDefault();
+  setAllowChanges(true);
+  setValue('cardNumber', '', { shouldValidate: true })
+  setValue('expiryDate', '', { shouldValidate: true })
+  setValue('cvv', '', { shouldValidate: true })
+  setIsPaymentFormFullFiled(false);
+
+}
 
   return(
     <>
@@ -74,10 +83,11 @@ export default function CardForm({register, setValue, watch, errors}){
             id="payment-numberInput" 
             placeholder="1234 5678 9012 3456" 
             autoComplete="cc-number"
-            value={cardValue || ''} 
+            value={allowChanges ? cardValue || '' : `**** **** **** ${paymentForm.last4}` }
+            disabled={!allowChanges} 
             className="focus:outline-0 w-full  py-2 px-2 rounded"
             {...register('cardNumber', {
-              required: true,
+              required: allowChanges,
               pattern: /^[0-9]{4}(\s?[0-9]{4}){2,3}\s?[0-9]{1,4}$/
             })}
             onChange={(e)=>{
@@ -96,6 +106,9 @@ export default function CardForm({register, setValue, watch, errors}){
               </svg>
 
         </div>
+        { !allowChanges && <a href="#" className="text-zinc-300/80 hover:underline" onClick={cardChange}>
+          Use a different card
+        </a>}
         {errors.cardNumber?.type === 'pattern' && <p className="text-red-500">Enter a valid Card number</p>}
         {errors.cardNumber?.type === 'required' && <p className="text-red-500">Card Number is required </p>}
       </div>

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import CardForm from "./CardForm";
 import { useCheckout } from "@/hooks/useCheckout";
-
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 const PayButton = ({title, symbol})=>{
@@ -37,21 +37,32 @@ function getCardType(cardNumber) {
 
 
 export default function PaymentForm() {
-   const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'payment-method': 'card'}})
-   const navigate = useNavigate();
-  const {onPaymentFormSubmit, isShippingFormFullFiled} = useCheckout((state) => state);
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'payment-method': 'card'}});
+  const [allowChanges, setAllowChanges] = useState(true);
+  const navigate = useNavigate();
+  const {onPaymentFormSubmit, isShippingFormFullFiled, isPaymentFormFullFiled, paymentForm } = useCheckout((state) => state);
   const paymentMethod = watch('payment-method');
 
 
   const onSubmit = (data)=> {
     navigate('/checkout/review');
-    data.lastNumbers = watch('cardNumber').slice(-4)
+    data.last4 = watch('cardNumber').slice(-4)
     data.cardNumber = null;
-    data.expiryDate = null;
     data.cvv = null;
     data.cardType = getCardType(watch('cardNumber'));
+    data.paymentMethod = paymentMethod;
     onPaymentFormSubmit(data)
   }
+
+  useEffect(()=>{
+    if(isPaymentFormFullFiled && paymentForm.paymentMethod === 'card'){
+      setAllowChanges(false)
+      setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
+      setValue('cvv', '', {shouldValidate: false})
+    }
+  },[])
+
+
   if(!isShippingFormFullFiled) return null;
 
   return (
@@ -200,7 +211,7 @@ export default function PaymentForm() {
       </fieldset>
         </div>
 
-      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register} errors={errors}/>}
+      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register} errors={errors} allowChanges={allowChanges} setAllowChanges={setAllowChanges} />}
       {paymentMethod == 'paypal' && <PayButton title={'Pay with PayPal'} symbol={'paypal-logomark'} />}
       {paymentMethod == 'applePay' && <PayButton title={'Pay with Apple Pay'} symbol={'apple-logomark'}/>}
       {paymentMethod == 'googlePay' && <PayButton title={'Pay with Google Pay'} symbol={'google-logomark'} />}

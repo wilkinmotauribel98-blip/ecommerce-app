@@ -17,6 +17,7 @@ export const useCheckout = create(
       onPaymentFormSubmit: (data) => set({paymentForm: data, isPaymentFormFullFiled: true}),
       setIsReviewed: () => set({isReviewed: true}),
       setIsDone: (value) => set({isDone: value}),
+      setIsPaymentFormFullFiled: (value) => set({isPaymentFormFullFiled: value}),
     }),
     
 

@@ -1,72 +1,45 @@
 import YouMayAlsoLikeCard from "../cart/YouMayAlsoLikeCard"
-import { useState, useEffect } from "react"
-const arr = [1,2,3,4,5]
+import { useState, useEffect, useMemo } from "react"
+const arr = Array.from({length: 5}).map((_,i) => i + 1)
 
 export default function CategoryContent ( { content, brands}){
-  const [dates, setDates ] = useState();
   const [filters, setFilters] = useState([]);
-  const [products, setProducts] = useState(content);
   const [open, setOpen] = useState(window.innerWidth > 768);
-  const [filtereds, setFiltereds] = useState({});
 
-  useEffect(()=>{
-    if(!brands) return
-    brands.map((e)=> {
-      setDates((prev) => ({...prev, [e]: false}))
-    })
-  },[brands])
-    useEffect(()=>{
-      if(!dates) return
-      setFilters(() => {
-      return Object.entries(dates).filter(([key, value]) => value === true).map(e => e[0])
-    })
-    }, [dates])
+const toggleFilter = (key) => {
+  setFilters(prev =>
+    prev.includes(key) ? prev.filter(f => f !== key) : [...prev, key]
+  );
+};
 
-    useEffect(()=>{
-      if(!filters.length) return setProducts(content)
-        const a = filters.filter(e => {
-        if (!isNaN(Number(e))) return e
-      })
+const isChecked = (key) => filters.includes(key);
 
+const getRatingKey = (key) => `${Math.floor(key)} stars`
 
-      const priceFilter= (n)=>{
-      let p;
-      if(n > 0 && n < 100) p = '1';
-      if(n > 99 && n < 200) p = '2';
-      if(n > 199 && n < 300) p = '3';
-      if(n > 300) p = '4';
-      if(!a.length) return true;
-      return a.includes(p)
+const getPriceKey = (n)=>{
+      if(n < 100) return '1';
+      if(n < 200) return '2';
+      if(n < 300) return '3';
+      return '4'
   }
 
-const c = filters.filter(e => e.includes('stars'))
-      
+ 
   
-  const ratingFilter = (n)=>{
-      let p;
-      if(n >= 1) p = '1 stars';
-      if(n >= 2) p = '2 stars';
-      if(n >= 3) p = '3 stars';
-      if(n >= 4) p = '4 stars';
-      if(n >= 5) p = '5 stars';
-      if(!c.length) return true;
-      return c.includes(p)
-  }
-const v = filters.filter(e => {
-        if (brands.includes(e)) return e
-      })
-      setProducts(() =>{
-        return content.filter(p => {
-          const brandFilter = ()=>{
-            if(v < 1) return true;
-            return filters.includes(p.brand)
-          }
-          
-          if((ratingFilter(p.rating) && brandFilter()) && priceFilter(p.price)) return p
-        })
-      })
 
-    }, [filters])
+const products = useMemo(()=> {
+  const brandsSel =  filters.filter(f => brands.includes(f)) 
+  const ratingsSel = filters.filter(f => f.includes('stars'))
+  const priceSel = filters.filter(f => !isNaN(Number(f)))
+  
+  return content.filter(p => {
+    const okBrand = !brandsSel.length || brandsSel.includes(p.brand);
+    const okRating = !ratingsSel.length || ratingsSel.includes(getRatingKey(p.rating))
+    const okPrice = !priceSel.length || priceSel.includes(getPriceKey(p.price))
+
+    return okBrand && okPrice && okRating
+  })
+
+  }, [filters, content, brands])
 
 
     useEffect(()=>{
@@ -78,26 +51,17 @@ const v = filters.filter(e => {
     },[])
 
   const handleChange = (event)=>{
-    setFiltereds(prev => {
-      return {...prev, [event.target.name]: event.target.checked}
-    })
-    
     const data = event.target;
-    setDates((prev) => ({...prev, [data.name]: data.checked}));
+    toggleFilter(data.name);
   }
 
   const handleClear = ()=>{
     const inputs = document.querySelectorAll('input[type="checkbox"]');
     inputs.forEach(input => input.checked = false);
-    
-    setDates((prev) => {
-      const cleared = {};
-      for (const key in prev) {
-        cleared[key] = false;
-      }
-      return cleared;
-    });
+    setFilters([])
   } 
+
+
  
   return(
     <>
@@ -148,7 +112,7 @@ const v = filters.filter(e => {
                 brands.map(b => {
                 return (
                 <div className="flex gap-2 items-center" key={b}>
-                  <input type="checkbox" name={b} id="" />
+                  <input type="checkbox" name={b} checked={isChecked(b)}/>
                   <span>{b}</span>
                 </div>
                 )
