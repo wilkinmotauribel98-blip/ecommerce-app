@@ -4,10 +4,8 @@ import useFetch from "@/hooks/useFetch";
 
 export default function Suggestions ({query}){
   const { data, loading } = useFetch(`https://dummyjson.com/products/search?q=${query}`)
-
     if(loading) return <SearchSkeleton count={3} />
     if(!data.products?.length) return
-    console.log(typeof data)
     
   return(
     <div 

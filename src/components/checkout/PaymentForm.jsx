@@ -55,23 +55,21 @@ export default function PaymentForm() {
   }
 
   useEffect(()=>{
+    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
     if(isPaymentFormFullFiled && paymentForm.paymentMethod === 'card'){
       setAllowChanges(false)
       setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
       setValue('cvv', '', {shouldValidate: false})
     }
   },[])
-
-
-  if(!isShippingFormFullFiled) return null;
-
+  
   return (
-    <section className="">
-      <h1 className="text-3xl text-white font-bold">Payment</h1>
-      <p className="text-zinc-400 mb-5">Enter your shipping details to ensure your order arrives safely at your doorstep.</p>
+    <section className="w-full max-w-2xl flex flex-col  ">
+      <h1 className="text-2xl text-white font-bold">Payment</h1>
+      <p className="text-zinc-400 mb-3 ">Enter your shipping details to ensure your order arrives safely at your doorstep.</p>
 
       <form 
-      className="text-zinc-200 py-5 px-3 border border-zinc-800 flex flex-col gap-2 rounded-xl bg-gray-950" 
+      className="text-zinc-200 py-5 px-3 border border-gray-800 flex flex-col gap-2 rounded-xl bg-gray-900/50" 
       onSubmit={handleSubmit(onSubmit)}
       >
       <div>

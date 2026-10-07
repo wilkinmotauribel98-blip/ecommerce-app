@@ -23,9 +23,6 @@ const getPriceKey = (n)=>{
       return '4'
   }
 
- 
-  
-
 const products = useMemo(()=> {
   const brandsSel =  filters.filter(f => brands.includes(f)) 
   const ratingsSel = filters.filter(f => f.includes('stars'))

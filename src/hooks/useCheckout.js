@@ -1,6 +1,8 @@
-import { create } from "zustand";
+import { create  } from "zustand";
+import { useCart } from "./useCart";
 
 
+const restartClientStorage = useCart.getState().restartClientStorage;
 
 export const useCheckout = create(
     (set) => ({
@@ -18,6 +20,13 @@ export const useCheckout = create(
       setIsReviewed: () => set({isReviewed: true}),
       setIsDone: (value) => set({isDone: value}),
       setIsPaymentFormFullFiled: (value) => set({isPaymentFormFullFiled: value}),
+      placeOrder: ()=>{
+        restartClientStorage();
+        set({shippingForm: {}, paymentForm: {}, isDone: true})
+      } ,
+      restartAll: ()=>{
+        set({shippingForm: {}, paymentForm: {}, isDone: false, isReviewed: false, isPaymentFormFullFiled: false, isShippingFormFullFiled: false, isSaved: false, orderNumber: null})
+      }
     }),
     
 

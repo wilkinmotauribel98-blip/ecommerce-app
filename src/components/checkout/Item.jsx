@@ -14,7 +14,7 @@ export default function Item({item, id}) {
         <p className="text-zinc-400 capitalize">{item.category.replace(/-/g, ' ')}</p>
         <p className="text-zinc-400">Quantity: {item.quantity}</p>
       </div>
-      <p className="text-zinc-400 ml-auto w-fit"> ${item.price * item.quantity}</p>
+      <p className="text-zinc-400 ml-auto w-fit"> ${(item.price * item.quantity).toFixed(2)}</p>
     </article>
   )
 }

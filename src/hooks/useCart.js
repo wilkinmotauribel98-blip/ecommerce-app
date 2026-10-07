@@ -35,6 +35,7 @@ export const useCart = create(
         return { subtotal, tax, total }
       },
 
+
       fecthRecomndedProducts:async ()=>{
         const cartIds = Object.keys(get().cart)
         const  w = [] ;
@@ -43,7 +44,7 @@ export const useCart = create(
           e => e.products.filter(e => !cartIds.includes(e.id.toString()))
         
         ).map(e => {
-          if(cartIds.length <= 2 ) return e.slice(0,5)
+          if(cartIds.length <= 2 ) return e.slice(0,6)
             return e.slice(0,3)
         })
 
@@ -55,6 +56,10 @@ export const useCart = create(
         return Object.entries(r).map(([key,value])=>{
         return value
        }).sort(() => Math.random() - 0.5)
+      },
+
+      restartClientStorage: ()=>{
+        set({cart: {}, total: 0})
       }
 
     }),

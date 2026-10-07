@@ -1,7 +1,7 @@
 
 import { useCheckout } from '@/hooks/useCheckout'
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 export default function Done(){
   const { orderNumber, isPaymentFormFullFiled, isShippingFormFullFiled, isReviewed } = useCheckout((state) => state);
   const navigate = useNavigate()
@@ -9,16 +9,23 @@ export default function Done(){
     navigator.clipboard.writeText(orderNumber)
   }
 
-  if(!isPaymentFormFullFiled || !isShippingFormFullFiled || !isReviewed) return null;
+  useEffect(()=>{
+    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
+    else if(!isPaymentFormFullFiled) navigate('/checkout/payment');
+    else if(!isReviewed) navigate('/checkout/review');
+
+  },[])
+
   
   return(
-    <section className="flex items-center flex-col justify-center gap-3">
+    <section className="flex items-center flex-col justify-center gap-3 mb-30 mt-20">
       <svg className="w-50 h-50 rounded">
         <use href='/ecommerce-app/sprite-core.svg#icon-check-circle' />
       </svg>
       <h1 className='text-4xl text-white'>Order Confirmed!</h1>
       <p className='text-zinc-400 text-center text-lg'>Thank for your purchase. Your order has been placed successfully.</p>
       <article className="flex flex-col gap-1 w-full max-w-md relative ">
+
         <div className="border border-gray-500 bg-gray-800 p-2 rounded flex flex-col gap-1 w-full ">
           <h2 className='text-zinc-400 text-lg' >Order Number</h2>
           <p className='text-white text-lg'>#{orderNumber}</p>

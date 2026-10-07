@@ -1,25 +1,30 @@
 import { useCheckout } from "@/hooks/useCheckout"
 import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Country, City } from "country-state-city"
 import Item from "@/components/checkout/Item";
 
 
 
-export default function Review({title, description}){
+export default function Review(){
   const navigate = useNavigate();
   const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
-  const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone } = useCheckout((state) => state);
+  const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone, isPaymentFormFullFiled, isShippingFormFullFiled, placeOrder } = useCheckout((state) => state);
   const cartItems = useCart((state) => state.cart);
-  const {isPaymentFormFullFiled, isShippingFormFullFiled} = useCheckout((state) => state);
+  
+  useEffect(()=>{
+    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
+    else if(!isPaymentFormFullFiled) navigate('/checkout/payment');
+  },[])
 
   
-  if(!isPaymentFormFullFiled || !isShippingFormFullFiled) return null;
   
   return (
-    <section className="text-white w-full ">
-      <h1 className="text-3xl font-bold ">{title || 'Review Your Order'} </h1>
-      <p className="text-zinc-400">{description || 'Please review your order details before completing your purchase.'}</p>
-      <div className="bg-gray-900/20 border border-gray-800 rounded-xl  mt-5 ">
+    <section className="text-white w-full max-w-2xl flex flex-col gap-3  ">
+      <h1 className="text-2xl font-bold "> Review Your Order </h1>
+      <p className="text-zinc-400">Please review your order details before completing your purchase.</p>
+      <div className="bg-gray-900/50 border border-gray-800 rounded-xl  mt-5 ">
         <article className="flex gap-2 border border-gray-800 rounded  p-2" >
          <svg 
             className='w-6.5 h-6.5' 
@@ -30,8 +35,8 @@ export default function Review({title, description}){
             <h2 className="text-lg mb-1">Shipping Address</h2>
             <h3 className="text-zinc-200">{shippingForm.firstName} {shippingForm.lastName}</h3>
             <p className="text-zinc-400">{shippingForm.address}</p>
-            <p className="text-zinc-400">{shippingForm.city}, {shippingForm.country}</p>
-            <span className="text-zinc-400">{shippingForm.pcode}</span>
+            <p className="text-zinc-400">{shippingForm.city}, {Country.getCountryByCode(shippingForm.country)?.name}</p>
+            <span className="text-zinc-400">{shippingForm.postalCode}</span>
           </div>
         <button 
           type="button" 
@@ -117,6 +122,7 @@ export default function Review({title, description}){
                 navigate('/checkout/done');
                 setOrderNumber(Math.floor(Math.random() * 1000000).toString().padStart(6, '0'));
                 setIsDone(true)
+                placeOrder();
               }}
             >
               Place Order

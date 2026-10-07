@@ -8,7 +8,7 @@ function Step({step, stepName, isFulfiled}) {
   const { pathname } = useLocation();
   const currentStep = pathname.split('/').pop();
   return(
-    <>
+    <article className="flex items-center gap-1.5 ">
     <button 
       className={`${isFulfiled ? onFullFiled : currentStep == stepName ? onActive : unActive} rounded-full w-7 h-7 text-center `}
       >
@@ -19,9 +19,9 @@ function Step({step, stepName, isFulfiled}) {
           </svg> : step}
       </button>
       <span className="capitalize text-sm sm:text-lg">{stepName}</span>
-      {step !== 4 && <hr className="w-20 hidden md:block text-emerald-300"/>}
+      {step !== 4 && <hr className="w-15 md:w-25 lg:w-40 hidden sm:block text-emerald-300"/>}
 
-    </>
+    </article>
   )
 }
 
@@ -30,7 +30,7 @@ export default function CheckoutSteps() {
   const {isShippingFormFullFiled, isPaymentFormFullFiled, isReviewed, isDone} = useCheckout((state)=> state);
 
   return (
-    <section className="text-white flex gap-1.5 items-center  ">
+    <section className="text-white flex gap-2  items-center justify-center sm:justify-start">
       <Step step={1} stepName={'shipping'} isFulfiled={isShippingFormFullFiled}/>
       <Step step={2} stepName={'payment'} isFulfiled={isPaymentFormFullFiled}/>
       <Step step={3} stepName={'review'} isFulfiled={isReviewed}/>

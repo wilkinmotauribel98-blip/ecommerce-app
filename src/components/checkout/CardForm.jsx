@@ -23,11 +23,11 @@ export default function CardForm({register, setValue, watch, errors, allowChange
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
     const cvvValue = watch('cvv')
-    const cardValue = watch('cardNumber')
+    const cardValue = allowChanges ? watch('cardNumber') || '' : `**** **** **** ${paymentForm.last4}`
     const isAllowed = useRef(true)
 
 
-  const handleChange = (e)=>{
+  const handleExpiryDateChange = (e)=>{
      const value = e.target.value.split("")
                 let arr = []
                  if(value.length > 7) arr = value.slice(0, 7)
@@ -52,6 +52,16 @@ export default function CardForm({register, setValue, watch, errors, allowChange
                   }
                 
                 setValue('expiryDate', a.join(''), { shouldValidate: true})
+  }
+
+  const handleCvvChange = (e)=>{
+    setValue('cvv', e.target.value.replace(/\D/g, '').split('').slice(0, 3).join(''), {shouldValidate: true})
+  }
+
+  const handleCardChange = (e)=>{
+    setCardType(detectCardTypeLive(e.target.value))
+    const formated = e.target.value.replace(/\D/g, '').slice(0, 16).match(/.{1,4}/g)?.join(' ') || '';
+    setValue('cardNumber', formated, { shouldValidate: true })
   }
 
 
@@ -83,18 +93,16 @@ const cardChange = (e)=>{
             id="payment-numberInput" 
             placeholder="1234 5678 9012 3456" 
             autoComplete="cc-number"
-            value={allowChanges ? cardValue || '' : `**** **** **** ${paymentForm.last4}` }
-            disabled={!allowChanges} 
             className="focus:outline-0 w-full  py-2 px-2 rounded"
+            value={cardValue}
+            disabled={!allowChanges}
             {...register('cardNumber', {
               required: allowChanges,
-              pattern: /^[0-9]{4}(\s?[0-9]{4}){2,3}\s?[0-9]{1,4}$/
+              pattern: /^[0-9]{4}(\s?[0-9]{4}){2,3}\s?[0-9]{1,4}$/,
+              
+              onChange: (e)=> handleCardChange(e)
             })}
-            onChange={(e)=>{
-                setCardType(detectCardTypeLive(e.target.value))
-               const formated = e.target.value.replace(/\D/g, '').slice(0, 16).match(/.{1,4}/g)?.join(' ') || '';
-               setValue('cardNumber', formated, { shouldValidate: true })
-            }}
+            
             
             />
 
@@ -120,14 +128,15 @@ const cardChange = (e)=>{
             type="text" 
             id="payment-expiryInput" 
             placeholder="MM/YY" 
-            className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
+            className="border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
             autoComplete="cc-exp"
+            disabled={!allowChanges}
             {...register('expiryDate', {
               required: true,
-              pattern: /^(0[1-9]|1[0-2])\/([0-9]{2})$/
+              pattern: /^(0[1-9]|1[0-2])\/([0-9]{2})$/,
+              onChange: (e) => handleExpiryDateChange(e),
+              value: expiryValue || ''
             } )}
-            onChange={handleChange}
-            value={expiryValue || ''}
             
             />
             {errors.expiryDate?.type === 'pattern' && <p className="text-red-500">Enter a valid expiration date (MM/YY)</p>}
@@ -138,18 +147,18 @@ const cardChange = (e)=>{
           <label htmlFor="payment-cvcInput">CVV</label>
           <input 
             type="text" 
-            name="" id="payment-cvcInput" 
+            id="payment-cvcInput" 
             placeholder="123" 
             className=" border focus:outline-0 border-zinc-800 py-2 px-2 rounded"
             inputMode="numeric"
-            
-            value={cvvValue || ''}
             {...register('cvv', {
               pattern: /^[0-9]{3,4}$/,
-              required: true
+              required: true,
+              value: cvvValue || '',
+              onChange: (e)=> handleCvvChange(e)
 
             })}
-            onChange={(e)=> setValue('cvv', e.target.value.replace(/\D/g, '').split('').slice(0, 3).join(''), {shouldValidate: true})}  
+            
             />
             {errors.cvv?.type === 'pattern' && <p className="text-red-500">Enter a valid cvv</p>}
             {errors.cvv?.type === 'required' && <p className="text-red-500">cvv is required </p>}

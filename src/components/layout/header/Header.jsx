@@ -70,7 +70,7 @@ export default function  Header() {
             >
             <use href="/ecommerce-app/sprite-core.svg#icon-logo"/>
           </svg>}
-          <Link to={'/'}>
+          <Link to={'/'} aria-label="Go to home page">
             <h1 className={`text-white text-3xl ${searcher && size <= 768 ? 'hidden' : 'flex'}`} 
             >NIFLIX</h1>
         </Link>
