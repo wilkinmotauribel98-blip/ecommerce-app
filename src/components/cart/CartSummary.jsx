@@ -66,24 +66,24 @@ export default function CartSummary({checkout}) {
         <h3 className='text-white text-lg pl-3 '>Payment Methods</h3>
         <div className='flex gap-2 px-3'>
           <svg 
-            className='w-18 h-9 bg-amber-50 rounded' >
+            className='w-20 h-10  rounded' >
             <use href="/ecommerce-app/payment-icons.svg#icon-visa"/>
           </svg>
           <svg 
-            className='w-18 h-9  rounded' >
+            className='w-20 h-10  rounded' >
             <use href="/ecommerce-app/payment-icons.svg#icon-mastercard"/>
           </svg>
           <svg 
-            className='w-18 h-9  rounded' >
+            className='w-20 h-10  rounded' >
             <use href="/ecommerce-app/payment-icons.svg#icon-amex"/>
           </svg>
           <svg 
-            className='w-18 h-9 bg-amber-50 rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-paypal"/>
+            className='w-20 h-10  rounded' >
+            <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark"/>
           </svg>
           <svg 
-            className='w-18 h-9 bg-amber-50 rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay"/>
+            className='w-20 h-10  rounded' >
+            <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge"/>
           </svg>
           
         </div>

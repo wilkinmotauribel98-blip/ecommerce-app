@@ -74,7 +74,7 @@ const products = useMemo(()=> {
       style={{height: `${open ? '100dvh' : '0'}`, position: `${open ? 'relative' : 'absolute'}`}}
     >
       <div className="flex border-b border-zinc-800 py-5 px-3">
-        <h2 className="text-xl">filters</h2>
+        <h2 className="text-xl">Filters</h2>
         <button className="ml-auto text-green-400" onClick={handleClear}>
           Clear All
         </button>
@@ -109,7 +109,7 @@ const products = useMemo(()=> {
                 brands.map(b => {
                 return (
                 <div className="flex gap-2 items-center" key={b}>
-                  <input type="checkbox" name={b} checked={isChecked(b)}/>
+                  <input type="checkbox" name={b} checked={isChecked(b)} readOnly/>
                   <span>{b}</span>
                 </div>
                 )

@@ -1,30 +1,15 @@
 import { useRef, useState, useEffect } from "react"
 import { useCheckout } from "@/hooks/useCheckout"
-
-
-const liveCardPatterns = {
-  visa: /^4/,
-  mastercard: /^(5[1-5]|2(2[2-9]|[3-6][0-9]|7[01]|720))/,
-  amex: /^3[47]/,
-  discover: /^6(?:011|5)/,
-};
-
-function detectCardTypeLive(input) {
-  const clean = input.replace(/[\s-]/g, '');
-  for (const [type, regex] of Object.entries(liveCardPatterns)) {
-    if (regex.test(clean)) return type;
-  }
-  return null; 
-}
+import { detectCardTypeLive } from "@/utils/detectCardTypeLive";
 
 
 export default function CardForm({register, setValue, watch, errors, allowChanges, setAllowChanges}) {
-  const {onPaymentFormSubmit, isPaymentFormFullFiled, paymentForm, setIsPaymentFormFullFiled} = useCheckout((state) => state);
+  const { isPaymentFormFullFiled, paymentForm, setIsPaymentFormFullFiled} = useCheckout((state) => state);
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
-    const cvvValue = watch('cvv')
-    const cardValue = allowChanges ? watch('cardNumber') || '' : `**** **** **** ${paymentForm.last4}`
-    const isAllowed = useRef(true)
+  const cvvValue = watch('cvv')
+  const cardValue = allowChanges ? watch('cardNumber') || '' : `**** **** **** ${paymentForm.last4}`
+  const isAllowed = useRef(true)
 
 
   const handleExpiryDateChange = (e)=>{
@@ -135,7 +120,6 @@ const cardChange = (e)=>{
               required: true,
               pattern: /^(0[1-9]|1[0-2])\/([0-9]{2})$/,
               onChange: (e) => handleExpiryDateChange(e),
-              value: expiryValue || ''
             } )}
             
             />
@@ -164,7 +148,7 @@ const cardChange = (e)=>{
             {errors.cvv?.type === 'required' && <p className="text-red-500">cvv is required </p>}
         </div>
       </div>
-      <input type="submit" value="Save & continue" className="bg-emerald-400 py-1 mt-3 cursor-pointer rounded" onSubmit={(data)=>onPaymentFormSubmit(data)}/>
+      <input type="submit" value="Save & continue" className="bg-emerald-400 py-1 mt-3 cursor-pointer rounded" />
       <p className="text-emerald-400 text-center">Your payment information is encrypted and secure.</p>
     </>
   )

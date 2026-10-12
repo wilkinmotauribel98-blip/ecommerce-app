@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useCart } from "@/hooks/useCart";
 import YouMayAlsoLikeCard from "../components/cart/YouMayAlsoLikeCard";
 import YouMayAlsoLikeSkeleton from "../components/cart/YouMayAlsoLikeSkeleton";
-import { optimizedImg } from "@/components/product/ProductCard";
+import { optimizedImg } from "@/utils/optimizedImg";
 import { preloadImages, minDelay } from "@/utils/loading";
 
 export default function YouMayAlsoLikeSection(){

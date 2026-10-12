@@ -1,4 +1,4 @@
-import { optimizedImg } from "@/components/product/ProductCard";
+import { optimizedImg } from "@/utils/optimizedImg";
 import AddToCard from "@/components/ui/AddToCard";
 import Skeleton from "@/components/ui/Skeleton";
 import AverageRating from "../components/ui/AverageRating";

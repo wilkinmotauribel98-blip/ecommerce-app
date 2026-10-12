@@ -1,4 +1,4 @@
-import { optimizedImg } from "../product/ProductCard"
+import { optimizedImg } from "@/utils/optimizedImg"
 import { useNavigate } from "react-router-dom"
 export default function CategoryCard ({category}){
   const navigate = useNavigate()

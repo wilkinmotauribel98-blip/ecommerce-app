@@ -48,7 +48,7 @@ export default function App() {
             
           </Route>
           <Route path="/categories" element={<CategoriesPage />} />
-          <Route path='/results/search?' element={<ResultsPage/>} />
+          <Route path='/results/search' element={<ResultsPage/>} />
           <Route path='/shop' element={<ShopPage />} />
           <Route path='/support' element={<SupportPage />} />
           <Route path='*' element={<NotFoundPage />} />

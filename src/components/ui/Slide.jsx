@@ -1,5 +1,5 @@
 import { Button } from './Button'
-import { optimizedImg } from '../product/ProductCard'
+import { optimizedImg } from '@/utils/optimizedImg'
 import AverageRating from './AverageRating'
 import PriceSection from './PriceSection'
 export function Slide({product, size}) {

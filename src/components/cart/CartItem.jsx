@@ -1,4 +1,4 @@
-import { optimizedImg } from "@/components/product/ProductCard"
+import { optimizedImg } from "@/utils/optimizedImg";
 import { useState, useEffect } from "react"
 import { useCart } from '@/hooks/useCart'
 

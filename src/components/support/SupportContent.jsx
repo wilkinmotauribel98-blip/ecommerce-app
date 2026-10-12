@@ -1,6 +1,6 @@
 import SupportCard from "./SupportCard"
 
-export default function MainContent(){
+export default function SupportContent(){
   return(
     <section className="mt-10  m-auto">
       <h2 className="text-white text-4xl">How can we help?</h2>
@@ -8,7 +8,7 @@ export default function MainContent(){
       <SupportCard title={'Orders & Delivery'} description={'Track your order, shipping info and delivery items.'} icon={'package'}/>
       <SupportCard title={'Return & Refunds'} description={'Return an item and get your refund'} icon={'return'}/>
       <SupportCard title={'Payments'} description={'Payments methods, security and billing questions'} icon={'credit-card'}/>
-      <SupportCard title={'Acount'} description={'Manege your account, password and settings.'} icon={'user'}/>
+      <SupportCard title={'Account'} description={'Manage your account, password and settings.'} icon={'user'}/>
       <SupportCard title={'FAQs'} description={'Find quick answers to common questions.'} icon={'help-circle'}/>
       <SupportCard title={'Contact us'} description={'Talk to our support team and get personalized help.'} icon={'message-circle'}/>
       </div>

@@ -36,13 +36,13 @@ export default function BreadCrumbSection({ category,  title, loading, product, 
       <>
       
       <h2 
-        className="text-zinc-400"
+        className="text-zinc-400 capitalize" 
         >{title}</h2>
     </>}
       {product &&
       <>
       <Link 
-        className="capitalize " 
+        className="capitalize" 
         to={`/category/${category}`}
         aria-label={`Link to Category ${category?.replace(/-/g, ' ')}`}
         >{category?.replace(/-/g, ' ')}

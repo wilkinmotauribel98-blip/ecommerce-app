@@ -2,17 +2,38 @@ import { useCheckout } from "@/hooks/useCheckout"
 import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Country, City } from "country-state-city"
+import { Country } from "country-state-city"
 import Item from "@/components/checkout/Item";
 
 
+const PAYPAL = 'paypal';
+const APPLE_PAY = 'applePay';
+const GOOGLE_PAY = 'googlePay';
+const CARD = 'card' 
 
+
+function PaymentCard({cardType, last4}){
+  const dots = Array.from({length: 4}).map((_, i) => <span key={i} className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>)
+  return(
+    <span className="text-zinc-200 flex items-center">
+              <svg className="w-10 h-10 mr-2">
+                {cardType !== null
+                 ? 
+                <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
+                : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
+              </svg>
+              {dots}
+              {last4}
+            </span>
+  )
+}
 export default function Review(){
   const navigate = useNavigate();
   const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
-  const { shippingForm, paymentForm, setOrderNumber, setIsReviewed, setIsDone, isPaymentFormFullFiled, isShippingFormFullFiled, placeOrder } = useCheckout((state) => state);
+  const { setOrderNumber, setIsReviewed, setIsDone, isPaymentFormFullFiled, isShippingFormFullFiled, placeOrder } = useCheckout((state) => state);
   const cartItems = useCart((state) => state.cart);
-  
+  const { firstName, address, city, postalCode, lastName, country } = useCheckout((state)=> state.shippingForm)
+  const { paymentMethod, last4, cardType  } = useCheckout((state)=> state.paymentForm)
   useEffect(()=>{
     if(!isShippingFormFullFiled) navigate('/checkout/shipping');
     else if(!isPaymentFormFullFiled) navigate('/checkout/payment');
@@ -25,18 +46,18 @@ export default function Review(){
       <h1 className="text-2xl font-bold "> Review Your Order </h1>
       <p className="text-zinc-400">Please review your order details before completing your purchase.</p>
       <div className="bg-gray-900/50 border border-gray-800 rounded-xl  mt-5 ">
-        <article className="flex gap-2 border border-gray-800 rounded  p-2" >
+        <article className="flex gap-6 border border-gray-800 rounded  p-2" >
          <svg 
-            className='w-6.5 h-6.5' 
-            aria-label="Check">
+            className='w-7.5 h-7.5' 
+            aria-label="Location">
             <use href="/ecommerce-app/sprite-extra.svg#icon-location"/>
           </svg>
           <div>
             <h2 className="text-lg mb-1">Shipping Address</h2>
-            <h3 className="text-zinc-200">{shippingForm.firstName} {shippingForm.lastName}</h3>
-            <p className="text-zinc-400">{shippingForm.address}</p>
-            <p className="text-zinc-400">{shippingForm.city}, {Country.getCountryByCode(shippingForm.country)?.name}</p>
-            <span className="text-zinc-400">{shippingForm.postalCode}</span>
+            <h3 className="text-zinc-200">{firstName} {lastName}</h3>
+            <p className="text-zinc-400">{address}</p>
+            <p className="text-zinc-400">{city}, {Country.getCountryByCode(country)?.name}</p>
+            <span className="text-zinc-400">{postalCode}</span>
           </div>
         <button 
           type="button" 
@@ -45,29 +66,20 @@ export default function Review(){
           >Edit</button>
       </article>
 
-      <article className="flex gap-5 border border-gray-800  rounded p-2" >
+      <article className="flex gap-3 border border-gray-800  rounded p-2" >
          <svg 
-            className='w-8 h-8' 
+            className='w-10 h-10' 
             aria-label="Payment Card">
-            <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />
+            {paymentMethod === CARD && <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
+            {paymentMethod === PAYPAL &&  <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark" />}
+            {paymentMethod === APPLE_PAY && <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-mark" />}
+            {paymentMethod === GOOGLE_PAY &&  <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />}
+            
           </svg>
           <div>
             <h2 className="text-lg mb-1">Payment Method</h2>
-            <span className="text-zinc-200 flex items-center">
-              <svg className="w-10 h-10 mr-2">
-                {paymentForm.cardType !== null
-                 ? 
-                <use href={`/ecommerce-app/payment-icons.svg#icon-${paymentForm.cardType}` } />
-                : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
-              </svg>
-              
+            {paymentMethod === CARD && <PaymentCard last4={last4} cardType={cardType}/>}
             
-              <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              <span className='w-1.5 h-1.5 bg-white rounded-full inline-block mr-1'></span>
-              {paymentForm.last4}
-            </span>
             
           </div>
         <button 

@@ -65,13 +65,19 @@
        <path fill="#fff" d="M32.6 25.4c-.05-4.9 4-7.3 4.2-7.4-2.3-3.3-5.8-3.8-7.1-3.9-3-.3-5.9 1.8-7.4 1.8-1.5 0-3.9-1.7-6.4-1.7-3.3.05-6.3 1.9-8 4.9-3.4 5.9-.9 14.7 2.5 19.5 1.6 2.4 3.6 5 6.2 4.9 2.5-.1 3.4-1.6 6.4-1.6 3 0 3.8 1.6 6.4 1.5 2.6-.05 4.3-2.4 6-4.8 1.9-2.7 2.6-5.4 2.7-5.5-.05-.05-5.2-2-5.5-8Zm-5-14.7c1.4-1.7 2.3-4.1 2.1-6.5-2 .1-4.5 1.4-6 3.1-1.3 1.5-2.4 4-2.1 6.3 2.2.2 4.5-1.1 6-2.9Z"/>
     </symbol>
 
-    <symbol id="icon-apple-pay-mark" viewBox="0 0 65 32">
-      
-      <path
-        fill="#fff"
-        d="M16.6 12.1c-.4.5-1 .9-1.7.8-.1-.7.2-1.4.6-1.9.4-.5 1.1-.9 1.7-.9.1.7-.2 1.4-.6 2Zm.6 1c-.9-.1-1.7.5-2.2.5-.5 0-1.1-.5-1.9-.5-1 0-1.9.6-2.4 1.5-1 1.8-.3 4.4.7 5.9.5.7 1.1 1.5 1.9 1.5.7 0 1-.5 1.9-.5s1.1.5 1.9.5c.8 0 1.3-.7 1.8-1.5.6-.8.8-1.6.8-1.7 0 0-1.6-.6-1.6-2.4 0-1.5 1.2-2.2 1.3-2.2-.7-1-1.7-1.1-2.2-1.1Z"/>
-      <text x="30" y="21" font-family="Arial, sans-serif" font-size="14" font-weight="500" fill="#fff">Pay</text>
-    </symbol>
+    <symbol id="icon-apple-pay-mark" viewBox="0 0 48 32">
+  <!-- Fondo de la tarjeta (igual que Visa/Mastercard/Amex/Google Pay) -->
+  <rect x="0.5" y="0.5" width="47" height="31" rx="4" fill="#fff" stroke="#dadce0"/>
+
+  <!-- Manzana: se reescala a 13px de alto y se centra -->
+  <path
+    fill="#000"
+    transform="translate(-2.85, -1.53) scale(1.0924)"
+    d="M16.6 12.1c-.4.5-1 .9-1.7.8-.1-.7.2-1.4.6-1.9.4-.5 1.1-.9 1.7-.9.1.7-.2 1.4-.6 2Zm.6 1c-.9-.1-1.7.5-2.2.5-.5 0-1.1-.5-1.9-.5-1 0-1.9.6-2.4 1.5-1 1.8-.3 4.4.7 5.9.5.7 1.1 1.5 1.9 1.5.7 0 1-.5 1.9-.5s1.1.5 1.9.5c.8 0 1.3-.7 1.8-1.5.6-.8.8-1.6.8-1.7 0 0-1.6-.6-1.6-2.4 0-1.5 1.2-2.2 1.3-2.2-.7-1-1.7-1.1-2.2-1.1Z"/>
+
+  <!-- "Pay" en negro -->
+  <text x="20.2" y="20.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="500" fill="#000">Pay</text>
+</symbol>
 
    <symbol id="icon-apple-pay-badge" viewBox="0 0 65 32">
   <rect x="0.5" y="0.5" width="64" height="31" rx="6" fill="#000" stroke="#4D4D4D" stroke-width="1"/>
@@ -91,15 +97,19 @@
     <path fill="#fff" d="M24 9.5c3.5 0 6.7 1.2 9.2 3.6l6.9-6.9C35.9 2.3 30.5 0 24 0 14.5 0 6.4 5.3 2.4 13.4l7.9 6.2C12.2 13.8 17.6 9.5 24 9.5Z"/>
   </symbol>
 
-  <symbol id="icon-google-pay-badge" viewBox="0 0 65 32">
-  
-  <g transform="translate(8, 8) scale(0.055)">
+<symbol id="icon-google-pay-badge" viewBox="0 0 48 32">
+  <!-- Fondo de la tarjeta (igual que Visa/Mastercard/Amex) -->
+  <rect x="0.5" y="0.5" width="47" height="31" rx="4" fill="#fff" stroke="#dadce0"/>
+
+  <!-- Logo "G" de 13x13 centrado verticalmente -->
+  <g transform="translate(6.5, 9.5) scale(0.05)">
     <path fill="#4285F4" d="M255.68 133.5c0-10.6-.95-20.8-2.7-30.6H130.5v57.9h70.4c-3 16.4-12.3 30.3-26.3 39.6v32.9h42.5c24.9-22.9 39.3-56.7 39.3-96.8z"/>
     <path fill="#34A853" d="M130.5 261.1c35.6 0 65.5-11.8 87.3-32l-42.5-32.9c-11.8 7.9-26.9 12.6-44.8 12.6-34.4 0-63.6-23.2-74-54.4H12.7v34c21.7 43.1 66.4 72.7 117.8 72.7z"/>
     <path fill="#FBBC05" d="M56.5 154.4c-2.7-7.9-4.2-16.4-4.2-25.1s1.5-17.2 4.2-25.1V70.2H12.7C4.6 86.4 0 104.7 0 129.3s4.6 42.9 12.7 59.1z"/>
     <path fill="#EA4335" d="M130.5 51.8c19.4 0 36.8 6.7 50.5 19.7l37.9-37.9C196 12.5 166.1 0 130.5 0 79.1 0 34.4 29.6 12.7 72.7l43.8 34c10.4-31.2 39.6-54.9 74-54.9z"/>
   </g>
-  <text x="27" y="20.5" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#fff">Pay</text>
-</symbol>
 
+  <!-- "Pay" en gris oscuro -->
+  <text x="22" y="20.2" font-family="Arial, Helvetica, sans-serif" font-size="11.5" font-weight="500" fill="#5f6368">Pay</text>
+</symbol>
 </svg>

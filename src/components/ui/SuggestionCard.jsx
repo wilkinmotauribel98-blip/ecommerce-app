@@ -1,4 +1,4 @@
-import { optimizedImg } from "../product/ProductCard"
+import { optimizedImg } from "@/utils/optimizedImg"
 import { Link } from "react-router-dom";
 
 

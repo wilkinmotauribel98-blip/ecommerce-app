@@ -3,65 +3,78 @@ import CardForm from "./CardForm";
 import { useCheckout } from "@/hooks/useCheckout";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { getCardType } from "@/utils/getCardType";
 
 const PayButton = ({title, symbol})=>{
   return(
-    <a href="" className="w-full" >
-      <button className="bg-emerald-400 w-full py-1 mt-3 flex  items-center justify-center text-center cursor-pointer rounded " readOnly >
+      <button 
+        className="bg-emerald-400 w-full py-1 mt-3 flex items-center justify-center text-center cursor-pointer rounded "
+        type="submit"
+        >
         <svg className="w-13 h-7 hidden sm:block rounded">
           <use href={`/ecommerce-app/payment-icons.svg#icon-${symbol}`} />
         </svg>
         {title}
       </button>
-    </a> 
+    
   )
 }
 
-const cardPatterns = {
-  visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-  mastercard: /^(5[1-5][0-9]{14}|2(2[2-9][0-9]{12}|[3-6][0-9]{13}|7[01][0-9]{12}|720[0-9]{12}))$/,
-  amex: /^3[47][0-9]{13}$/,
-  discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
-  diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
-  jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
-};
+const PAYPAL = 'paypal';
+const APPLE_PAY = 'applePay';
+const GOOGLE_PAY = 'googlePay';
+const CARD = 'card' 
 
-function getCardType(cardNumber) {
-  for (const [cardType, pattern] of Object.entries(cardPatterns)) {
-    if (pattern.test(cardNumber.replace(/\s/g, ''))) {
-      return cardType;
-    }
-  }
-  return null;
-}
 
 
 export default function PaymentForm() {
-  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'payment-method': 'card'}});
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'paymentMethod': 'card'}});
   const [allowChanges, setAllowChanges] = useState(true);
   const navigate = useNavigate();
-  const {onPaymentFormSubmit, isShippingFormFullFiled, isPaymentFormFullFiled, paymentForm } = useCheckout((state) => state);
-  const paymentMethod = watch('payment-method');
-
+  const { onPaymentFormSubmit, isShippingFormFullFiled, isPaymentFormFullFiled, paymentForm} = useCheckout((state) => state);
+  const { paymentMethod } = paymentForm
+  const paymentMethodValue = watch('paymentMethod');
+  
 
   const onSubmit = (data)=> {
     navigate('/checkout/review');
+    if (paymentMethodValue == CARD) {
     data.last4 = watch('cardNumber').slice(-4)
     data.cardNumber = null;
     data.cvv = null;
     data.cardType = getCardType(watch('cardNumber'));
-    data.paymentMethod = paymentMethod;
+    }
+    data.paymentMethod = paymentMethodValue;
     onPaymentFormSubmit(data)
   }
 
   useEffect(()=>{
     if(!isShippingFormFullFiled) navigate('/checkout/shipping');
-    if(isPaymentFormFullFiled && paymentForm.paymentMethod === 'card'){
-      setAllowChanges(false)
-      setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
-      setValue('cvv', '', {shouldValidate: false})
+    if(isPaymentFormFullFiled){
+      switch(paymentMethod){
+        case CARD:{
+          setAllowChanges(false)
+          setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
+          setValue('cvv', '', {shouldValidate: false})
+        }
+        break;
+        case PAYPAL:{
+          setValue('paymentMethod', PAYPAL, {shouldValidate: false})
+        }
+        break;
+        case GOOGLE_PAY:{
+          setValue('paymentMethod', GOOGLE_PAY, {shouldValidate: false} )
+        }
+        break;
+        case APPLE_PAY:{
+          setValue('paymentMethod', APPLE_PAY, {shouldValidate: false})
+        }
+        
+      }
     }
+
   },[])
+  
   
   return (
     <section className="w-full max-w-2xl flex flex-col  ">
@@ -84,7 +97,7 @@ export default function PaymentForm() {
                 id="payment-card"
                 value="card"
                 className="peer absolute inset-0 opacity-0 cursor-pointer"
-                {...register('payment-method', { required: true })}
+                {...register('paymentMethod', { required: true })}
               />
              
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
@@ -120,7 +133,7 @@ export default function PaymentForm() {
                 id="paypal"
                 value="paypal"
                 className="peer absolute inset-0 opacity-0 cursor-pointer"
-                {...register('payment-method', { required: true })}
+                {...register('paymentMethod', { required: true })}
               />
              
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
@@ -152,7 +165,7 @@ export default function PaymentForm() {
                 id="applePay"
                 value="applePay"
                 className="peer absolute inset-0 opacity-0 cursor-pointer"
-                {...register('payment-method', { required: true })}
+                {...register('paymentMethod', { required: true })}
               />
              
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
@@ -184,7 +197,7 @@ export default function PaymentForm() {
                 id="googlePay"
                 value="googlePay"
                 className="peer absolute inset-0 opacity-0 cursor-pointer"
-                {...register('payment-method', { required: true })}
+                {...register('paymentMethod', { required: true })}
               />
              
               <span className="absolute inset-0 m-auto size-2.5 rounded-full bg-emerald-500 scale-0 peer-checked:scale-100 transition-transform pointer-events-none" />
@@ -209,10 +222,10 @@ export default function PaymentForm() {
       </fieldset>
         </div>
 
-      {paymentMethod == 'card' && <CardForm watch={watch} setValue={setValue} register={register} errors={errors} allowChanges={allowChanges} setAllowChanges={setAllowChanges} />}
-      {paymentMethod == 'paypal' && <PayButton title={'Pay with PayPal'} symbol={'paypal-logomark'} />}
-      {paymentMethod == 'applePay' && <PayButton title={'Pay with Apple Pay'} symbol={'apple-logomark'}/>}
-      {paymentMethod == 'googlePay' && <PayButton title={'Pay with Google Pay'} symbol={'google-logomark'} />}
+      {paymentMethodValue == CARD && <CardForm watch={watch} setValue={setValue} register={register} errors={errors} allowChanges={allowChanges} setAllowChanges={setAllowChanges} />}
+      {paymentMethodValue == PAYPAL && <PayButton title={'Pay with PayPal'} symbol={'paypal-logomark'} />}
+      {paymentMethodValue == APPLE_PAY && <PayButton title={'Pay with Apple Pay'} symbol={'apple-logomark'}/>}
+      {paymentMethodValue == GOOGLE_PAY && <PayButton title={'Pay with Google Pay'} symbol={'google-logomark'} />}
     </form>
     </section>
   )

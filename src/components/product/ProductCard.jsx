@@ -1,11 +1,8 @@
 import PriceSection from "../ui/PriceSection";
 import AverageRating from "../ui/AverageRating";
-import { useCart } from "../../hooks/useCart";
+import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
-export function optimizedImg(src, w, h) {
-  if (!src) return '';
-  return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${w}&h=${h}&fit=cover&q=80`;
-}
+import { optimizedImg } from "@/utils/optimizedImg";
 
 const VARIANT_CONFIG = {
   shop: {

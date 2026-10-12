@@ -4,7 +4,7 @@ import { useState, useEffect  } from "react";
 import BreadCrumbSection from "@/sections/BreadCrumbSection"
 import CategoryContent from "@/components/category/CategoryContent";
 import CategoryContentSkeleton from "@/components/category/CategoryContentSkeleton";
-import { optimizedImg } from "@/components/product/ProductCard";
+import { optimizedImg } from "@/utils/optimizedImg";
 import { preloadImages, minDelay } from "@/utils/loading";
 
 export default function CategoryPage() {

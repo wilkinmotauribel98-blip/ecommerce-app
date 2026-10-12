@@ -5,7 +5,7 @@ export default function SupportHeader(){
         <h1 className="text-emerald-300 text-lg">SUPPORT</h1>
         <span className="text-4xl text-white">Need a <strong className="text-emerald-300">hand?</strong></span>
         <p className="text-zinc-400 ">
-          we're here to help you width your NIFLIX experience.<br></br>
+          we're here to help you with your NIFLIX experience.<br></br>
           Find answers to your questions, track your orders, and get the support you need - fast.
         </p>
         <form action="">

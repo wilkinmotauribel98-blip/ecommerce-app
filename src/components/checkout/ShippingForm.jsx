@@ -3,18 +3,17 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { useCheckout } from "@/hooks/useCheckout";
 import { useNavigate } from "react-router-dom"
-
-
+import { AsYouType, parsePhoneNumberFromString } from "libphonenumber-js";
 
 export default function ShippingForm() {
   const countries = Country.getAllCountries();
   const navigate = useNavigate();
-  const shippingInfo = useCheckout((state) => state.shippingForm)
-  const onShippingFormSubmit = useCheckout((state) => state.onShippingFormSubmit)
-  const isSaved = useCheckout((state)=> state.isSaved)
-  const { register, handleSubmit, setValue, watch, formState:{ errors } } = useForm({defaultValues: {
+  const { onShippingFormSubmit, isShippingFormFullFiled, shippingForm } = useCheckout((state) => state)
+  const { register, handleSubmit, setValue, formState:{ errors } } = useForm({defaultValues: {
     'country' : 'DO' 
   }})
+  const { phoneNumber, postalCode, email, firstName, lastName, address, city, country } = shippingForm
+
   const [cities, setCities ] = useState(City.getCitiesOfCountry('DO'))
 
   const handleCountryChange = (event)=>{
@@ -23,32 +22,36 @@ export default function ShippingForm() {
   } 
 
   const handlePhoneNumberChange = (event)=>{
-    const formatted = event.target.value
-    .replace(/\D/g, '')
-    .slice(0, 10)
-    .match(/(\d{1,3})?(\d{1,3})?(\d{1,4})?/)
-    ?.slice(1)
-    ?.filter(Boolean)
-    ?.join('-') || '';     
-    setValue('phoneNumber', formatted, {shouldValidate: true} )
+  const raw = event.target.value;
+  const hasPlus = raw.trim().startsWith('+');
+  const digits = raw.replace(/\D/g, '').slice(0, 15);
+  const cleaned = hasPlus ? `+${digits}` : digits;
+
+  const formatted = new AsYouType('DO').input(cleaned);
+
+  setValue('phoneNumber', formatted, { shouldValidate: true });
   }
 
+  const handlePostalCodeChange = (e) =>{
+    setValue('postalCode', e.target.value.replace(/\D/g, '').split('').slice(0, 5).join(''), {shouldValidate: true})
+  }
 
   const onSubmit = (data)=> {
     onShippingFormSubmit(data)
     navigate('/checkout/payment')
   };
 
+
   useEffect(()=>{
-  if(isSaved){
-    setValue('phoneNumber', shippingInfo.phoneNumber, {shouldValidate: true});
-    setValue('postalCode', shippingInfo.postalCode, {shouldValidate: true})
-    setValue('email', shippingInfo.email, {shouldValidate: true})
-    setValue('firstName', shippingInfo.firstName, {shouldValidate: true})
-    setValue('lastName', shippingInfo.lastName , {shouldValidate: true})
-    setValue('address', shippingInfo.address, {shouldValidate: true})
-    setValue('city', shippingInfo.city, {shouldValidate: true})
-    setValue('country', shippingInfo.country, {shouldValidate: true})
+  if(isShippingFormFullFiled){
+    setValue('phoneNumber', phoneNumber, {shouldValidate: true});
+    setValue('postalCode', postalCode, {shouldValidate: true})
+    setValue('email', email, {shouldValidate: true})
+    setValue('firstName', firstName, {shouldValidate: true})
+    setValue('lastName', lastName , {shouldValidate: true})
+    setValue('address', address, {shouldValidate: true})
+    setValue('city', city, {shouldValidate: true})
+    setValue('country', country, {shouldValidate: true})
   }
   },  [])
 
@@ -75,7 +78,6 @@ export default function ShippingForm() {
             {...register('email', {
               required: true,
               pattern: /[^@]+@[^@]+\.[^@]+$/,
-              value: watch('email') || '',
             })}
             />
 
@@ -105,9 +107,8 @@ export default function ShippingForm() {
             {...register('firstName', {
               required: true,
               minLength: 2,
-              value: watch('firstName') || '',
             })} 
-            placeholder="Jhon"
+            placeholder="John"
             id="fname"
             className=" border focus:outline-0 border-gray-800 py-2 px-2 rounded" />
             {errors.firstName?.type == "minLength" && <p className="text-red-500">First name is too short.</p>}
@@ -122,11 +123,10 @@ export default function ShippingForm() {
             {...register('lastName', {
               required: true,
               minLength: 2,
-              value: watch('lastName') || '',
             })} 
             className=" border focus:outline-0 border-gray-800 py-2 px-2 rounded"/>
-            {errors.lname?.type == "minLength" && <p className="text-red-500">Last name is too short.</p>}
-            {errors.lname?.type == 'required' && <p className="text-red-500">Last name is required.</p>}
+            {errors.lastName?.type == "minLength" && <p className="text-red-500">Last name is too short.</p>}
+            {errors.lastName?.type == 'required' && <p className="text-red-500">Last name is required.</p>}
             
           </div>
         </div>
@@ -138,13 +138,12 @@ export default function ShippingForm() {
           id="address" 
           {...register('address', {
             required:true,
-            value: watch('address') || '',
           })} 
           className=" border focus:outline-0 border-gray-800 py-2 px-2 rounded"
           placeholder='123 Main St'
           />
           {errors.address?.type == "required" && <p className="text-red-500">Address is required</p>}
-          <input type="text" {...register('apartment')} placeholder="Apartment, suit, etc (optional)" id="optional-address" className=" mt-2 border focus:outline-0 border-gray-800 py-2 px-2 rounded"/>
+          <input type="text" {...register('apartment')} placeholder="Apartment, suite, etc (optional)" id="optional-address" className=" mt-2 border focus:outline-0 border-gray-800 py-2 px-2 rounded"/>
         </div>
 
           <div className="flex flex-col sm:flex-row gap-5">
@@ -165,9 +164,9 @@ export default function ShippingForm() {
               type="text"
               {...register('postalCode', {
                 required: true,
-                pattern:/[0-9]{5}/,
-                watch: watch('postalCode') || '',
-                onChange: (e)=> setValue('postalCode', e.target.value, {shouldValidate: true})
+                pattern:/[0-9]/,
+                maxLength: 5,
+                onChange: (e)=> handlePostalCodeChange(e)
               })}
               placeholder="12345"  
               id="postalCode"  
@@ -182,16 +181,15 @@ export default function ShippingForm() {
           <label htmlFor="phoneNumber">Phone Number</label>
           <input type="tel"  
           {...register('phoneNumber', {
+            validate: (v) => parsePhoneNumberFromString(v, 'DO')?.isValid() || 'Invalid phone number', 
             required: true,
-            pattern: /[0-9]{3}-[0-9]{3}-[0-9]{4}/,
-            value: watch('phoneNumber') || '',
             onChange: (e)=> handlePhoneNumberChange(e)
           })} 
           placeholder="123-456-7890"
           id="phoneNumber"
           className="border focus:outline-0 border-gray-800 py-2 px-2 rounded"
           />
-          {errors.phoneNumber?.type == "pattern" && <p className="text-red-500">Please enter a valid phone number</p>}
+          {errors.phoneNumber && <p className="text-red-500">{errors.phoneNumber.message}</p>}
           {errors.phoneNumber?.type == 'required' && <p className="text-red-500">Phone number is required.</p>}
         </div>
        

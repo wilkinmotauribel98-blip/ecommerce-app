@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ProductCard, { optimizedImg } from "../product/ProductCard";
+import ProductCard from "@/components/product/ProductCard";
 import AllProductsSkeleton from "./AllProductsSkeleton";
 import useFetch from "@/hooks/useFetch";
 

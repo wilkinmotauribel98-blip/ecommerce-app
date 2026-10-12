@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { categories } from "./const";
-import { optimizedImg } from "../product/ProductCard";
+import { optimizedImg } from "@/utils/optimizedImg";
 import CategoryCard from "./CategoryCard";
 import CategoriesSkeleton from "./CategoriesSkeleton";
 import { preloadImages, minDelay } from "@/utils/loading";
