@@ -15,7 +15,9 @@ export function SuggestionCard({info}) {
         <img 
           src={optimizedImg(info.images[0], 200, 200)} 
           alt={`this is the image of the ${info.title}`} 
-          className="w-2/12 min-w-16 aspect-square"/>
+          className="w-2/12 min-w-16 aspect-square"
+          loading="lazy"
+          />
       <div className="flex flex-col mr-10">
         <span className="sm:text-xl lg:text-2xl">{info.title}</span>
         <div className=" items-center gap-1 text-zinc-400 hidden sm:flex">

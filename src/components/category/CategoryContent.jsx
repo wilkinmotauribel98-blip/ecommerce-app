@@ -138,7 +138,7 @@ const products = useMemo(()=> {
     </aside>
       </div>
       <section className="grid w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] grid-rows-3 md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 "> 
-        {products.map(e => <YouMayAlsoLikeCard key={e.id} category={true} product={e}/> )}
+        {products.map((e, index) => <YouMayAlsoLikeCard key={e.id} category={true} product={e} isLazy={index > 6}/> )}
       </section>
     </section>
     </>

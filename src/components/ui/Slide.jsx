@@ -2,7 +2,8 @@ import { Button } from './Button'
 import { optimizedImg } from '@/utils/optimizedImg'
 import AverageRating from './AverageRating'
 import PriceSection from './PriceSection'
-export function Slide({product, size}) {
+export function Slide({product, size, isActive, isNext}) {
+  
   return(
     <article 
     className={`z-0 relative  overflow-hidden pt-3 sm:pt-0`}   
@@ -19,6 +20,7 @@ export function Slide({product, size}) {
         alt={`img from ${product?.title}`} 
         fetchpriority='high' 
         className=" object-cover z-10 pb-8 aspect-16/15 xl:max-w-120 m-auto relative" 
+        loading={isActive || isNext ? 'eager' : 'lazy'}
          />
       </div>
       <div className="z-10 bottom-0  justify-end pb-5  absolute px-4  sm:ml-10 flex flex-col gap-0.5 sm:gap-2 lg:gap-3 xl:gap-4.5  " >
@@ -38,7 +40,7 @@ export function Slide({product, size}) {
         </div>
         
           <div className='hidden md:flex flex-col gap-2'>
-            <AverageRating reviews={product.reviews}/>
+            <AverageRating rating={product?.rating}/>
             <PriceSection product={product}/>
           </div>
         <p 

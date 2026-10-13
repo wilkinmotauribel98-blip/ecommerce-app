@@ -31,7 +31,7 @@ export default function ShopByCategorySection() {
         {loading || !categories.length
           ? [0,1,2,3,4].map(i => <Skeleton key={i} className="h-62 w-full" />)
           : categories.map((i) => (
-          <ProductCard key={i.title} product={i} variant='shop' />
+          <ProductCard key={i.title} product={i} variant='shop' isLazy={true} />
         )) }
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { optimizedImg } from "@/utils/optimizedImg";
 import { useNavigate } from "react-router-dom";
-export default function YouMayAlsoLikeCard({product, category}){
+export default function YouMayAlsoLikeCard({product, category, isLazy}){
   const navigate = useNavigate()
   return(
     <article 
@@ -8,7 +8,11 @@ export default function YouMayAlsoLikeCard({product, category}){
       onClick={()=> navigate(`/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
     > 
       <div>
-        <img src={optimizedImg(product.images[0], 400, 400)} alt={`image of ${product.title}`} />
+        <img 
+          src={optimizedImg(product.images[0], 400, 400)} 
+          alt={`image of ${product.title}`}
+          loading={isLazy ? 'lazy' : 'eager'}
+          />
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-zinc-400">{product.title}</h3>

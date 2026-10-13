@@ -4,7 +4,7 @@ import { useCart } from '@/hooks/useCart'
 
 
 
-export default function CartItem ({product, id}) {
+export default function CartItem ({product, id, isLazy}) {
   const {image, price, quantity,  stock, title, category} = product;
   const [counter, setCounter] = useState(quantity);
   const setCart = useCart((state)=> state.setCart)
@@ -24,7 +24,7 @@ export default function CartItem ({product, id}) {
         <img 
           src={optimizedImg(image, 550, 550)} alt={`image of ${title}`} 
           className="w-full"
-          
+          loading={isLazy ? 'lazy' : 'eager'}
           />
       </div>
       

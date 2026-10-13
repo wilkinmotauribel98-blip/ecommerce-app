@@ -6,23 +6,24 @@ import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
 import BottomNavbar from '@/components/layout/bottomNavbar/BottomNavbar'
 import PageSkeleton from '@/components/ui/PageSkeleton'
-import ShippingForm from "@/components/checkout/ShippingForm"
-import PaymentForm from '@/components/checkout/PaymentForm'
-import Review from "@/components/checkout/Review"
-import Done from '@/components/checkout/Done'
+
 import '@/index.css'
 
-const HomePage = lazy(()=>import('@/pages/Home.jsx'));
-const ShopPage = lazy(()=>import('@/pages/ShopPage.jsx'));
-const ProductPage = lazy(()=>import('@/pages/ProductPage.jsx'));
+const HomePage = lazy(()=>import('@/pages/Home'));
+const ShopPage = lazy(()=>import('@/pages/ShopPage'));
+const ProductPage = lazy(()=>import('@/pages/ProductPage'));
 const CartPage = lazy(()=>import('@/pages/CartPage.jsx'));
-const CheckoutPage = lazy(()=>import('@/pages/CheckoutPage.jsx'));
+const CheckoutPage = lazy(()=>import('@/pages/CheckoutPage'));
 const CategoryPage = lazy(()=> import('@/pages/CategoryPage'));
 const CategoriesPage = lazy(()=> import('@/pages/CategoriesPage'));
 const ResultsPage = lazy(()=> import('@/pages/ResultsPage'));
 const NotFoundPage = lazy(()=> import('@/pages/NotFoundPage'));
-const SupportPage = lazy(()=> import('@/pages/SupportPage'))
+const SupportPage = lazy(()=> import('@/pages/SupportPage'));
 
+const ShippingForm = lazy(()=> import('@/components/checkout/ShippingForm'));
+const Done = lazy(()=> import('@/components/checkout/Done'));
+const PaymentForm = lazy(()=> import('@/components/checkout/PaymentForm'))
+const Review = lazy(()=> import("@/components/checkout/Review")) 
 
 
 export default function App() {

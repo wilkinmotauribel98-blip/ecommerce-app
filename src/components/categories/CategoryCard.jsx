@@ -1,6 +1,6 @@
 import { optimizedImg } from "@/utils/optimizedImg"
 import { useNavigate } from "react-router-dom"
-export default function CategoryCard ({category}){
+export default function CategoryCard ({category, isLazy}){
   const navigate = useNavigate()
   return(
     <article 
@@ -9,7 +9,11 @@ export default function CategoryCard ({category}){
       aria-label={`${category.category} category Link`}
     >
       <div >
-        <img className="w-full" src={optimizedImg(category.image, 300, 300)} alt={`${category.category} image`} />
+        <img className="w-full" 
+          src={optimizedImg(category.image, 300, 300)} 
+          alt={`${category.category} image`} 
+          loading={isLazy ? 'lazy' : 'eager'}
+          />
       </div>
 
       <h2 className="text-white pl-3 capitalize">{category.category.replace(/-/g, ' ')}</h2>

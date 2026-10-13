@@ -22,7 +22,7 @@ export default function SupportContent(){
           <p className="text-zinc-400 max-w-90 text-pretty">Get in touch with us and we'll be happy to help.</p>
         </div>
         <button className="bg-emerald-300 flex items-center gap-1 shrink-0 text-white rounded py-2 px-2.5 text-center ml-auto">
-          <svg class="w-5 h-5 ">
+          <svg className="w-5 h-5 ">
             <use href="/ecommerce-app/sprite-core.svg#icon-envelope" />
           </svg>
           Contact Support

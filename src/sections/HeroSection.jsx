@@ -13,8 +13,6 @@ export default function HeroSection() {
   const slideRef = useRef(slide);
   slideRef.current = slide;
 
-  
-  
   const prev = () => {
     if(isTransitioning.current) return
     isTransitioning.current = true;
@@ -107,8 +105,8 @@ export default function HeroSection() {
         style={{ transform: `translate(-${slide * size }px)`, transition }}
         onTransitionEnd={handleTransitionEnd}
       >
-        <Slide key="start clone" product={products[4]} size={size} />
-        {products.map((e) => <Slide key={e.id} product={e} size={size} />)}
+        <Slide key="start clone" product={products[products.length - 1]} size={size} />
+        {products.map((p, index) => <Slide key={p.id} product={p} size={size} isActive={index + 1 == slide} isNext={index + 1 == slide + 1} />)}
         <Slide key="end clone" product={products[0]} size={size} />
       </div>
       <div 

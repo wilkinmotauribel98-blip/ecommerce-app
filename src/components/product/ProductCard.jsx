@@ -46,7 +46,7 @@ const VARIANT_CONFIG = {
 };
 
 
-export default function ProductCard({ product, variant = 'default', isNew }) {
+export default function ProductCard({ product, variant = 'default', isNew, isLazy }) {
   const config = VARIANT_CONFIG[variant];
   const displayText =  config.getText(product);
   const navigate = useNavigate()
@@ -86,7 +86,13 @@ export default function ProductCard({ product, variant = 'default', isNew }) {
         )}
 
         <div className={config.imgWrapperClass}>
-          <img src={optimizedImg(product?.images[0], 280, 280)} alt={product?.title} className={`w-full ${variant === 'allProducts' ? 'a' : 'relative z-10'} `} />
+          <img 
+            src={optimizedImg(product?.images[0], 280, 280)} 
+            alt={product?.title} 
+            className={`w-full ${variant === 'allProducts' || 'relative z-10'} `} 
+            loading={isLazy ? 'lazy' : "eager"}
+            />
+            
         </div>
 
         {config.showGlow && (

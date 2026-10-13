@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 import { fetchAllProducts } from '@/api/products.js'
+
+const STALE_TIME = 1000 * 60 * 60;
 const heroIds = [98, 78, 81, 95, 100];
 const newArrivalsIds = [140, 87, 34, 163, 170];
 const bestSellersIds = [121, 116, 99, 80];
@@ -20,7 +21,6 @@ const pickByIds = (all, ids) => {
 };
 
 export const useProducts = create(
-  persist(
     (set, get) => ({
       heroProducts: [],
       newArrivalsProducts: [],
@@ -31,9 +31,11 @@ export const useProducts = create(
       bestSellersLoading: false,
       categoriesLoading: false,
       hasHomeFetched: false,
+      lastFetched: null,
       error: null,
       fetchHomeProducts: async () => {
-        if (get().hasHomeFetched) return;
+        const { hasHomeFetched, lastFetched } = get();
+        if (hasHomeFetched && lastFetched && Date.now() - lastFetched < STALE_TIME) return;
         set({
           error: null,
           heroLoading: true,
@@ -42,7 +44,7 @@ export const useProducts = create(
           categoriesLoading: true,
         });
         try {
-          // 1 request instead of N+1 (21x fetchProduct)
+          
           const all = await fetchAllProducts();
 
           const hero = pickByIds(all, heroIds);
@@ -63,6 +65,7 @@ export const useProducts = create(
             categoryProducts: categorias,
             categoriesLoading: false,
             hasHomeFetched: true,
+            lastFetched: Date.now(),
           });
         } catch (err) {
           set({
@@ -74,7 +77,6 @@ export const useProducts = create(
           });
         }
       }
-    }),
-    { name: "products-storage" } 
-  )
-);
+    })
+    
+  );

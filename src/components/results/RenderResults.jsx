@@ -23,8 +23,8 @@ export default function RenderResults({ results }){
     <>
       <p className="text-zinc-400 text-xl font-medium ">{results.products.length} Results found</p>
       <section className="grid mt-7  w-full grid-cols-[repeat(auto-fill,minmax(150px,1fr))] grid-rows-3 md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5"> 
-            {products?.map((product) => (
-              <YouMayAlsoLikeCard category={true} key={product.id} product={product} />
+            {products?.map((product, index) => (
+              <YouMayAlsoLikeCard category={true} key={product.id} product={product} isLazy={index > 5} />
             ))}
       </section>
 

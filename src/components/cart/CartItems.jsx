@@ -17,7 +17,7 @@ export default function CartItems(){
         </div>
       </div>
       {
-        Object.entries(cart).map(([key, value]) => <CartItem key={key} id={key} product={value}/>)
+        Object.entries(cart).map(([key, value], index) => <CartItem key={key} id={key} product={value} isLazy={index > 7}/>)
       } 
         
       </div>

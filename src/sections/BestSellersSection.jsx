@@ -15,7 +15,7 @@ export default function BestSellersSection() {
       <div className='grid gap-4 h- px-3  py-3 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(320px,1fr))]  ' >
         {loading || !bestSellers.length
           ? [0, 1, 2, 3].map(i => <Skeleton key={i} className="h-65 w-full" />)
-          : bestSellers.map(e =>   <ProductCard key={e.id} product={e} variant='bestSeller' isNew={true} />)}
+          : bestSellers.map(e =>   <ProductCard key={e.id} product={e} variant='bestSeller' isNew={true}  isLazy={true} />)}
       </div>
     </section>
   )

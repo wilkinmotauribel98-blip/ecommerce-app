@@ -37,7 +37,10 @@ export default function ProductHeroSection({ product, loading }){
         <img 
           className="cover w-full"
           src={optimizedImg(product?.images[0], 720, 720)} 
-          alt={`image of ${product.title}`} />
+          alt={`image of ${product.title}`}
+          loading="eager"
+          fetchPriority="high"
+          />
       </div>
     
       <article className="text-white m-auto  flex-1 flex flex-col px-3 gap-3">
