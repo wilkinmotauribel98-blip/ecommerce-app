@@ -36,7 +36,7 @@ export default function App() {
       <Header />
       <BottomNavbar />
     </PageContextProvider>
-      <ErrorBoundary key={location.pathname}>
+      <ErrorBoundary pathname={location.pathname}>
       <Suspense fallback={<PageSkeleton />}>
         <Routes>
           <Route path="/" element={<HomePage />} />

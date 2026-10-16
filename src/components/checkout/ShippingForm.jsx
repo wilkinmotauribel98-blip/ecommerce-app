@@ -17,6 +17,8 @@ export default function ShippingForm() {
 
   const [cities, setCities ] = useState([])
 
+
+  
   
   const handleCountryChange = (event)=>{
     const data = event.target.value;
@@ -38,7 +40,8 @@ export default function ShippingForm() {
     setValue('postalCode', e.target.value.replace(/\D/g, '').split('').slice(0, 5).join(''), {shouldValidate: true})
   }
 
-  const onSubmit = (data)=> {
+  const onSubmit = (data)=> {;
+    
     onShippingFormSubmit(data)
     navigate('/checkout/payment')
   };

@@ -12,6 +12,12 @@ export default class ErrorBoundary extends Component {
     console.error(error, info.componentStack);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.pathname !== this.props.pathname && this.state.hasError) {
+      this.setState({ hasError: false });
+    }
+  }
+
   render() {
     if (this.state.hasError) {
       return (

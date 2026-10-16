@@ -36,6 +36,7 @@ export default function PaymentForm() {
   const { paymentMethod } = paymentForm
   const paymentMethodValue = watch('paymentMethod');
   
+  
 
   const onSubmit = (data)=> {
     navigate('/checkout/review');
