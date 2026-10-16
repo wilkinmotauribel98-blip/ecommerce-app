@@ -66,6 +66,7 @@ export const useProducts = create(
             categoriesLoading: false,
             hasHomeFetched: true,
             lastFetched: Date.now(),
+            error: null,
           });
         } catch (err) {
           set({

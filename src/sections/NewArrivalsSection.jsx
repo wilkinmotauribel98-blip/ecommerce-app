@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 import  ProductCard from "@/components/product/ProductCard";
 import Skeleton from "../components/ui/Skeleton";
+import ErrorState from "../components/ui/ErrorState";
 const newIds = [0,1,2,3,4];
 
 function getIdsForWidth(width) {
@@ -15,6 +16,8 @@ export default function NewArrivalsSection(params) {
   const [ids, setIds] = useState(()=> getIdsForWidth(window.innerWidth))
   const products = useProducts((state)=> state.newArrivalsProducts);
   const loading = useProducts((state) => state.newArrivalsLoading);
+  const error = useProducts((state) => state.error);
+  const retry = useProducts((state) => state.fetchHomeProducts);
   
   
   useEffect(()=>{ 
@@ -33,7 +36,9 @@ export default function NewArrivalsSection(params) {
         <span className="text-emerald-500 text-sm sm:text-lg lg-text-xl" aria-label="Discover now">Discover Now</span>
       </div>
       <div className="flex gap-4 ml-auto">
-        {loading || !products.length
+        {error && !loading && !products.length
+          ? <ErrorState compact title="Couldn't load new arrivals" onRetry={retry} />
+          : loading || !products.length
           ? ids.map(i => <Skeleton key={i} className="h-55 w-43" />)
           : ids.map(e => <ProductCard key={`arrival ${products[e]?.id}`} isNew={true} isLazy={true} variant="newArrivals" product={products[e]} />)}
       </div>

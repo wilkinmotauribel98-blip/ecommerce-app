@@ -27,7 +27,7 @@ Frontend de ecommerce construido con React + Vite + Tailwind. Catálogo, búsque
 - React 18.3, React Router 6.26, Vite 5.4
 - Tailwind CSS 4.3 + @tailwindcss/vite
 - zustand 4.5 (solo el carrito persiste en `localStorage` como `client-storage`)
-- react-hook-form 7.86, country-state-city 3.2, libphonenumber-js
+- react-hook-form 7.86, libphonenumber-js (validación de teléfono DO)
 - Imágenes optimizadas con `wsrv.nl` (helper centralizado `optimizedImg`)
 
 ## Funcionalidades
@@ -78,6 +78,8 @@ src/
   utils/
     loading.js             # preloadImages, minDelay
     optimizedImg.js        # URLs optimizadas vía wsrv.nl
+    publicUrl.js           # URLs públicas con import.meta.env.BASE_URL
+    location.js            # países (Intl) + ciudades RD sin dependencias pesadas
     getCardType.js         # detección de marca (visa, mastercard, amex…)
     detectCardTypeLive.js  # detección en vivo mientras se escribe
 ```

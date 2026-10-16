@@ -1,12 +1,15 @@
 import { Slide } from "../components/ui/Slide"
 import { useProducts } from "../hooks/useProducts"
 import Skeleton from "../components/ui/Skeleton"
+import ErrorState from "../components/ui/ErrorState"
 import { useState, useRef, useEffect } from "react";
 import { publicUrl } from "@/utils/publicUrl";
 
 export default function HeroSection() {
   const products = useProducts((state) => state.heroProducts);
   const loading = useProducts((state) => state.heroLoading);
+  const error = useProducts((state) => state.error);
+  const retry = useProducts((state) => state.fetchHomeProducts);
   const [slide, setSlide] = useState(1);
   const [transition, setTransition] = useState('transform .2s ease');
   const [size, setSize ]= useState(window.innerWidth <= 1440 ? window.innerWidth : 1440);
@@ -67,6 +70,21 @@ export default function HeroSection() {
       window.removeEventListener('resize', handleResize);
     };
   },[])
+
+  if (error && !loading && products.length === 0) {
+    return (
+      <section
+        className="z-0 relative bg-black overflow-hidden flex items-center justify-center min-h-100"
+        style={{ width: `${size}px` }}
+      >
+        <ErrorState
+          title="Couldn't load featured products"
+          message="Check your connection and try again."
+          onRetry={retry}
+        />
+      </section>
+    );
+  }
 
   if (loading || products.length === 0) {
     return (

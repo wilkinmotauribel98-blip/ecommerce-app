@@ -1,4 +1,4 @@
-import { Country } from "country-state-city"
+import { getCountries, getCitiesOfCountry } from "@/utils/location"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { useCheckout } from "@/hooks/useCheckout";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { AsYouType, parsePhoneNumberFromString } from "libphonenumber-js";
 
 export default function ShippingForm() {
-  const countries = Country.getAllCountries();
+  const countries = getCountries();
   const [selectedCountry, setSelectedCountry] = useState('DO');
   const navigate = useNavigate();
   const { onShippingFormSubmit, isShippingFormFulfilled, shippingForm } = useCheckout((state) => state)
@@ -58,9 +58,7 @@ export default function ShippingForm() {
   },  [])
 
   useEffect(()=>{
-    import('country-state-city').then(({City})=>{
-      setCities(City.getCitiesOfCountry(selectedCountry))
-    })
+    setCities(getCitiesOfCountry(selectedCountry))
   }, [selectedCountry])
 
   
@@ -157,13 +155,23 @@ export default function ShippingForm() {
           <div className="flex flex-col sm:flex-row gap-5">
             <div className="flex flex-1 flex-col gap-1">
             <label htmlFor="city">City</label>
+            {cities.length ? (
             <select 
               id="city" 
               {...register('city')} 
               className=" border focus:outline-0 border-gray-800 py-2 px-1 rounded"
               >
-              {cities.map(e => <option key={e.name + e.stateCode} value={e.name}> {e.name}</option>)}
+              {cities.map((name) => <option key={name} value={name}> {name}</option>)}
             </select>
+            ) : (
+            <input
+              type="text"
+              id="city"
+              {...register('city', { required: true })}
+              placeholder="City"
+              className=" border focus:outline-0 border-gray-800 py-2 px-2 rounded"
+              />
+            )}
           </div>
 
           <div className="flex flex-1 flex-col gap-1">

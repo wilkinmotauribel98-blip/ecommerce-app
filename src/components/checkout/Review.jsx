@@ -2,7 +2,7 @@ import { useCheckout } from "@/hooks/useCheckout"
 import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useMemo } from "react";
-import { Country } from "country-state-city"
+import { getCountryName } from "@/utils/location";
 import Item from "@/components/checkout/Item";
 import { publicUrl } from "@/utils/publicUrl";
 
@@ -57,7 +57,7 @@ export default function Review(){
             <h2 className="text-lg mb-1">Shipping Address</h2>
             <h3 className="text-zinc-200">{firstName} {lastName}</h3>
             <p className="text-zinc-400">{address}</p>
-            <p className="text-zinc-400">{city}, {Country.getCountryByCode(country)?.name}</p>
+            <p className="text-zinc-400">{city}, {getCountryName(country)}</p>
             <span className="text-zinc-400">{postalCode}</span>
           </div>
         <button 
