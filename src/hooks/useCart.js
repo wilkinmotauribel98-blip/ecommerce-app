@@ -7,9 +7,7 @@ export const useCart = create(
   persist(
     (set, get) => ({
       cart:{},
-      total: Object.values(get().cart).reduce((acc, e)=>{
-          return acc + e.quantity
-        }, 0),
+      total: 0,
       setCart: (product, id) => {
         set((state)=>({cart : {...state.cart, [id]: product}, }))
        const s =  Object.values(get().cart).reduce((acc, e)=>{
