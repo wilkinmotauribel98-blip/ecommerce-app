@@ -1,6 +1,7 @@
-import { Routes, Route, Navigate  } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation  } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { PageContextProvider } from '@/context/PageContext'
+import ErrorBoundary from '@/components/ui/ErrorBoundary'
 
 import Header  from '@/components/layout/header/Header'
 import Footer from '@/components/layout/footer/Footer'
@@ -19,6 +20,7 @@ const CategoriesPage = lazy(()=> import('@/pages/CategoriesPage'));
 const ResultsPage = lazy(()=> import('@/pages/ResultsPage'));
 const NotFoundPage = lazy(()=> import('@/pages/NotFoundPage'));
 const SupportPage = lazy(()=> import('@/pages/SupportPage'));
+const InfoPage = lazy(()=> import('@/pages/InfoPage'));
 
 const ShippingForm = lazy(()=> import('@/components/checkout/ShippingForm'));
 const Done = lazy(()=> import('@/components/checkout/Done'));
@@ -27,13 +29,14 @@ const Review = lazy(()=> import("@/components/checkout/Review"))
 
 
 export default function App() {
+  const location = useLocation()
   return (
     <>
     <PageContextProvider>
       <Header />
       <BottomNavbar />
     </PageContextProvider>
-      
+      <ErrorBoundary key={location.pathname}>
       <Suspense fallback={<PageSkeleton />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -52,9 +55,21 @@ export default function App() {
           <Route path='/results/search' element={<ResultsPage/>} />
           <Route path='/shop' element={<ShopPage />} />
           <Route path='/support' element={<SupportPage />} />
+          <Route path='/contact' element={<InfoPage contentKey="contact" />} />
+          <Route path='/contact-us' element={<InfoPage contentKey="contact" />} />
+          <Route path='/shipping-delivery' element={<InfoPage contentKey="shipping-delivery" />} />
+          <Route path='/returns-refunds' element={<InfoPage contentKey="returns-refunds" />} />
+          <Route path='/faqs' element={<InfoPage contentKey="faqs" />} />
+          <Route path='/about' element={<InfoPage contentKey="about" />} />
+          <Route path='/careers' element={<InfoPage contentKey="careers" />} />
+          <Route path='/press' element={<InfoPage contentKey="press" />} />
+          <Route path='/sustainability' element={<InfoPage contentKey="sustainability" />} />
+          <Route path='/privacy-policy' element={<InfoPage contentKey="privacy-policy" />} />
+          <Route path='/terms-of-service' element={<InfoPage contentKey="terms-of-service" />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Suspense>
+      </ErrorBoundary>
       <Footer />
    </>
   )

@@ -11,8 +11,8 @@ export default function CategoriesContent() {
   useEffect(() => {
     let cancelled = false;
     const startedAt = Date.now();
-    // Precarga de imágenes + tiempo mínimo para que el skeleton
-    // sea perceptible aunque estén en caché del navegador.
+    // Preload images + minimum delay so the skeleton
+    // stays visible even when images are cached by the browser.
     Promise.all([
       preloadImages(categories.map((c) => optimizedImg(c.image, 300, 300))),
       minDelay(800, startedAt),

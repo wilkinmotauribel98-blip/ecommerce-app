@@ -1,7 +1,7 @@
 import { useCart } from "@/hooks/useCart";
 import { useState, useEffect } from "react";
 
-export default function AddToCard({product, price}){
+export default function AddToCart({product, price}){
   const [counter, setCounter] = useState(0);
   const cart = useCart((state)=> state.cart)
   const setCart = useCart((state)=> state.setCart);
@@ -15,7 +15,7 @@ export default function AddToCard({product, price}){
 
 
   const cartProduct = {
-      image: product.images[0],
+      image: product.images?.[0],
       title: product.title,
       price: price,
       stock: product.stock,

@@ -11,7 +11,7 @@ export default function CategoryCard ({category, isLazy}){
       <div >
         <img className="w-full" 
           src={optimizedImg(category.image, 300, 300)} 
-          alt={`${category.category} image`} 
+          alt={`Photo representing the ${category.category.replace(/-/g, ' ')} category`} 
           loading={isLazy ? 'lazy' : 'eager'}
           />
       </div>

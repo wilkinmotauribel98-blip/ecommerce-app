@@ -1,3 +1,4 @@
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function SupportHeader(){
   return(
@@ -11,7 +12,7 @@ export default function SupportHeader(){
         <form action="">
           <div className="flex gap-3 mt-3 border border-zinc-600 bg-gray-700/50  text-zinc-400 py-1.5 px-3  rounded-xl ">
           <svg className={`w-4.5 h-4.5 text-zinc-300 mt-0.5`}>
-            <use href="/ecommerce-app/sprite-core.svg#icon-search"/>
+            <use href={publicUrl('sprite-core.svg#icon-search')}/>
           </svg>
             <input type="search" placeholder="Search for help..." className="placeholder-zinc-400 w-full focus:outline-none"/>
           </div>

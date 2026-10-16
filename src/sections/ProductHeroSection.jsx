@@ -1,5 +1,5 @@
 import { optimizedImg } from "@/utils/optimizedImg";
-import AddToCard from "@/components/ui/AddToCard";
+import AddToCart from "@/components/ui/AddToCart";
 import Skeleton from "@/components/ui/Skeleton";
 import AverageRating from "../components/ui/AverageRating";
 import PriceSection from "../components/ui/PriceSection";
@@ -36,8 +36,8 @@ export default function ProductHeroSection({ product, loading }){
       <div className="bg-zinc-950 flex-1 mt-0  lg:max-w-140 m-auto  border border-zinc-600 rounded-xl">
         <img 
           className="cover w-full"
-          src={optimizedImg(product?.images[0], 720, 720)} 
-          alt={`image of ${product.title}`}
+          src={optimizedImg(product?.images?.[0], 720, 720)} 
+          alt={`Main photo of ${product.title}`}
           loading="eager"
           fetchPriority="high"
           />
@@ -59,11 +59,11 @@ export default function ProductHeroSection({ product, loading }){
 
         <div className="text-zinc-400 flex flex-col gap-1">
             <span>Weight {product.weight} g</span> 
-            <span>Dimensions {product.dimensions.width} x {product.dimensions.height}  x {product.dimensions.depth} cm </span>  
+            <span>Dimensions {product.dimensions?.width} x {product.dimensions?.height}  x {product.dimensions?.depth} cm </span>  
             <span>Minimum order quantity: {product.minimumOrderQuantity}</span> 
-            <span>Availabity: in stock ({product.stock} units)</span>
+            <span>Availability: in stock ({product.stock} units)</span>
         </div>
-        <AddToCard product={product} price={price}/>
+        <AddToCart product={product} price={price}/>
         <button className="border border-zinc-600 py-2 cursor-pointer rounded">Buy Now</button>
       </article>
     </section>

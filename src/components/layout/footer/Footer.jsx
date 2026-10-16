@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import FooterDesktopDetails from "./FooterDesktopDetails";
 import FooterMobileDetails from "./FooterMobileDetails";
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function Footer() {
   const [size, setSize] = useState(window.innerWidth);
@@ -20,7 +21,7 @@ export default function Footer() {
         <article className="flex flex-col flex-1 " aria-label="Footer Navigation Links">
           <div className="flex items-center" aria-label="Footer Logo and Title">
             <svg className="w-10 h-10 flex" aria-label="Footer Logo">
-              <use href="/ecommerce-app/sprite-core.svg#icon-logo"></use>
+              <use href={publicUrl('sprite-core.svg#icon-logo')}></use>
             </svg>
             <span className="text-white text-xl sm:text-xl lg:text-2xl" aria-label="Footer Navigation Title">NIFLIX</span>
           </div>

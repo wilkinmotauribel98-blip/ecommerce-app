@@ -1,5 +1,6 @@
 import { Detail } from '@/components/ui/Detail'
 import { Link } from 'react-router-dom'
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function FooterMobileDetails() {
 
@@ -45,22 +46,22 @@ export default function FooterMobileDetails() {
           <ul className='flex gap-4' aria-label="Social Media Links">
             <li className='text-zinc-300 w-min ' aria-label="Instagram">
               <svg width="44" height="44" aria-hidden="true">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-instagram"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-instagram')}></use>
               </svg>   
             </li>
             <li className='text-zinc-300 w-min' aria-label="YouTube">
               <svg className=" text-zinc-400 w-11 h-11 hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-youtube"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-youtube')}></use>
               </svg>
             </li>
             <li className='text-zinc-400 w-min' aria-label="Twitter">
               <svg className="text-zinc-300  w-11 h-11 hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-twitter"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-twitter')}></use>
               </svg>
             </li>
             <li className='text-zinc-400 w-min' aria-label="Facebook">
               <svg className=" text-zinc-300  w-11 h-11 hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-facebook"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-facebook')}></use>
               </svg>    
             </li>
           </ul>

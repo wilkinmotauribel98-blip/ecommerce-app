@@ -4,15 +4,30 @@ import useFetch from "@/hooks/useFetch";
 import BreadCrumbSection from "@/sections/BreadCrumbSection";
 import RenderResults from "@/components/results/RenderResults";
 import ResultsSkeleton from "@/components/results/ResultsSkeleton";
+import ErrorState from "@/components/ui/ErrorState";
 
 
 export default function ResultsPage(){
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q');
-  const { loading, data } = useFetch(`https://dummyjson.com/products/search?q=${query}`)
+  const { loading, data, error, retry } = useFetch(`https://dummyjson.com/products/search?q=${query}`)
  
 
   if(!query) return null
+
+  if(error) {
+    return(
+      <main className="mb-10 min-h-dvh max-w-360 w-[95%] m-auto z-0 bg-black overflow-hidden" aria-label="Results Page Main Content">
+        <BreadCrumbSection loading={loading} cart={true} title={'Search Results'} />
+        <ErrorState
+          title="Couldn't load search results"
+          message="Check your connection and try again."
+          onRetry={retry}
+        />
+      </main>
+    )
+  }
+  
   return(
     <main className="mb-10 min-h-dvh max-w-360 w-[95%] m-auto z-0 bg-black overflow-hidden  " aria-label="Results Page Main Content">
       <BreadCrumbSection loading={ loading } cart={true} title={'Search Results'} />

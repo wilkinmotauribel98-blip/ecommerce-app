@@ -50,7 +50,7 @@ export const useProducts = create(
           const hero = pickByIds(all, heroIds);
           const newArrivals = pickByIds(all, newArrivalsIds);
           const bestSellers = pickByIds(all, bestSellersIds);
-          const categorias = categories.map((category) => {
+          const categoriesWithImages = categories.map((category) => {
             const match = all.find((p) => p.id === category.id);
             return { ...category, images: match?.images ?? [] };
           });
@@ -62,7 +62,7 @@ export const useProducts = create(
             newArrivalsLoading: false,
             bestSellersProducts: bestSellers,
             bestSellersLoading: false,
-            categoryProducts: categorias,
+            categoryProducts: categoriesWithImages,
             categoriesLoading: false,
             hasHomeFetched: true,
             lastFetched: Date.now(),

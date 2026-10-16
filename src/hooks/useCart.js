@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { fetchProductsByCategory } from '@/api/products.js'
-const ITBIS_RATE = 0.18;
+const TAX_RATE = 0.18;
 
 export const useCart = create(
   persist(
     (set, get) => ({
       cart:{},
-      total: 0,
+      total: Object.values(get().cart).reduce((acc, e)=>{
+          return acc + e.quantity
+        }, 0),
       setCart: (product, id) => {
         set((state)=>({cart : {...state.cart, [id]: product}, }))
        const s =  Object.values(get().cart).reduce((acc, e)=>{
@@ -30,18 +32,19 @@ export const useCart = create(
 
       recalcTotal: ()=>{
         const subtotal = Object.values(get().cart).reduce((acc, e) => acc + (e.quantity * e.price), 0);
-        const tax = subtotal * ITBIS_RATE;
+        const tax = subtotal * TAX_RATE;
         const total = subtotal + tax;
         return { subtotal, tax, total }
       },
 
 
-      fecthRecomndedProducts:async ()=>{
+      fetchRecommendedProducts:async ()=>{
         const cartIds = Object.keys(get().cart)
         const  w = [] ;
         await Promise.all( Object.values(get().cart).map((e) => fetchProductsByCategory(e.category).then(a => w.push(a))));
+        
         const products = w.map(
-          e => e.products.filter(e => !cartIds.includes(e.id.toString()))
+          e => e.filter(e => !cartIds.includes(e.id.toString()))
         
         ).map(e => {
           if(cartIds.length <= 2 ) return e.slice(0,6)

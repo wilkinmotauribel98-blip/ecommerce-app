@@ -2,16 +2,17 @@
 import { useCheckout } from '@/hooks/useCheckout'
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { publicUrl } from "@/utils/publicUrl";
 export default function Done(){
-  const { orderNumber, isPaymentFormFullFiled, isShippingFormFullFiled, isReviewed } = useCheckout((state) => state);
+  const { orderNumber, isPaymentFormFulfilled, isShippingFormFulfilled, isReviewed } = useCheckout((state) => state);
   const navigate = useNavigate()
   const handleCopyClick = (orderNumber) => {
     navigator.clipboard.writeText(orderNumber)
   }
 
   useEffect(()=>{
-    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
-    else if(!isPaymentFormFullFiled) navigate('/checkout/payment');
+    if(!isShippingFormFulfilled) navigate('/checkout/shipping');
+    else if(!isPaymentFormFulfilled) navigate('/checkout/payment');
     else if(!isReviewed) navigate('/checkout/review');
 
   },[])
@@ -20,10 +21,10 @@ export default function Done(){
   return(
     <section className="flex items-center flex-col justify-center gap-3 mb-30 mt-20">
       <svg className="w-50 h-50 rounded">
-        <use href='/ecommerce-app/sprite-core.svg#icon-check-circle' />
+        <use href={publicUrl('sprite-core.svg#icon-check-circle')} />
       </svg>
       <h1 className='text-4xl text-white'>Order Confirmed!</h1>
-      <p className='text-zinc-400 text-center text-lg'>Thank for your purchase. Your order has been placed successfully.</p>
+      <p className='text-zinc-400 text-center text-lg'>Thank you for your purchase. Your order has been placed successfully.</p>
       <article className="flex flex-col gap-1 w-full max-w-md relative ">
 
         <div className="border border-gray-500 bg-gray-800 p-2 rounded flex flex-col gap-1 w-full ">
@@ -34,7 +35,7 @@ export default function Done(){
             onClick={() => handleCopyClick(orderNumber)}
           >
            <svg className="w-5 h-5" aria-label="Copy order number">
-            <use href='/ecommerce-app/sprite-core.svg#icon-copy' />
+            <use href={publicUrl('sprite-core.svg#icon-copy')} />
            </svg>
           </button>
         </div>

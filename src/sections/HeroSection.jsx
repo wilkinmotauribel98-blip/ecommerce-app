@@ -2,6 +2,7 @@ import { Slide } from "../components/ui/Slide"
 import { useProducts } from "../hooks/useProducts"
 import Skeleton from "../components/ui/Skeleton"
 import { useState, useRef, useEffect } from "react";
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function HeroSection() {
   const products = useProducts((state) => state.heroProducts);
@@ -126,14 +127,14 @@ export default function HeroSection() {
       <svg 
         className="h-15 w-15 z-100 -left-1 text-zinc-400 absolute top-5/12 hidden lg:group-hover:block" 
         >
-        <use href="/ecommerce-app/sprite-core.svg#chevron-left"></use>
+        <use href={publicUrl('sprite-core.svg#chevron-left')}></use>
       </svg>
     </button>
       
 
       <button onClick={next} aria-label="Go to next slide" focus-visible="true">
         <svg className="absolute z-100 text-zinc-400 h-15 w-15 -right-1 top-5/12 hidden group-hover:block">
-          <use href="/ecommerce-app/sprite-core.svg#chevron-right"></use>
+          <use href={publicUrl('sprite-core.svg#chevron-right')}></use>
         </svg>
       </button>
 

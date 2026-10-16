@@ -1,9 +1,10 @@
 import { useCheckout } from "@/hooks/useCheckout"
 import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Country } from "country-state-city"
 import Item from "@/components/checkout/Item";
+import { publicUrl } from "@/utils/publicUrl";
 
 
 const PAYPAL = 'paypal';
@@ -19,8 +20,8 @@ function PaymentCard({cardType, last4}){
               <svg className="w-10 h-10 mr-2">
                 {cardType !== null
                  ? 
-                <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
-                : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
+                <use href={publicUrl(`payment-icons.svg#icon-${cardType}`) } />
+                : <use href={publicUrl('sprite-core.svg#icon-credit-card')} />}
               </svg>
               {dots}
               {last4}
@@ -29,14 +30,14 @@ function PaymentCard({cardType, last4}){
 }
 export default function Review(){
   const navigate = useNavigate();
-  const { subtotal, tax, total } = useCart((state) => state.recalcTotal());
-  const { setOrderNumber, setIsReviewed, setIsDone, isPaymentFormFullFiled, isShippingFormFullFiled, placeOrder } = useCheckout((state) => state);
   const cartItems = useCart((state) => state.cart);
+  const { subtotal, tax, total } = useMemo(() => useCart.getState().recalcTotal(), [cartItems]);
+  const { setOrderNumber, setIsReviewed, setIsDone, isPaymentFormFulfilled, isShippingFormFulfilled, placeOrder } = useCheckout((state) => state);
   const { firstName, address, city, postalCode, lastName, country } = useCheckout((state)=> state.shippingForm)
   const { paymentMethod, last4, cardType  } = useCheckout((state)=> state.paymentForm)
   useEffect(()=>{
-    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
-    else if(!isPaymentFormFullFiled) navigate('/checkout/payment');
+    if(!isShippingFormFulfilled) navigate('/checkout/shipping');
+    else if(!isPaymentFormFulfilled) navigate('/checkout/payment');
   },[])
 
   
@@ -50,7 +51,7 @@ export default function Review(){
          <svg 
             className='w-7.5 h-7.5' 
             aria-label="Location">
-            <use href="/ecommerce-app/sprite-extra.svg#icon-location"/>
+            <use href={publicUrl('sprite-extra.svg#icon-location')}/>
           </svg>
           <div>
             <h2 className="text-lg mb-1">Shipping Address</h2>
@@ -70,10 +71,10 @@ export default function Review(){
          <svg 
             className='w-10 h-10' 
             aria-label="Payment Card">
-            {paymentMethod === CARD && <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
-            {paymentMethod === PAYPAL &&  <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark" />}
-            {paymentMethod === APPLE_PAY && <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-mark" />}
-            {paymentMethod === GOOGLE_PAY &&  <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />}
+            {paymentMethod === CARD && <use href={publicUrl('sprite-core.svg#icon-credit-card')} />}
+            {paymentMethod === PAYPAL &&  <use href={publicUrl('payment-icons.svg#icon-paypal-mark')} />}
+            {paymentMethod === APPLE_PAY && <use href={publicUrl('payment-icons.svg#icon-apple-pay-mark')} />}
+            {paymentMethod === GOOGLE_PAY &&  <use href={publicUrl('payment-icons.svg#icon-google-pay-badge')} />}
             
           </svg>
           <div>

@@ -1,6 +1,7 @@
 import { useCart } from '@/hooks/useCart'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { publicUrl } from "@/utils/publicUrl";
 export default function CartSummary({checkout}) {
   const cart = useCart((state) => state.cart)
   const recalcTotal = useCart((state) => state.recalcTotal)
@@ -10,7 +11,7 @@ export default function CartSummary({checkout}) {
   
   return (
     <section className="text-white  lg:max-w-75 w-full mb-10 p-6 h-min flex flex-col gap-6 rounded-2xl border border-zinc-800"
-    aria-label='Chekout section'
+    aria-label='Checkout section'
     >
       <div className='flex flex-col gap-2 text-zinc-400 pb-7 border-b border-zinc-700'>
         <div className='flex justify-between items-center pb-7 border-b border-zinc-800'>
@@ -57,7 +58,7 @@ export default function CartSummary({checkout}) {
         >
           <svg 
             className='w-6.5 h-6.5 text-zinc-100 cursor-pointer' >
-            <use href="/ecommerce-app/sprite-extra.svg#icon-lock"/>
+            <use href={publicUrl('sprite-extra.svg#icon-lock')}/>
           </svg>
           Proceed to Checkout
         </button>
@@ -67,23 +68,23 @@ export default function CartSummary({checkout}) {
         <div className='flex gap-2 px-3'>
           <svg 
             className='w-20 h-10  rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-visa"/>
+            <use href={publicUrl('payment-icons.svg#icon-visa')}/>
           </svg>
           <svg 
             className='w-20 h-10  rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-mastercard"/>
+            <use href={publicUrl('payment-icons.svg#icon-mastercard')}/>
           </svg>
           <svg 
             className='w-20 h-10  rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-amex"/>
+            <use href={publicUrl('payment-icons.svg#icon-amex')}/>
           </svg>
           <svg 
             className='w-20 h-10  rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark"/>
+            <use href={publicUrl('payment-icons.svg#icon-paypal-mark')}/>
           </svg>
           <svg 
             className='w-20 h-10  rounded' >
-            <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge"/>
+            <use href={publicUrl('payment-icons.svg#icon-google-pay-badge')}/>
           </svg>
           
         </div>

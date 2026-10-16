@@ -1,6 +1,7 @@
 import { optimizedImg } from "@/utils/optimizedImg";
 import { useState, useEffect } from "react"
 import { useCart } from '@/hooks/useCart'
+import { publicUrl } from "@/utils/publicUrl";
 
 
 
@@ -10,9 +11,12 @@ export default function CartItem ({product, id, isLazy}) {
   const setCart = useCart((state)=> state.setCart)
   const deleteProduct = useCart((state)=> state.deleteProduct)
   useEffect(()=>{
+    setCounter(quantity)
+  }, [quantity])
+  useEffect(()=>{
     const setProduct = {image:image, price:price, quantity:counter, title:title, stock:stock, category: category}
     setCart(setProduct, id)
-  }, [counter])
+  }, [counter, id])
   
   
   
@@ -22,7 +26,7 @@ export default function CartItem ({product, id, isLazy}) {
     >
       <div className="min-w-35 w-2/6 max-w-35 ">
         <img 
-          src={optimizedImg(image, 550, 550)} alt={`image of ${title}`} 
+          src={optimizedImg(image, 550, 550)} alt={`${title} in your shopping cart`} 
           className="w-full"
           loading={isLazy ? 'lazy' : 'eager'}
           />
@@ -69,7 +73,7 @@ export default function CartItem ({product, id, isLazy}) {
           <svg 
             className='w-6.5 h-6.5 text-red-500 cursor-pointer ' 
             aria-label="Delete Item">
-            <use href="/ecommerce-app/sprite-core.svg#icon-trash"/>
+            <use href={publicUrl('sprite-core.svg#icon-trash')}/>
           </svg>
         </button>
     </article>

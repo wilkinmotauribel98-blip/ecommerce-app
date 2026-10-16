@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { publicUrl } from "@/utils/publicUrl";
 
 export function FeatureCard({className, icon, title, description, hidden}) {
   return(
@@ -8,7 +9,7 @@ export function FeatureCard({className, icon, title, description, hidden}) {
       aria-label={`Feature: ${title} - ${description}`}
     >
       <svg className={`${className}`}>
-        <use href={`/ecommerce-app/sprite-extra.svg#${icon}`}></use>
+        <use href={publicUrl(`sprite-extra.svg#${icon}`)}></use>
       </svg>
 
       <div className="flex flex-col "> 

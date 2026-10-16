@@ -1,10 +1,11 @@
+import { publicUrl } from "@/utils/publicUrl";
 export default function ShopHeroSection(){
   return(
     <section className="relative w-full ">
       <div className="w-full max-h-100 aspect-video "> 
         <img 
-          src="heroimg.png" 
-          alt="image of products" 
+          src={publicUrl('heroimg.png')} 
+          alt="Banner showcasing the full product collection in the shop" 
           className="aspect-video w-full max-h-120"
           loading="eager"
 

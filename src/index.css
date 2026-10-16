@@ -14,7 +14,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:checked {
-  background: #47db51; /* o el color que quieras cuando está marcado */
+  background: #47db51; /* or any color you want when checked */
 }
 
 input[type='checkbox']:checked::after {

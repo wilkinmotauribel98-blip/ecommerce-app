@@ -1,5 +1,6 @@
 import YouMayAlsoLikeCard from "../cart/YouMayAlsoLikeCard"
 import { useState, useEffect, useMemo } from "react"
+import { publicUrl } from "@/utils/publicUrl";
 const arr = Array.from({length: 5}).map((_,i) => i + 1)
 
 export default function CategoryContent ( { content, brands}){
@@ -124,7 +125,7 @@ const products = useMemo(()=> {
               <input type="checkbox" name={`${6 - e} stars`} id="" className="bg-amber-200" />
               <span className="flex">
                 {
-                  arr.map(a => a < 7 - e ? <svg key={a} className="w-6 h-6 text-amber-300 "><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use> </svg> : <svg  className="w-6 h-6" key={a} ><use href="/ecommerce-app/sprite-extra.svg#icon-void-star"></use> </svg>)
+                  arr.map(a => a < 7 - e ? <svg key={a} className="w-6 h-6 text-amber-300 "><use href={publicUrl('sprite-extra.svg#icon-star')}></use> </svg> : <svg  className="w-6 h-6" key={a} ><use href={publicUrl('sprite-extra.svg#icon-void-star')}></use> </svg>)
                 }
               </span>
             </div>)

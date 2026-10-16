@@ -18,12 +18,7 @@ export async function fetchProductsByCategory(category) {
   const res = await fetch(`https://dummyjson.com/products/category/${category}`);
   const json = await res.json();
   const products = json.products
-  const brands = json.products.map(e => e.brand).reduce((acc, p)=>  { 
-    if(!acc.includes(p)) acc.push(p)
-      return acc
-   },[])
-  
-  return {products, brands}
+  return products
 }
 
 export async function fetchAllProducts(limit = 194) {

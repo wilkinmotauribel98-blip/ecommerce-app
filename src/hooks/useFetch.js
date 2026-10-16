@@ -4,9 +4,8 @@ export default function useFetch(url) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-
+  const [attempt, setAttempt] = useState(0)
   useEffect(()=>{
-    
     setLoading(true);
     const abortController = new AbortController();
     setError(null)
@@ -23,8 +22,8 @@ export default function useFetch(url) {
 
     return ()=> abortController.abort();
 
-  }, [url])
+  }, [url, attempt])
 
   
-  return { error, data, loading };
+  return { error, data, loading, retry: ()=> setAttempt(n => n + 1)};
 }

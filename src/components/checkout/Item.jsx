@@ -6,20 +6,20 @@ export default function Item({item, id}) {
   return(
     <article 
       className="flex gap-2 items-center border-t border-gray-800 cursor-pointer" 
-      onClick={()=> navigate(`/product/${id}/${item.title.replace(/ /g, '-')}`)}
+      onClick={()=> navigate(`/product/${id}/${item.title?.replace(/ /g, '-')}`)}
     >
       <img 
         src={item.image} 
-        alt={item.title} 
+        alt={`${item.title} in your order`} 
         className="w-20 h-30  sm:w-30 object-cover rounded"
         loading="lazy"
         />
       <div className="flex flex-col gap-1">
         <h3 className="text-lg">{item.title}</h3>
-        <p className="text-zinc-400 capitalize">{item.category.replace(/-/g, ' ')}</p>
+        <p className="text-zinc-400 capitalize">{item.category?.replace(/-/g, ' ')}</p>
         <p className="text-zinc-400">Quantity: {item.quantity}</p>
       </div>
-      <p className="text-zinc-400 ml-auto w-fit"> ${(item.price * item.quantity).toFixed(2)}</p>
+      <p className="text-zinc-400 ml-auto w-fit"> ${((item.price ?? 0) * (item.quantity ?? 0)).toFixed(2)}</p>
     </article>
   )
 }

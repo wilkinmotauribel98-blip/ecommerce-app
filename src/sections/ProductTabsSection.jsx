@@ -33,11 +33,11 @@ export default function ProductTabsSection({product, loading}){
     {title:'Brand', content: product?.brand },
     {title:'SKU', content: product?.sku },
     {title:'Weight', content: product?.weight },
-    {title:'Dimentions', content: product?.dimentions },
+    {title:'Dimensions', content: product?.dimensions ? `${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm` : undefined },
     {title:'Minimum order quantity', content: product?.minimumOrderQuantity },
     {title:'Availability', content: product?.availabilityStatus },
-    {title:'Category', content: product?.category.replace(/-/g, ' ') },
-    {title:'Tags', content: product?.tags.join(', ') },
+    {title:'Category', content: product?.category?.replace(/-/g, ' ') },
+    {title:'Tags', content: product?.tags?.join(', ') },
   ]
 
   return(
@@ -51,13 +51,13 @@ export default function ProductTabsSection({product, loading}){
         <button 
           className={`flex-1 py-3 cursor-pointer ${tab == 'SPECIFICATIONS' && 'border-b-4 border-emerald-400'}`} 
           onClick={()=> setTab('SPECIFICATIONS')}
-          aria-label="Specifitions tab"
+          aria-label="Specifications tab"
           >Specifications</button>
         <button 
           className={`flex-1 cursor-pointer py-3 ${tab == 'REVIEWS' &&  'border-b-4 border-emerald-400'}`} 
           onClick={()=> setTab('REVIEWS')}
           aria-label="Reviews tab"
-          >Reviews ({product.reviews.length})</button>
+          >Reviews ({product.reviews?.length ?? 0})</button>
       </div>
 
        {tab == 'DESCRIPTION' &&
@@ -65,7 +65,7 @@ export default function ProductTabsSection({product, loading}){
         <p aria-label={`${product.description}`} className="flex-1">{product.description}</p>
         <div className="flex-1 flex flex-col gap-5">
           <h3 className="text-white text-lg">Customer Reviews</h3>
-          {product.reviews.slice(0,3).map((e)=> <ReviewCard key={e.comment} review={e}/>)}
+          {(product.reviews ?? []).slice(0,3).map((e)=> <ReviewCard key={e.comment} review={e}/>)}
         </div>
       </section> 
       }
@@ -84,7 +84,7 @@ export default function ProductTabsSection({product, loading}){
         tab == 'REVIEWS' &&
         <section className="flex flex-col gap-5 text-zinc-400 w-full sm:ml-10 md:ml-20 lg:ml-25 xl:ml-37">
           <h3 className="text-white text-xl">Customer Reviews</h3>
-          {product.reviews.map((e)=> <ReviewCard key={e.comment} review={e}/>)}
+          {(product.reviews ?? []).map((e)=> <ReviewCard key={e.comment} review={e}/>)}
         </section> 
         
       }

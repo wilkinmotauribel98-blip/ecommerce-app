@@ -1,3 +1,4 @@
+import { publicUrl } from "@/utils/publicUrl";
 export default function Badge({icon, title, desc, style}) {
   return (
     <>
@@ -6,7 +7,7 @@ export default function Badge({icon, title, desc, style}) {
         aria-label={`${title}: ${desc}`}
         >
             <svg className="w-10 text-emerald-400 h-10">
-              <use href={`/ecommerce-app/sprite-extra.svg#${icon}`}></use>
+              <use href={publicUrl(`sprite-extra.svg#${icon}`)}></use>
             </svg>
             <div>
               <h3 className={`font-bold text-sm ${style ? '': "text-center"}`}>{title}</h3>

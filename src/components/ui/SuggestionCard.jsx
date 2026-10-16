@@ -13,8 +13,8 @@ export function SuggestionCard({info}) {
       className="flex items-center hover:bg-zinc-700  cursor-pointer  bg-zinc-800 border-b border-b-gray-500 z-90" 
     >
         <img 
-          src={optimizedImg(info.images[0], 200, 200)} 
-          alt={`this is the image of the ${info.title}`} 
+          src={optimizedImg(info.images?.[0], 200, 200)} 
+          alt={`Search result thumbnail for ${info.title}`} 
           className="w-2/12 min-w-16 aspect-square"
           loading="lazy"
           />

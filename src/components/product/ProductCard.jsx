@@ -3,6 +3,7 @@ import AverageRating from "../ui/AverageRating";
 import { useCart } from "@/hooks/useCart";
 import { useNavigate } from "react-router-dom";
 import { optimizedImg } from "@/utils/optimizedImg";
+import { publicUrl } from "@/utils/publicUrl";
 
 const VARIANT_CONFIG = {
   shop: {
@@ -63,12 +64,12 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
 
 
   const cartProduct = {
-      image: product?.images[0],
+      image: product?.images?.[0],
       title: product?.title,
       price: (product?.price - (product?.price / 100 * product?.discountPercentage)).toFixed(2),
       stock: product?.stock,
       quantity: productQuantity(),
-      category: product.category
+      category: product?.category
     }
 
   
@@ -76,8 +77,8 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
       <article className={`border border-zinc-800 rounded-2xl  gap-1 cursor-pointer relative hover:scale-105 ${config.articleClass}`}
         onClick={()=>{    
       variant === 'shop'
-      ? navigate(`/category/${product?.title.toLowerCase()}`)
-      : navigate(`/product/${product?.id}/${product?.title.toLowerCase().replace(/\s/g, '-')}`)
+      ? navigate(`/category/${product?.title?.toLowerCase() ?? ''}`)
+      : navigate(`/product/${product?.id}/${product?.title?.toLowerCase()?.replace(/\s/g, '-') ?? ''}`)
     
         }}
       >
@@ -87,8 +88,8 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
 
         <div className={config.imgWrapperClass}>
           <img 
-            src={optimizedImg(product?.images[0], 280, 280)} 
-            alt={product?.title} 
+            src={optimizedImg(product?.images?.[0], 280, 280)} 
+            alt={`${product?.title} product photo`} 
             className={`w-full ${variant === 'allProducts' || 'relative z-10'} `} 
             loading={isLazy ? 'lazy' : "eager"}
             />
@@ -100,11 +101,11 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
         )}
 
         <div className={`${variant === 'allProducts' ? 'w-full justify-end px-2 flex flex-col pl-3  flex-1' : 'absolute bottom-3 w-full'} `}>
-           { variant === 'allProducts' && <span className="sm:absolute w-fit top-3 capitalize left-4 bg-emerald-700 text-emerald-300  rounded-full px-2">{product?.category.replace(/-/g, ' ')}</span> 
+           { variant === 'allProducts' && <span className="sm:absolute w-fit top-3 capitalize left-4 bg-emerald-700 text-emerald-300  rounded-full px-2">{product?.category?.replace(/-/g, ' ')}</span> 
           }
 
           <h3 className={`text-white p-0 m-0 ${config.titleClass}`}>
-            {product?.title.replace(/-/g, ' ')}
+            {product?.title?.replace(/-/g, ' ')}
           </h3>
           { variant === 'allProducts' &&
             <>
@@ -117,7 +118,7 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
                 <svg 
                 className='w-6.5 h-6.5 cursor-pointer' 
                 aria-label="Shopping cart">
-                <use href="/ecommerce-app/sprite-core.svg#icon-cart"/>
+                <use href={publicUrl('sprite-core.svg#icon-cart')}/>
                 </svg>
                 <span>Add to cart</span>
                 </button>
@@ -129,7 +130,7 @@ export default function ProductCard({ product, variant = 'default', isNew, isLaz
               <span className="text-zinc-400 flex ml-3 gap-1.5 items-center">
                 Rating
                 <svg className="w-6 h-6 text-emerald-500">
-                  <use href="/ecommerce-app/sprite-extra.svg#icon-star" />
+                  <use href={publicUrl('sprite-extra.svg#icon-star')} />
                 </svg>
                 {product?.rating}
               </span>

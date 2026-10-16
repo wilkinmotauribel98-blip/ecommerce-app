@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Cart from "../../cart/Cart";
 import { PageContext } from "@/context/PageContext";
 import { useContext } from "react";
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function BottomNavbar() {
   const {currentPage} = useContext(PageContext)
@@ -25,7 +26,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Home page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="Home">
-                <use href="/ecommerce-app/sprite-core.svg#icon-home"/>
+                <use href={publicUrl('sprite-core.svg#icon-home')}/>
               </svg>
               <p className='text-md sm:text-lg'>
                 Home
@@ -42,7 +43,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Shop page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8 cursor-pointer `} aria-label="Products">
-                <use href="/ecommerce-app/sprite-core.svg#icon-shop"/>
+                <use href={publicUrl('sprite-core.svg#icon-shop')}/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Shop
@@ -58,7 +59,7 @@ export default function BottomNavbar() {
               aria-label="Navigate to Categories page"
             >
               <svg className={` w-7 h-7 sm:w-9 sm:h-8  cursor-pointer`} aria-label="About">
-                <use href="/ecommerce-app/sprite-core.svg#icon-grid"/>
+                <use href={publicUrl('sprite-core.svg#icon-grid')}/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Categories
@@ -75,7 +76,7 @@ export default function BottomNavbar() {
             className={`flex flex-col  ${currentPage === 'support'  && 'text-emerald-400'}  items-center`}
             >
               <svg className={` w-7 h-7 sm:w-9  sm:h-8  cursor-pointer`} aria-label="User Account">
-                <use href="/ecommerce-app/sprite-core.svg#icon-support"/>
+                <use href={publicUrl('sprite-core.svg#icon-support')}/>
               </svg >
               <p className='text-md sm:text-lg'>
                 Support

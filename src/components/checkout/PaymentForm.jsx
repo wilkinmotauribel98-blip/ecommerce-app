@@ -4,6 +4,7 @@ import { useCheckout } from "@/hooks/useCheckout";
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { getCardType } from "@/utils/getCardType";
+import { publicUrl } from "@/utils/publicUrl";
 
 const PayButton = ({title, symbol})=>{
   return(
@@ -12,7 +13,7 @@ const PayButton = ({title, symbol})=>{
         type="submit"
         >
         <svg className="w-13 h-7 hidden sm:block rounded">
-          <use href={`/ecommerce-app/payment-icons.svg#icon-${symbol}`} />
+          <use href={publicUrl(`payment-icons.svg#icon-${symbol}`)} />
         </svg>
         {title}
       </button>
@@ -31,7 +32,7 @@ export default function PaymentForm() {
   const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm({defaultValues: {'paymentMethod': 'card'}});
   const [allowChanges, setAllowChanges] = useState(true);
   const navigate = useNavigate();
-  const { onPaymentFormSubmit, isShippingFormFullFiled, isPaymentFormFullFiled, paymentForm} = useCheckout((state) => state);
+  const { onPaymentFormSubmit, isShippingFormFulfilled, isPaymentFormFulfilled, paymentForm} = useCheckout((state) => state);
   const { paymentMethod } = paymentForm
   const paymentMethodValue = watch('paymentMethod');
   
@@ -49,8 +50,8 @@ export default function PaymentForm() {
   }
 
   useEffect(()=>{
-    if(!isShippingFormFullFiled) navigate('/checkout/shipping');
-    if(isPaymentFormFullFiled){
+    if(!isShippingFormFulfilled) navigate('/checkout/shipping');
+    if(isPaymentFormFulfilled){
       switch(paymentMethod){
         case CARD:{
           setAllowChanges(false)
@@ -104,7 +105,7 @@ export default function PaymentForm() {
             </span>
 
             <svg className="w-14  h-9 rounded">
-              <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />
+              <use href={publicUrl('sprite-core.svg#icon-credit-card')} />
             </svg>
 
             <span className="flex flex-col">
@@ -114,13 +115,13 @@ export default function PaymentForm() {
 
             <div className="flex gap-2 px-3 ml-auto">
               <svg className="w-13 h-7 hidden sm:block bg-amber-50 rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-visa" />
+                <use href={publicUrl('payment-icons.svg#icon-visa')} />
               </svg>
               <svg className="w-13 h-7 hidden sm:block rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-mastercard" />
+                <use href={publicUrl('payment-icons.svg#icon-mastercard')} />
               </svg>
               <svg className="w-13 h-7 hidden sm:block rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-amex" />
+                <use href={publicUrl('payment-icons.svg#icon-amex')} />
               </svg>
             </div>
           </label>
@@ -140,7 +141,7 @@ export default function PaymentForm() {
             </span>
 
             <svg className="w-14  h-9 rounded">
-              <use href="/ecommerce-app/payment-icons.svg#icon-paypal-mark" />
+              <use href={publicUrl('payment-icons.svg#icon-paypal-mark')} />
             </svg>
 
             <span className="flex flex-col">
@@ -150,7 +151,7 @@ export default function PaymentForm() {
 
             <div className="flex gap-2 px-3 ml-auto">
               <svg className="w-13 h-7 hidden sm:block rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-paypal-badge" />
+                <use href={publicUrl('payment-icons.svg#icon-paypal-badge')} />
               </svg>
               
             </div>
@@ -172,7 +173,7 @@ export default function PaymentForm() {
             </span>
 
             <svg className="w-14 h-9 rounded">
-              <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-mark" />
+              <use href={publicUrl('payment-icons.svg#icon-apple-pay-mark')} />
             </svg>
 
             <span className="flex flex-col">
@@ -182,7 +183,7 @@ export default function PaymentForm() {
 
             <div className="flex gap-2 px-3 ml-auto">
               <svg className="w-13 h-7 hidden sm:block rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-apple-pay-badge" />
+                <use href={publicUrl('payment-icons.svg#icon-apple-pay-badge')} />
               </svg>
               
             </div>
@@ -204,7 +205,7 @@ export default function PaymentForm() {
             </span>
 
             <svg className="w-14 h-9 rounded">
-              <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />
+              <use href={publicUrl('payment-icons.svg#icon-google-pay-badge')} />
             </svg>
 
             <span className="flex flex-col">
@@ -214,7 +215,7 @@ export default function PaymentForm() {
 
             <div className="flex gap-2 px-3 ml-auto">
               <svg className="w-13 h-7 hidden sm:block rounded">
-                <use href="/ecommerce-app/payment-icons.svg#icon-google-pay-badge" />
+                <use href={publicUrl('payment-icons.svg#icon-google-pay-badge')} />
               </svg>
               
             </div>

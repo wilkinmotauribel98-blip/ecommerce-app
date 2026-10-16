@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function FooterDesktopDetails() {
   return (
@@ -27,22 +28,22 @@ export default function FooterDesktopDetails() {
           <ul className='flex gap-4 mt-2' aria-label="Social Media Links">
             <li className='text-zinc-400' aria-label="Instagram">
               <svg  aria-hidden="true" className="border cursor-pointer w-10 h-10 p-2 border-zinc-800 rounded-full">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-instagram"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-instagram')}></use>
               </svg>   
             </li>
             <li className='text-zinc-400' aria-label="YouTube">
               <svg className="w-10 h-10 p-2 border border-zinc-800 rounded-full text-zinc-400 hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-youtube"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-youtube')}></use>
               </svg>
             </li>
             <li className='text-zinc-400' aria-label="Twitter">
               <svg className="w-10 h-10 p-2 text-zinc-400 border border-zinc-800 rounded-full hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-twitter"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-twitter')}></use>
               </svg>
             </li>
             <li className='text-zinc-400' aria-label="Facebook">
               <svg className="w-10 h-10 p-2 border border-zinc-800 rounded-full  text-zinc-400 hover:text-gray-400 cursor-pointer">
-                <use href="/ecommerce-app/sprite-extra.svg#icon-facebook"></use>
+                <use href={publicUrl('sprite-extra.svg#icon-facebook')}></use>
               </svg>    
             </li>
           </ul>

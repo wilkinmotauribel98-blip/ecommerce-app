@@ -2,12 +2,12 @@ import { useSearchParams } from "react-router-dom";
 import ProductCard from "@/components/product/ProductCard";
 import AllProductsSkeleton from "./AllProductsSkeleton";
 import useFetch from "@/hooks/useFetch";
-
+import ErrorState from "@/components/ui/ErrorState";
 export default function RenderAllProducts (){
   const [searchParams, setSearchParams] = useSearchParams()
   const page = Number(searchParams.get('page')) || 1;
-  const {data, error, loading} = useFetch(`https://dummyjson.com/products?limit=24&skip=${(page - 1) * 24}`)
-  
+  const PAGE_URL = `https://dummyjson.com/products?limit=24&skip=${(page - 1) * 24}`
+  const { data, error, loading, retry } = useFetch(PAGE_URL)
   
   function goToPage(i) {
       setSearchParams((prev)=>{
@@ -17,10 +17,19 @@ export default function RenderAllProducts (){
       })
     }
   
-  
   const pages = Array.from({length: Math.ceil(194 / 24)}).map((_,i) => i);
     
   if(loading) return <AllProductsSkeleton />
+  if(error) {
+      return(
+        <ErrorState 
+          title={error.message === "HTTP 404" ? "Page not found" : "Couldn't load this page"}
+          message="Check your connection and try again."
+          onRetry={error.message === "HTTP 404" ? undefined : retry}
+        />
+      )
+    }
+
    return(
     <section className="flex max-w-360 flex-col gap-10 w-[95%] m-auto mt-10" >
       <section className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))]  sm:grid-cols-[repeat(auto-fill,minmax(255px,1fr))] grid-rows-4  gap-5">

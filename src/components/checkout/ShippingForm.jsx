@@ -1,4 +1,4 @@
-import { Country, City } from "country-state-city"
+import { Country } from "country-state-city"
 import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form";
 import { useCheckout } from "@/hooks/useCheckout";
@@ -7,18 +7,20 @@ import { AsYouType, parsePhoneNumberFromString } from "libphonenumber-js";
 
 export default function ShippingForm() {
   const countries = Country.getAllCountries();
+  const [selectedCountry, setSelectedCountry] = useState('DO');
   const navigate = useNavigate();
-  const { onShippingFormSubmit, isShippingFormFullFiled, shippingForm } = useCheckout((state) => state)
+  const { onShippingFormSubmit, isShippingFormFulfilled, shippingForm } = useCheckout((state) => state)
   const { register, handleSubmit, setValue, formState:{ errors } } = useForm({defaultValues: {
     'country' : 'DO' 
   }})
   const { phoneNumber, postalCode, email, firstName, lastName, address, city, country } = shippingForm
 
-  const [cities, setCities ] = useState(City.getCitiesOfCountry('DO'))
+  const [cities, setCities ] = useState([])
 
+  
   const handleCountryChange = (event)=>{
     const data = event.target.value;
-    setCities(City.getCitiesOfCountry(data))
+    setSelectedCountry(data)
   } 
 
   const handlePhoneNumberChange = (event)=>{
@@ -43,7 +45,7 @@ export default function ShippingForm() {
 
 
   useEffect(()=>{
-  if(isShippingFormFullFiled){
+  if(isShippingFormFulfilled){
     setValue('phoneNumber', phoneNumber, {shouldValidate: true});
     setValue('postalCode', postalCode, {shouldValidate: true})
     setValue('email', email, {shouldValidate: true})
@@ -54,6 +56,12 @@ export default function ShippingForm() {
     setValue('country', country, {shouldValidate: true})
   }
   },  [])
+
+  useEffect(()=>{
+    import('country-state-city').then(({City})=>{
+      setCities(City.getCitiesOfCountry(selectedCountry))
+    })
+  }, [selectedCountry])
 
   
 

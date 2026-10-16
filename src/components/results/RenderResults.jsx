@@ -13,12 +13,13 @@ export default function RenderResults({ results }){
         return params
       })
     }
-
     useEffect(()=> { 
-      setProducts(results?.products.slice((page - 1 ) * 24, page * 24))
+      setProducts(results?.products?.slice((page - 1 ) * 24, page * 24) ?? [])
       window.scrollTo(0, 0);
     }, [page, results])
     
+  if(!results?.products) return null
+
   return(
     <>
       <p className="text-zinc-400 text-xl font-medium ">{results.products.length} Results found</p>

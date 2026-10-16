@@ -1,16 +1,17 @@
 import { optimizedImg } from "@/utils/optimizedImg";
 import { useNavigate } from "react-router-dom";
+import { publicUrl } from "@/utils/publicUrl";
 export default function YouMayAlsoLikeCard({product, category, isLazy}){
   const navigate = useNavigate()
   return(
     <article 
       className={`text-white cursor-pointer ${category || 'lg:min-w-50 w-55 shrink-0 grow-0'} bg-zinc-900 p-2 rounded-2xl`}
-      onClick={()=> navigate(`/product/${product.id}/${product.title.replace(/\s/g, '-')}`)}
+      onClick={()=> navigate(`/product/${product.id}/${product.title?.replace(/\s/g, '-')}`)}
     > 
       <div>
         <img 
-          src={optimizedImg(product.images[0], 400, 400)} 
-          alt={`image of ${product.title}`}
+          src={optimizedImg(product.images?.[0], 400, 400)} 
+          alt={`Recommended product: ${product.title}`}
           loading={isLazy ? 'lazy' : 'eager'}
           />
       </div>
@@ -19,8 +20,8 @@ export default function YouMayAlsoLikeCard({product, category, isLazy}){
         <span className="sr-only">Price:</span>
         <data value={product.price}>${product.price}</data>
         <span className="flex gap-1">
-          <svg className="w-6 h-6 text-amber-300"><use href="/ecommerce-app/sprite-extra.svg#icon-star"></use></svg> 
-          {product.rating} ({product.reviews.length})
+          <svg className="w-6 h-6 text-amber-300"><use href={publicUrl('sprite-extra.svg#icon-star')}></use></svg> 
+          {product.rating} ({product.reviews?.length ?? 0})
           </span>
       </div>
     </article>

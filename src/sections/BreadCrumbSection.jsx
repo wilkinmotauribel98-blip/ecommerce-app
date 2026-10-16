@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import Skeleton from "@/components/ui/Skeleton"
+import { publicUrl } from "@/utils/publicUrl";
 
 export default function BreadCrumbSection({ category,  title, loading, product, cart}) {
   if (loading) {
@@ -29,7 +30,7 @@ export default function BreadCrumbSection({ category,  title, loading, product, 
         aria-label="Link to Home"
       >Home</Link>
       <svg className="w-7 h-7">
-        <use href="/ecommerce-app/sprite-core.svg#chevron-right"></use>
+        <use href={publicUrl('sprite-core.svg#chevron-right')}></use>
       </svg>
       
       {cart &&
@@ -49,7 +50,7 @@ export default function BreadCrumbSection({ category,  title, loading, product, 
       </Link>
       
       <svg className="w-7 h-7 ">
-        <use href="/ecommerce-app/sprite-core.svg#chevron-right"></use>
+        <use href={publicUrl('sprite-core.svg#chevron-right')}></use>
       </svg>
       <h2 
         className="text-emerald-400"

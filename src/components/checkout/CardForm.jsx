@@ -1,10 +1,11 @@
 import { useRef, useState, useEffect } from "react"
 import { useCheckout } from "@/hooks/useCheckout"
 import { detectCardTypeLive } from "@/utils/detectCardTypeLive";
+import { publicUrl } from "@/utils/publicUrl";
 
 
 export default function CardForm({register, setValue, watch, errors, allowChanges, setAllowChanges}) {
-  const { isPaymentFormFullFiled, paymentForm, setIsPaymentFormFullFiled} = useCheckout((state) => state);
+  const { isPaymentFormFulfilled, paymentForm, setIsPaymentFormFulfilled} = useCheckout((state) => state);
   const [cardType, setCardType] = useState('visa')
   const expiryValue = watch('expiryDate')
   const cvvValue = watch('cvv')
@@ -51,7 +52,7 @@ export default function CardForm({register, setValue, watch, errors, allowChange
 
 
   useEffect(()=>{
-    if(isPaymentFormFullFiled){
+    if(isPaymentFormFulfilled){
       setValue('cardNumber',paymentForm.cardNumber, {shouldValidate: false})
       setValue('expiryDate', paymentForm.expiryDate, {shouldValidate: false})
       setValue('cvv', paymentForm.cvv, {shouldValidate: false})
@@ -64,7 +65,7 @@ const cardChange = (e)=>{
   setValue('cardNumber', '', { shouldValidate: true })
   setValue('expiryDate', '', { shouldValidate: true })
   setValue('cvv', '', { shouldValidate: true })
-  setIsPaymentFormFullFiled(false);
+  setIsPaymentFormFulfilled(false);
 
 }
 
@@ -94,8 +95,8 @@ const cardChange = (e)=>{
           <svg className="w-10 h-10 mr-2">
                 {cardType
                  ? 
-                <use href={`/ecommerce-app/payment-icons.svg#icon-${cardType}` } />
-                : <use href="/ecommerce-app/sprite-core.svg#icon-credit-card" />}
+                <use href={publicUrl(`payment-icons.svg#icon-${cardType}`) } />
+                : <use href={publicUrl('sprite-core.svg#icon-credit-card')} />}
               </svg>
 
         </div>
